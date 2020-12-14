@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity_pedido2">
+
+    <Button
+        android:id="@+id/btn_siguiente"
+        android:layout_width="106dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/btn_siguiente"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btn_volver"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/btn_volver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_logoPistacho8"
+        android:layout_width="52dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pinguino" />
+
+    <TextView
+        android:id="@+id/lbl_nomEmpresa7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="@string/lbl_nomEmpresa"
+        android:textColor="@android:color/background_dark"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_logoPistacho8"
+        app:layout_constraintEnd_toStartOf="@+id/img_logoPistacho8"
+        app:layout_constraintTop_toTopOf="@+id/img_logoPistacho8" />
+
+    <TextView
+        android:id="@+id/lbl_anadirArticulos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/lbl_anadirArticulos"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="181dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_anadirArticulos" />
+
+    <TextView
+        android:id="@+id/lbl_prUnidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="80dp"
+        android:text="@string/lbl_prUnidad"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+    <EditText
+        android:id="@+id/txt_precioUnidad"
+        android:layout_width="61dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="10dp"
+        android:editable="false"
+        android:ems="10"
+        android:inputType="none"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/lbl_prUnidad"
+        app:layout_constraintStart_toEndOf="@+id/lbl_prUnidad"
+        app:layout_constraintTop_toTopOf="@+id/lbl_prUnidad" />
+
+    <EditText
+        android:id="@+id/txt_descripcion"
+        android:layout_width="317dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="30dp"
+        android:editable="false"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="none"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_precioUnidad" />
+
+    <TextView
+        android:id="@+id/lbl_cantidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:text="@string/lbl_cantidad"
+        app:layout_constraintBottom_toBottomOf="@+id/lbl_prUnidad"
+        app:layout_constraintStart_toEndOf="@+id/txt_precioUnidad"
+        app:layout_constraintTop_toTopOf="@+id/lbl_prUnidad" />
+
+    <EditText
+        android:id="@+id/txt_cantidades"
+        android:layout_width="58dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="10dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/lbl_cantidad"
+        app:layout_constraintStart_toEndOf="@+id/lbl_cantidad"
+        app:layout_constraintTop_toTopOf="@+id/lbl_cantidad" />
+
+    <ImageView
+        android:id="@+id/imagen"
+        android:layout_width="132dp"
+        android:layout_height="130dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="15dp"
+        android:background="#717171"
+        app:layout_constraintStart_toEndOf="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/lbl_anadirArticulos"
+        app:srcCompat="@drawable/movil" />
+
+    <TextView
+        android:id="@+id/lbl_precioTot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="50dp"
+        android:inputType="none"
+        android:text="@string/lbl_precioTot"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_descripcion" />
+
+    <EditText
+        android:id="@+id/txt_precioTotal"
+        android:layout_width="67dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="10dp"
+        android:editable="false"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="none"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/lbl_precioTot"
+        app:layout_constraintStart_toEndOf="@+id/lbl_precioTot"
+        app:layout_constraintTop_toTopOf="@+id/lbl_precioTot" />
+
+    <Button
+        android:id="@+id/btn_addToPedido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:text="@string/btn_addToPedido"
+        app:layout_constraintBottom_toBottomOf="@+id/lbl_precioTot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/lbl_precioTot" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

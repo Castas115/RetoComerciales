@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">RetoComerciales</string>
+
+    <string name="lbl_nomEmpresa">Pistacho</string>
+    <string name="btn_volver">Volver</string>
+    <string name="btn_siguiente">Siguiente</string>
+
+    <!-- presentación -->
+
+    <string name="btn_iniciar">Iniciar</string>
+
+    <!-- Menu -->
+    <string name="txt_calendario">Calendario</string>
+    <string name="txt_gestionPedido">Gestión de pedidos</string>
+    <string name="txt_gestionPartners">Gestión de partners</string>
+    <string name="txt_envioDelegacion">Envios a la Delegación</string>
+
+
+    <!-- pedido2 -->
+    <string name="lbl_anadirArticulos">Añadir artículos</string>
+    <string name="lbl_nomProd">Artículo:</string>
+    <string name="lbl_prUnidad">Precio unidad:</string>
+    <string name="lbl_cantidad">Cantidad:</string>
+    <string name="lbl_precioTot">Precio total:</string>
+    <string name="btn_addToPedido">Añadir linea</string>
+    <string name="title_activity_maps">Map</string>
+
+
 </resources>
