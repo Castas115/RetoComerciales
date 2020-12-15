@@ -2,24 +2,24 @@ package com.example.retocomerciales.Clases;
 
 import android.provider.Contacts;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
+
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReadXML {
 
-    public Producto[] cargaProductos() {
+    public static Producto[] cargaProductos() {
 
         Producto[] listProducto;
 
         SAXBuilder builder = new SAXBuilder();
-        File xml = new File("productos.xml");
+        File xml = new File("app/src/debug/assets/productos.xml");
         Document document = null;
         try {
             document = builder.build(xml);

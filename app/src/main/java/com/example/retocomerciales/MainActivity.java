@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.retocomerciales.Clases.Partner;
 import com.example.retocomerciales.Clases.Producto;
+import com.example.retocomerciales.Clases.ReadXML;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -35,19 +36,10 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
-        listaProductos = new Producto[]{
-                new Producto("PPB_", "PistachoB", "movil", 79.95f),
-                new Producto("PPA_", "PistachoA", "movil", 125.95f),
-                new Producto("PPA+", "PistachoA+", "movil", 153.45f),
-                new Producto("PPO_", "PistachoO", "movil", 279.95f),
-                new Producto("PPO+", "PistachoO+", "movil", 293.45f),
-                new Producto("PPod", "PistachoPods", "airpodsPistacho", 24.95f),
-                new Producto("Carg", "Cargador Pistacho", "cargadorPistacho", 12.34f),
-                new Producto("FPB_", "Funda PistachoB", "fundaPistacho", 7f),
-                new Producto("FPA_", "Funda PistachoA", "fundaPistacho", 7f),
-                new Producto("FPA+", "Funda PistachoA+", "fundaPistacho", 8.54f),
-                new Producto("FPO_", "Funda PistachoO", "fundaPistacho", 8f),
-                new Producto("FPO+", "Funda PistachoO+", "fundaPistacho", 9.54f)};
+        /**
+         * MAAAAAAAAAAAAAAAAAAAAAAAAAAL
+         */
+        listaProductos = new Producto[]{new Producto(".", ".", ".", 100f, 1)};// ReadXML.cargaProductos();
 
         listaPartners = new Partner[]{
             new Partner("1", "Cebanc", "Berio Pasealekua, 50, 20018 Donostia, Gipuzkoa", "A20045548", "943316900", "contacto@cebanc.com"),
