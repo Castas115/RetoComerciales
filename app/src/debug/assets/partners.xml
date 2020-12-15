@@ -1,0 +1,32 @@
+<partners>
+	<partner>
+		<id_partner>1</id_partner>
+		<nombre>SICOS</nombre>
+		<direccion>LA BRETXA</direccion>
+		<poblacion>DONOSTI</poblacion>
+		<CIF>B75034496</CIF>
+		<telefono> 943441279</telefono>
+		<email>administracion@sicosgroup.com</email>
+		<id_comercial>0</id_comercial>
+	</partner>
+	<partner>
+		<id_partner>2</id_partner>
+		<nombre>K-TUIN TIENDAS APPLE</nombre>
+		<direccion>SAN MARTZIAL KALEA</direccion>
+		<poblacion>DONOSTI</poblacion>
+		<CIF>A50578772</CIF>
+		<telefono>843990500</telefono>
+		<email>ktuin@ktuin.com</email>
+		<id_comercial>0</id_comercial>
+	</partner>
+	<partner>
+		<id_partner>3</id_partner>
+		<nombre>MEDIA MARKT</nombre>
+		<direccion>GARBERA BIDEA</direccion>
+		<poblacion>GARBERA</poblacion>
+		<CIF>A63297071</CIF>
+		<telefono>943447700</telefono>
+		<email>garbera@garbera.com</email>
+		<id_comercial>0</id_comercial>
+	</partner>
+</partners>
