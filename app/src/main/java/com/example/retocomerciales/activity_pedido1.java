@@ -33,6 +33,8 @@ public class activity_pedido1 extends AppCompatActivity {
 
         datos = Datos.getInstance();
 
+        datos.cargarExistencias();//cargar existenciasCompras = existencias (nuevo pedido cancelando los cambios hechos anteriormente)
+
         //Spinner partners
         final ArrayAdapter adapterPartners = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getListNombres(datos.getPartners()));
         adapterPartners.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

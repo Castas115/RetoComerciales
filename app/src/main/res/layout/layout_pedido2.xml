@@ -112,7 +112,7 @@
         android:id="@+id/lbl_precioTot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="40dp"
         android:inputType="none"
         android:text="@string/lbl_precioTot"
@@ -155,8 +155,8 @@
 
     <EditText
         android:id="@+id/txt_precioTotal"
-        android:layout_width="67dp"
-        android:layout_height="36dp"
+        android:layout_width="103dp"
+        android:layout_height="43dp"
         android:layout_marginStart="12dp"
         android:editable="false"
         android:ems="10"

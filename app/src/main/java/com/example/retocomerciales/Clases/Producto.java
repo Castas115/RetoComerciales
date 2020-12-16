@@ -11,7 +11,7 @@ public class Producto implements Serializable {
 
     //FALTA EXISTENCIAS
     String cod, nombre, descripcion, imagen;
-    int existencias;
+    int existencias, existenciasCompra; //existenciasCompra son las existencias que el producto tiene mientras se realiza una compra
     float pr_unidad;
 
     //Constructor
@@ -23,6 +23,7 @@ public class Producto implements Serializable {
         this.descripcion = "El innovador " + nombre + " de Pistacho.";
         this.pr_unidad = pr_unidad;
         this.existencias = existencias;
+        this.existenciasCompra = existencias;
     }
 
 
@@ -33,6 +34,7 @@ public class Producto implements Serializable {
         this.imagen = imagen;
         this.pr_unidad = pr_unidad;
         this.existencias = existencias;
+        this.existenciasCompra = existencias;
     }
 
     //Getters
@@ -42,11 +44,20 @@ public class Producto implements Serializable {
     public float getPr_unidad() {return pr_unidad;}
     public String getDescripcion() {return descripcion;}
     public int getExistencias() {return existencias;}
+    public int getExistenciasCompra() {return existenciasCompra;}
 
     //Setter
-    public void setExistencias(int existencias) {this.existencias = existencias;}
+    public void setExistenciasCompra(int existencias) {this.existenciasCompra = existencias;}
     public void restaExistencias(int existenciasRestadas) {
-        this.existencias = this.existencias - existenciasRestadas;
+        this.existenciasCompra = this.existenciasCompra - existenciasRestadas;
+    }
+
+    //ajustan las existencias si el pedido se ha realizado o si no se ha podido realizar
+    public void ajustarExistencias(){
+        this.existencias = this.existenciasCompra;
+    }
+    public void ajustarExistenciasCompra(){
+        this.existenciasCompra = this.existencias;
     }
 
 }

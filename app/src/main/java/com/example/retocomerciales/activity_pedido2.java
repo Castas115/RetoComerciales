@@ -28,6 +28,8 @@ import com.example.retocomerciales.Clases.Partner;
 import com.example.retocomerciales.Clases.Pedido;
 import com.example.retocomerciales.Clases.Producto;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 
 public class activity_pedido2 extends AppCompatActivity {
@@ -45,10 +47,9 @@ public class activity_pedido2 extends AppCompatActivity {
     Intent intent, extras;
     Datos datos;
 
-    int posicionProductoEnLista;//posición del producto elegido en el spinner
+    private static DecimalFormat formatoDecimal;
 
-
-    float precioUnidad = 0f;
+    private int posicionProductoEnLista;//posición del producto elegido en el spinneer
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +84,11 @@ public class activity_pedido2 extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         String fecha = cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH)+1) + "/" + cal.get(Calendar.YEAR); //mes mal
 
+        //formato de decimales
+        formatoDecimal = new DecimalFormat("0.00");
+        formatoDecimal.setRoundingMode(RoundingMode.DOWN);
 
-        //Crear pruebas
+        //Crear pedido
         pedido = new Pedido(fecha, partner, new Comercial("1", "s", "123 12", "Gipuzkoa"));
 
 
@@ -96,7 +100,7 @@ public class activity_pedido2 extends AppCompatActivity {
                 posicionProductoEnLista = position;
 
                 prUnidad.setText(String.valueOf(datos.getProducto(position).getPr_unidad()) + "€");
-                stock.setText("(" + String.valueOf(datos.getProducto(position).getExistencias()) + " en stock)");
+                stock.setText("(" + String.valueOf(datos.getProducto(position).getExistenciasCompra()) + " en stock)");
                 descripcion.setText(datos.getProducto(position).getDescripcion());
                 cambiarImagen(datos.getProducto(position).getImagen());
                 calcPrecioTotal();
@@ -127,8 +131,14 @@ public class activity_pedido2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    pedido.addLinea(new Linea(datos.getProducto(posicionProductoEnLista), Integer.parseInt(unidades.getText().toString())));
-                    Toast.makeText(getApplicationContext(), "Artículo añadido", Toast.LENGTH_SHORT).show();
+                    int cantidad = Integer.parseInt(unidades.getText().toString());
+                    if (cantidad < datos.getProducto(posicionProductoEnLista).getExistenciasCompra()) {
+                        pedido.addLinea(new Linea(datos.getProducto(posicionProductoEnLista), cantidad));
+                        datos.restaExistenciasCompra(posicionProductoEnLista, cantidad);
+                        Toast.makeText(getApplicationContext(), "Artículo añadido", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Cantidad superior al stock", Toast.LENGTH_SHORT).show();
+                    }
                 }catch (Exception e){
                     //En caso de que no se haya elegido una cantidad
                     Toast.makeText(getApplicationContext(), "Elige cantidad", Toast.LENGTH_SHORT).show();
@@ -197,8 +207,8 @@ public class activity_pedido2 extends AppCompatActivity {
     //metodo para calcular y escribir el precio total
     public void calcPrecioTotal() {
         try {
-            float result = precioUnidad * Float.parseFloat(unidades.getText().toString());
-            prTotal.setText(String.valueOf(result) + "€");
+            float result = datos.getProducto(posicionProductoEnLista).getPr_unidad() * Float.parseFloat(unidades.getText().toString());
+            prTotal.setText(String.valueOf(formatoDecimal.format(result)) + "€");
         }catch (Exception e){
             prTotal.setText("0.0€");
         }

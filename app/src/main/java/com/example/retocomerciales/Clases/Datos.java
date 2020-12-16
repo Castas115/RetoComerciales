@@ -4,8 +4,8 @@ public class Datos {
 
     private static Datos datos;
     //atributos:
-    Producto[] productos;
-    Partner[] partners;
+    private static Producto[] productos;
+    private static Partner[] partners;
 
 
     private Datos(){
@@ -47,8 +47,13 @@ public class Datos {
         return productos[posicion];
     }
 
-    public void restaExistencias(int posicion, int existenciasRestadas){
-        productos[posicion].setExistencias(productos[posicion].getExistencias() - existenciasRestadas);
+    public void restaExistenciasCompra(int posicion, int existenciasRestadas){
+        productos[posicion].setExistenciasCompra(productos[posicion].getExistenciasCompra() - existenciasRestadas);
+    }
+    public static void cargarExistencias(){
+        for (Producto producto : productos){
+            producto.setExistenciasCompra(producto.getExistencias());
+        }
     }
 
     /**
