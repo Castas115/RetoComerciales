@@ -3,7 +3,7 @@
 		<nombre>PistachoB</nombre>
 		<imagen>movil</imagen>
 		<descripcion></descripcion>
-		<precio>79,95</precio>
+		<precio>79.95</precio>
 		<existencias>34</existencias>
 	</producto>
 	<producto cod= "PPA_">
