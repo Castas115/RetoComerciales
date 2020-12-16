@@ -37,9 +37,22 @@ public class MainActivity extends AppCompatActivity{
             }
         });
         /**
-         * MAAAAAAAAAAAAAAAAAAAAAAAAAAL
+         * sutituir los datos por la lectura de xmls
          */
-        listaProductos = new Producto[]{new Producto(".", ".", ".", 100f, 1)};// ReadXML.cargaProductos();
+
+        listaProductos = new Producto[]{
+                new Producto("PPB_", "PistachoB", "movil", 79.95f, 10),
+                new Producto("PPA_", "PistachoA", "movil", 125.95f, 10),
+                new Producto("PPA+", "PistachoA+", "movil", 153.45f, 10),
+                new Producto("PPO_", "PistachoO", "movil", 279.95f, 10),
+                new Producto("PPO+", "PistachoO+", "movil", 293.45f, 10),
+                new Producto("PPod", "PistachoPods", "airpodsPistacho", 24.95f, 10),
+                new Producto("Carg", "Cargador Pistacho", "cargadorPistacho", 12.34f, 10),
+                new Producto("FPB_", "Funda PistachoB", "Funda diseñada para proteger de tu PistachoPhone Beta",  "fundaPistacho", 7f, 10),
+                new Producto("FPA_", "Funda PistachoA", "Funda diseñada para proteger de tu PistachoPhone Alfa", "fundaPistacho", 7f, 10),
+                new Producto("FPA+", "Funda PistachoA+", "Funda diseñada para proteger de tu PistachoPhone Alfa+", "fundaPistacho", 8.54f, 10),
+                new Producto("FPO_", "Funda PistachoO", "Funda diseñada para proteger de tu PistachoPhone Omega", "fundaPistacho", 8f, 10),
+                new Producto("FPO+", "Funda PistachoO+", "Funda diseñada para proteger de tu PistachoPhone Omega+", "fundaPistacho", 9.54f, 10)};
 
         listaPartners = new Partner[]{
             new Partner("1", "Cebanc", "Berio Pasealekua, 50, 20018 Donostia, Gipuzkoa", "A20045548", "943316900", "contacto@cebanc.com"),

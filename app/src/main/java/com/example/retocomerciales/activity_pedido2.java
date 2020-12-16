@@ -133,7 +133,6 @@ public class activity_pedido2 extends AppCompatActivity {
             }
         });
 
-
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
