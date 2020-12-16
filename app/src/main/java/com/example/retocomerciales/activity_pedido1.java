@@ -9,6 +9,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.retocomerciales.Clases.Datos;
 import com.example.retocomerciales.Clases.Partner;
 import com.example.retocomerciales.Clases.Producto;
 
@@ -16,9 +17,8 @@ import com.example.retocomerciales.Clases.Producto;
 public class activity_pedido1 extends AppCompatActivity {
 
     Button siguiente, volver;
-    Intent intent, extras;
-    Producto[] listaProductos;
-    Partner[] listaPartners;
+    Intent intent;
+    Datos datos;
 
     Spinner spnPartners;
 
@@ -31,12 +31,10 @@ public class activity_pedido1 extends AppCompatActivity {
         volver = findViewById(R.id.btn_volver);
         spnPartners = findViewById(R.id.spn_partners);
 
-        extras = getIntent();
-        listaProductos = (Producto[]) extras.getSerializableExtra("listaProductos");
-        listaPartners = (Partner[]) extras.getSerializableExtra("listaPartners");
+        datos = Datos.getInstance();
 
         //Spinner partners
-        final ArrayAdapter adapterPartners = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getListNombres(listaPartners));
+        final ArrayAdapter adapterPartners = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getListNombres(datos.getPartners()));
         adapterPartners.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnPartners.setAdapter(adapterPartners);
 
@@ -47,8 +45,7 @@ public class activity_pedido1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(activity_pedido1.this, activity_pedido2.class);
-                intent.putExtra("listaProductos", listaProductos);
-                intent.putExtra("partner", listaPartners[spnPartners.getSelectedItemPosition()]);
+                intent.putExtra("partner", datos.getPartner(spnPartners.getSelectedItemPosition()));
                 startActivity(intent);
             }
         });
@@ -60,6 +57,7 @@ public class activity_pedido1 extends AppCompatActivity {
             }
         });
     }
+
     //devuelven lista de nombres
     public String[] getListNombres(Producto[] list){
         String[] nombres = new String[list.length];

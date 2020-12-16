@@ -15,12 +15,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.retocomerciales.Clases.Comercial;
+import com.example.retocomerciales.Clases.Datos;
 import com.example.retocomerciales.Clases.Linea;
 import com.example.retocomerciales.Clases.Partner;
 import com.example.retocomerciales.Clases.Pedido;
@@ -31,18 +33,20 @@ import java.util.Calendar;
 public class activity_pedido2 extends AppCompatActivity {
 
 
-    //info que viene del intent
-    Producto[] listaProductos;
+    //info que viene del intentç
     Partner partner;
 
     Spinner spinnerProductos;
     Pedido pedido;
     EditText prUnidad, descripcion, prTotal, unidades;
+    TextView stock;
     ImageView imagen;
     Button addToPedido, volver, siguiente;
     Intent intent, extras;
+    Datos datos;
 
-    Producto prod;//producto elegido en el spinner
+    int posicionProductoEnLista;//posición del producto elegido en el spinner
+
 
     float precioUnidad = 0f;
 
@@ -55,20 +59,25 @@ public class activity_pedido2 extends AppCompatActivity {
         siguiente  = findViewById(R.id.btn_siguiente);
         spinnerProductos = findViewById(R.id.spinner);
         prUnidad = findViewById(R.id.txt_precioUnidad);
+        stock = findViewById(R.id.lbl_stock);
         descripcion = findViewById(R.id.txt_descripcion);
         imagen = findViewById(R.id.imagen);
         prTotal = findViewById(R.id.txt_precioTotal);
         unidades = findViewById(R.id.txt_cantidades);
         addToPedido = findViewById(R.id.btn_addToPedido);
 
+        //el partner del intent del anterior activity (pedido1)
         extras = getIntent();
-        listaProductos = (Producto[]) extras.getSerializableExtra("listaProductos");
         partner = (Partner) extras.getSerializableExtra("partner");
 
+        //instancia de los datos
+        datos = Datos.getInstance();
+
         //datos de los spinners
-        final ArrayAdapter adapterPoductos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getListNombres(listaProductos));
+        final ArrayAdapter adapterPoductos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getListNombres(datos.getProductos()));
         adapterPoductos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProductos.setAdapter(adapterPoductos);
+
 
         //fecha
         Calendar cal = Calendar.getInstance();
@@ -84,17 +93,18 @@ public class activity_pedido2 extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                prod = listaProductos[position];
-                precioUnidad = prod.getPr_unidad();
+                posicionProductoEnLista = position;
 
-                prUnidad.setText(String.valueOf(precioUnidad) + "€");
-                descripcion.setText(prod.getDescripcion());
-                cambiarImagen(prod.getImagen());
+                prUnidad.setText(String.valueOf(datos.getProducto(position).getPr_unidad()) + "€");
+                stock.setText("(" + String.valueOf(datos.getProducto(position).getExistencias()) + " en stock)");
+                descripcion.setText(datos.getProducto(position).getDescripcion());
+                cambiarImagen(datos.getProducto(position).getImagen());
                 calcPrecioTotal();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                stock.setText("");
                 prUnidad.setText("0€");
             }
         });
@@ -117,8 +127,8 @@ public class activity_pedido2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    pedido.addLinea(new Linea(prod, Integer.parseInt(unidades.getText().toString())));
-                    Toast.makeText(getApplicationContext(), "Artículo", Toast.LENGTH_SHORT).show();
+                    pedido.addLinea(new Linea(datos.getProducto(posicionProductoEnLista), Integer.parseInt(unidades.getText().toString())));
+                    Toast.makeText(getApplicationContext(), "Artículo añadido", Toast.LENGTH_SHORT).show();
                 }catch (Exception e){
                     //En caso de que no se haya elegido una cantidad
                     Toast.makeText(getApplicationContext(), "Elige cantidad", Toast.LENGTH_SHORT).show();
@@ -138,7 +148,6 @@ public class activity_pedido2 extends AppCompatActivity {
             public void onClick(View v) {
                 if (pedido.getLineas().size()>0) {
                     intent = new Intent(activity_pedido2.this, activity_pedido3.class);
-                    intent.putExtra("listaProductos", listaProductos);
                     intent.putExtra("pedido", pedido);
                     startActivity(intent);
                 }else{
