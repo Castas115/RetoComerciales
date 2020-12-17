@@ -86,7 +86,7 @@
         android:id="@+id/txt_descripcion"
         android:layout_width="156dp"
         android:layout_height="239dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:editable="false"
         android:ems="10"
@@ -100,12 +100,12 @@
         android:id="@+id/imagen"
         android:layout_width="192dp"
         android:layout_height="208dp"
-        android:layout_marginEnd="20dp"
         android:background="#717171"
         app:layout_constraintBottom_toBottomOf="@+id/txt_descripcion"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txt_descripcion"
         app:layout_constraintTop_toTopOf="@+id/txt_descripcion"
-        app:layout_constraintVertical_bias="0.285"
+        app:layout_constraintVertical_bias="0.322"
         app:srcCompat="@drawable/movil" />
 
     <TextView

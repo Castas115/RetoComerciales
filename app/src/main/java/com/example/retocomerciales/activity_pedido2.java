@@ -135,6 +135,7 @@ public class activity_pedido2 extends AppCompatActivity {
                     if (cantidad < datos.getProducto(posicionProductoEnLista).getExistenciasCompra()) {
                         pedido.addLinea(new Linea(datos.getProducto(posicionProductoEnLista), cantidad));
                         datos.restaExistenciasCompra(posicionProductoEnLista, cantidad);
+                        stock.setText("(" + String.valueOf(datos.getProducto(posicionProductoEnLista).getExistenciasCompra()) + " en stock)");
                         Toast.makeText(getApplicationContext(), "Artículo añadido", Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(getApplicationContext(), "Cantidad superior al stock", Toast.LENGTH_SHORT).show();
