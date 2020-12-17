@@ -29,55 +29,53 @@
         app:layout_constraintTop_toTopOf="@+id/img_logoPistacho" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/lbl_nomDelegacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:text="Delegacion Provincial:"
+        android:layout_marginTop="30dp"
+        android:text="@string/lbl_nomDelegacion"
         android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="241dp" />
+        app:layout_constraintTop_toBottomOf="@+id/spn_comerciales" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/lbl_direccionDelegacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:text="Direccion de Empresa:"
+        android:layout_marginTop="20dp"
+        android:text="@string/lbl_direccionDelegacion"
         android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.056" />
+        app:layout_constraintTop_toBottomOf="@+id/lbl_nomDelegacion" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/lbl_emailDelegacion"
+        android:layout_width="222dp"
+        android:layout_height="29dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="24dp"
-        android:text="Email:"
+        android:layout_marginTop="20dp"
+        android:gravity="center|left"
+        android:text="@string/lbl_emailDelegacion"
         android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/lbl_telefDelegacion" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/lbl_telefDelegacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:text="Nº de Telefono: 688847776"
+        android:layout_marginTop="40dp"
+        android:text="@string/lbl_telefDelegacion"
         android:textColor="@android:color/background_dark"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.058" />
+        app:layout_constraintTop_toBottomOf="@+id/lbl_direccionDelegacion" />
 
     <Button
         android:id="@+id/btn_iniciar"
@@ -92,12 +90,22 @@
 
     <Button
         android:id="@+id/btnLlamar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="88dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="50dp"
         android:text="Llamar"
-        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintBottom_toBottomOf="@+id/lbl_telefDelegacion"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        app:layout_constraintTop_toTopOf="@+id/lbl_telefDelegacion"
+        app:layout_constraintVertical_bias="0.437" />
+
+    <Spinner
+        android:id="@+id/spn_comerciales"
+        android:layout_width="244dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_logoPistacho" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
