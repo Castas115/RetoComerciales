@@ -89,7 +89,7 @@ public class activity_pedido2 extends AppCompatActivity {
         formatoDecimal.setRoundingMode(RoundingMode.DOWN);
 
         //Crear pedido
-        pedido = new Pedido(fecha, partner, new Comercial("1", "s", "123 12", "Gipuzkoa"));
+        pedido = new Pedido(fecha, partner, new Comercial("1", "s", "123 12", "Gipuzkoa", "123654456", "pito@gordo.ehu"));
 
 
         //listener del spinner
