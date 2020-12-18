@@ -4,11 +4,18 @@ public class Datos {
 
     private static Datos datos;
     //atributos:
-    private static Producto[] productos;
-    private static Partner[] partners;
+    private Producto[] productos;
+    private Partner[] partners;
+    private Comercial[] comerciales;
+    private int posComercial;
 
 
     private Datos(){
+        comerciales = new Comercial[]{
+            new Comercial("jcastander@mlarramendi.com", "Jon", "Castander Illarramendi", "Guipuzcoa", "627739436", "delegGuipuzcoa@pistacho.es"),
+            new Comercial("iperez@pistachito.com", "Iker", "Pérez Juez", "Navarra", "688847776", "delegNavarra@pistacho.es")
+        };
+
         productos = new Producto[]{
                 new Producto("PPB_", "PistachoB", "movil", 79.95f, 10),
                 new Producto("PPA_", "PistachoA", "movil", 125.95f, 10),
@@ -37,6 +44,14 @@ public class Datos {
         return datos;
     }
 
+    //Dato posComercial
+    public int getPosComercial(){
+        return  this.posComercial;
+    }
+    public void setPosComercial(int posComercial){
+        this.posComercial = posComercial;
+    }
+
     /**
      * Métodos para lista de productos
      */
@@ -50,7 +65,7 @@ public class Datos {
     public void restaExistenciasCompra(int posicion, int existenciasRestadas){
         productos[posicion].setExistenciasCompra(productos[posicion].getExistenciasCompra() - existenciasRestadas);
     }
-    public static void cargarExistencias(){
+    public void cargarExistencias(){
         for (Producto producto : productos){
             producto.setExistenciasCompra(producto.getExistencias());
         }

@@ -159,7 +159,7 @@ public class activity_pedido2 extends AppCompatActivity {
             public void onClick(View v) {
                 if (pedido.getLineas().size()>0) {
                     intent = new Intent(activity_pedido2.this, activity_pedido3.class);
-                    intent.putExtra("pedido", pedido);
+                    //intent.putExtra("pedido", pedido);
                     startActivity(intent);
                 }else{
                     Toast.makeText(getApplicationContext(), "Añade artículos", Toast.LENGTH_SHORT).show();

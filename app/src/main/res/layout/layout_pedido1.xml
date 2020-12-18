@@ -32,23 +32,24 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/lbl_nomEmpresa6"
+            android:id="@+id/lbl_nomEmpresa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:text="@string/lbl_nomEmpresa"
             android:textColor="@android:color/background_dark"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_logoPistacho7"
-            app:layout_constraintEnd_toStartOf="@+id/img_logoPistacho7"
-            app:layout_constraintTop_toTopOf="@+id/img_logoPistacho7" />
+            app:layout_constraintBottom_toBottomOf="@+id/img_logoPistacho"
+            app:layout_constraintEnd_toStartOf="@+id/img_logoPistacho"
+            app:layout_constraintTop_toTopOf="@+id/img_logoPistacho" />
 
         <ImageView
-            android:id="@+id/img_logoPistacho7"
+            android:id="@+id/img_logoPistacho"
             android:layout_width="52dp"
             android:layout_height="62dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
+            android:contentDescription="@string/todo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/pinguino" />
@@ -57,10 +58,29 @@
             android:id="@+id/spn_partners"
             android:layout_width="303dp"
             android:layout_height="30dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="@+id/btn_elegirFecha"
+            app:layout_constraintTop_toBottomOf="@+id/btn_elegirFecha" />
+
+        <Button
+            android:id="@+id/btn_elegirFecha"
+            android:layout_width="82dp"
+            android:layout_height="37dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/btn_elegirFecha"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_logoPistacho7" />
+            app:layout_constraintTop_toBottomOf="@+id/img_logoPistacho" />
+
+        <TextView
+            android:id="@+id/lbl_fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:inputType="none"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_elegirFecha"
+            app:layout_constraintStart_toEndOf="@+id/btn_elegirFecha"
+            app:layout_constraintTop_toTopOf="@+id/btn_elegirFecha" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

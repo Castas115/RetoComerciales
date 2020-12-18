@@ -19,6 +19,8 @@
     <string name="txt_gestionPartners">Gestión de partners</string>
     <string name="txt_envioDelegacion">Envios a la Delegación</string>
 
+    <!-- pedido1 -->
+    <string name="btn_elegirFecha">Fecha</string>
 
     <!-- pedido2 -->
     <string name="lbl_anadirArticulos">Añadir artículos</string>
@@ -28,6 +30,11 @@
     <string name="lbl_precioTot">Precio total:</string>
     <string name="btn_addToPedido">Añadir linea</string>
     <string name="title_activity_maps">Map</string>
+    <string name="todo">TODO</string>
+
+    <!-- pedid3 -->
+    <string name="btn_terminarPedido">Confirmar</string>
+    <string name="lbl_comercial">Comercial:</string>
 
 
 </resources>
