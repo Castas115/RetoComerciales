@@ -9,10 +9,18 @@ import java.util.ArrayList;
 public class Pedido implements Serializable {
 
     final static long serialVersionUID = 1l;
-    String fecha;
-    Partner partner;
-    Comercial comercial;
-    ArrayList<Linea> lineas;
+    private String fecha;
+    private Partner partner;
+    private Comercial comercial;
+    private ArrayList<Linea> lineas;
+
+    //constructor por defecto con comercial
+
+
+    public Pedido(Comercial comercial) {
+        this.comercial = comercial;
+        this.lineas = new ArrayList<>();
+    }
 
     //constructor (el array list empieza vacio)
     public Pedido(String fecha, Partner partner, Comercial comercial) {
@@ -30,7 +38,9 @@ public class Pedido implements Serializable {
     public Linea getLinea(int i){ return lineas.get(i);}
 
     //Setters
-    public void setComercial(Comercial comercial) {this.comercial = comercial;}
+    //public void setComercial(Comercial comercial) {this.comercial = comercial;}
+    public void setFecha(String fecha) {this.fecha = fecha;}
+    public void setPartner(Partner partner) {this.partner = partner;}
 
     //borrarLinea
     public void deleteLinea(int pos) {this.lineas.remove(pos);}

@@ -7,10 +7,12 @@ public class Datos {
     private Producto[] productos;
     private Partner[] partners;
     private Comercial[] comerciales;
+    private Pedido pedido;
     private int posComercial;
 
 
     private Datos(){
+
         comerciales = new Comercial[]{
             new Comercial("jcastander@mlarramendi.com", "Jon", "Castander Illarramendi", "Guipuzcoa", "627739436", "delegGuipuzcoa@pistacho.es"),
             new Comercial("iperez@pistachito.com", "Iker", "Pérez Juez", "Navarra", "688847776", "delegNavarra@pistacho.es")
@@ -35,6 +37,11 @@ public class Datos {
                 new Partner("2", "Ibermática", "Mikeletegi Pasealekua, 5, 20009 Donostia, Gipuzkoa", "A20038915", "943413500", "contacto@ibermatica.com"),
                 new Partner("3", "Dosystem S.L.", "Sagardotegi Kalea, 1, 20160 Lasarte-Oria, SS", "A20040547", "943369533", "contacto@dosystem.com")
         };
+        comerciales = new Comercial[]{
+                new Comercial("Ejemplo1" , "1", "1", "1" , "1", "1"),
+                new Comercial("Ejemplo2" , "2", "2", "2" , "2", "2"),
+                new Comercial("Ejemplo3" , "3", "3", "3" , "3", "3")
+        };
     }
 
     public static Datos getInstance(){
@@ -50,6 +57,14 @@ public class Datos {
     }
     public void setPosComercial(int posComercial){
         this.posComercial = posComercial;
+    }
+    //dato pedido
+
+
+    public Pedido getPedido() {return pedido;}
+
+    public void nuevoPedido(Comercial comercial){
+        pedido = new Pedido(comercial);
     }
 
     /**
@@ -82,4 +97,16 @@ public class Datos {
         return partners[posicion];
     }
 
+    /**
+     * métodos para comerciales
+     */
+    public Comercial[] getComerciales() {
+        return comerciales;
+    }
+    public Comercial getComercial(int pos) {
+        return comerciales[pos];
+    }
+    public Comercial getComercial() {
+        return comerciales[posComercial];
+    }
 }

@@ -8,6 +8,8 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.retocomerciales.Clases.Comercial;
+import com.example.retocomerciales.Clases.Datos;
 import com.example.retocomerciales.Clases.Partner;
 import com.example.retocomerciales.Clases.Producto;
 
@@ -52,6 +54,8 @@ public class activity_menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(activity_menu.this, activity_pedido1.class);
+                Datos datos = Datos.getInstance();
+                datos.nuevoPedido(datos.getComercial());
                 startActivity(intent);
             }
         });
