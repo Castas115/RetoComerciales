@@ -33,8 +33,7 @@ public class activity_gestionPartner extends AppCompatActivity {
         volver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(activity_gestionPartner.this, activity_menu.class);
-                startActivity(intent);
+                finish();
             }
         });
 
