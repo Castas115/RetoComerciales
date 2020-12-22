@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Partner implements Serializable {
 
     final static long serialVersionUID = 1l;
-    String id, nombre, direccion, CIF, telefono, email;
+    private String id, nombre, direccion, CIF, telefono, email;
 
     //Constructor
     public Partner(String id, String nombre, String direccion, String CIF, String telefono, String email) {

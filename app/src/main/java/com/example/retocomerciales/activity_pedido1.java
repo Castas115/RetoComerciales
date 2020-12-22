@@ -28,7 +28,7 @@ public class activity_pedido1 extends AppCompatActivity {
         setContentView(R.layout.layout_pedido1);
 
         siguiente = findViewById(R.id.btn_siguiente);
-        volver = findViewById(R.id.btn_volver);
+        volver = findViewById(R.id.btn_anadirArticulos);
         spnPartners = findViewById(R.id.spn_partners);
 
         datos = Datos.getInstance();
@@ -47,7 +47,7 @@ public class activity_pedido1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(activity_pedido1.this, activity_pedido2.class);
-                intent.putExtra("partner", datos.getPartner(spnPartners.getSelectedItemPosition()));
+                datos.getPedido().setPartner(datos.getPartner(spnPartners.getSelectedItemPosition()));
                 startActivity(intent);
             }
         });

@@ -8,10 +8,7 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.retocomerciales.Clases.Comercial;
 import com.example.retocomerciales.Clases.Datos;
-import com.example.retocomerciales.Clases.Partner;
-import com.example.retocomerciales.Clases.Producto;
 
 public class activity_menu extends AppCompatActivity {
 
@@ -29,7 +26,7 @@ public class activity_menu extends AppCompatActivity {
         img_pedidos = findViewById(R.id.img_gestionPedidos);
         img_delegaciones = findViewById(R.id.img_envioDelegacion);
         img_partners = findViewById(R.id.img_gestionPartners);
-        volver = findViewById(R.id.btn_volver);
+        volver = findViewById(R.id.btn_anadirArticulos);
 
 
 

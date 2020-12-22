@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Comercial implements Serializable {
 
     final static long serialVersionUID = 1l;
-    String email, nombre, apellidos, delegacion, telefonoDelegacion, emailDelegacion;
+    private String email, nombre, apellidos, delegacion, telefonoDelegacion, emailDelegacion;
 
     //constructor
     public Comercial(String email, String nombre, String apellidos, String delegacion, String telefonoDelegacion, String emailDelegacion) {

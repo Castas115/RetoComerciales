@@ -9,10 +9,9 @@ import java.io.Serializable;
 public class Producto implements Serializable {
     final static long serialVersionUID = 1L;
 
-    //FALTA EXISTENCIAS
-    String cod, nombre, descripcion, imagen;
-    int existencias, existenciasCompra; //existenciasCompra son las existencias que el producto tiene mientras se realiza una compra
-    float pr_unidad;
+    private String cod, nombre, descripcion, imagen;
+    private int existencias, existenciasCompra; //existenciasCompra son las existencias que el producto tiene mientras se realiza una compra
+    private float pr_unidad;
 
     //Constructor
 

@@ -50,7 +50,7 @@ public class Pedido implements Serializable {
      * @param linea: linea a añadir
      */
     public void addLinea(Linea linea){
-        int posProd = existeProd(linea.producto);
+        int posProd = existeProd(linea.getProducto());
         if (posProd < 0){
             lineas.add(linea);
         }else{

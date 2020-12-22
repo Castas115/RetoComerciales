@@ -1,9 +1,7 @@
 package com.example.retocomerciales;
 
-/*
-falta la recepción de datos del intent del que se abre y el envio en intent + algunos apartados visuales como toasts
- */
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -39,7 +37,6 @@ public class activity_pedido2 extends AppCompatActivity {
     Partner partner;
 
     Spinner spinnerProductos;
-    Pedido pedido;
     EditText prUnidad, descripcion, prTotal, unidades;
     TextView stock;
     ImageView imagen;
@@ -56,7 +53,7 @@ public class activity_pedido2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_pedido2);
 
-        volver  = findViewById(R.id.btn_volver);
+        volver  = findViewById(R.id.btn_anadirArticulos);
         siguiente  = findViewById(R.id.btn_siguiente);
         spinnerProductos = findViewById(R.id.spinner);
         prUnidad = findViewById(R.id.txt_precioUnidad);
@@ -80,21 +77,15 @@ public class activity_pedido2 extends AppCompatActivity {
         spinnerProductos.setAdapter(adapterPoductos);
 
 
-        //fecha
-        Calendar cal = Calendar.getInstance();
-        String fecha = cal.get(Calendar.DAY_OF_MONTH) + "/" + (cal.get(Calendar.MONTH)+1) + "/" + cal.get(Calendar.YEAR); //mes mal
 
         //formato de decimales
         formatoDecimal = new DecimalFormat("0.00");
         formatoDecimal.setRoundingMode(RoundingMode.DOWN);
 
-        //Crear pedido
-        pedido = new Pedido(fecha, partner, new Comercial("1", "s", "123 12", "Gipuzkoa", "123654456", "pito@gordo.ehu"));
-
-
         //listener del spinner
         spinnerProductos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 posicionProductoEnLista = position;
@@ -128,12 +119,13 @@ public class activity_pedido2 extends AppCompatActivity {
 
         //listener de boton añadir
         addToPedido.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
                 try {
                     int cantidad = Integer.parseInt(unidades.getText().toString());
-                    if (cantidad < datos.getProducto(posicionProductoEnLista).getExistenciasCompra()) {
-                        pedido.addLinea(new Linea(datos.getProducto(posicionProductoEnLista), cantidad));
+                    if (cantidad <= datos.getProducto(posicionProductoEnLista).getExistenciasCompra()) {
+                        datos.getPedido().addLinea(new Linea(datos.getProducto(posicionProductoEnLista), cantidad));
                         datos.restaExistenciasCompra(posicionProductoEnLista, cantidad);
                         stock.setText("(" + String.valueOf(datos.getProducto(posicionProductoEnLista).getExistenciasCompra()) + " en stock)");
                         Toast.makeText(getApplicationContext(), "Artículo añadido", Toast.LENGTH_SHORT).show();
@@ -157,7 +149,7 @@ public class activity_pedido2 extends AppCompatActivity {
         siguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pedido.getLineas().size()>0) {
+                if (datos.getPedido().getLineas().size()>0) {
                     intent = new Intent(activity_pedido2.this, activity_pedido3.class);
                     //intent.putExtra("pedido", pedido);
                     startActivity(intent);
@@ -216,7 +208,7 @@ public class activity_pedido2 extends AppCompatActivity {
     }
 
     //metodo para testear
-    public void sysoPedido(View v){
+    /*public void sysoPedido(View v){
         System.out.println("______________________________________________");
         System.out.println("_______________DATOS DE PEDIDO________________");
         System.out.println("______________________________________________");
@@ -227,5 +219,5 @@ public class activity_pedido2 extends AppCompatActivity {
         for (int i=0; i < pedido.getLineas().size(); i++){
             System.out.println("    * " + pedido.getLinea(i).getProducto().getCod() + " " + pedido.getLinea(i).getProducto().getNombre() + " | "  + pedido.getLinea(i).getCantidad() + " | "  + pedido.getLinea(i).getPr_total());
         }
-    }
+    }*/
 }

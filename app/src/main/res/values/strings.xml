@@ -21,6 +21,8 @@
 
     <!-- pedido1 -->
     <string name="btn_elegirFecha">Fecha</string>
+    <string name="btn_nuevoComercial">Nuevo comercial</string>
+
 
     <!-- pedido2 -->
     <string name="lbl_anadirArticulos">Añadir artículos</string>
@@ -35,6 +37,9 @@
     <!-- pedid3 -->
     <string name="btn_terminarPedido">Confirmar</string>
     <string name="lbl_comercial">Comercial:</string>
+    <string name="lbl_cambiaPartner">Cambiar partner:</string>
+    <string name="btn_anadirArticulos">Añadir articulos</string>
+    <string name="btn_borrar">borrar</string>
 
 
 </resources>

@@ -1,19 +1,26 @@
 package com.example.retocomerciales.Clases;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 /**
  * La línea de cada producto con su cantidad y precio total (lo que aparecerá en el pedido)
  */
 public class Linea {
-    Producto producto;
-    int cantidad;
-    double pr_total;
-
+    private Producto producto;
+    private int cantidad;
+    private double pr_total;
+    private static DecimalFormat formatoDecimal;
 
     //constructor (el precio total se calcula con el precio_unidad del producto y la cantidad
     public Linea(Producto producto, int cantidad) {
+
+        formatoDecimal = new DecimalFormat("0.00");
+        formatoDecimal.setRoundingMode(RoundingMode.DOWN);
+
         this.producto = producto;
         this.cantidad = cantidad;
-        this.pr_total = producto.pr_unidad * cantidad;
+        this.pr_total = Double.parseDouble(formatoDecimal.format( (double) producto.getPr_unidad() * cantidad));
     }
 
     //Getter
@@ -24,7 +31,7 @@ public class Linea {
     //Setter de la cantidad (actualiza el precio)
     public void setCantidad(int cantidad){
         this.cantidad = cantidad;
-        this.pr_total = (double) (producto.pr_unidad * cantidad);
+        this.pr_total = Double.parseDouble(formatoDecimal.format( (double) producto.getPr_unidad() * cantidad));
     }
 
     //para pruebas
