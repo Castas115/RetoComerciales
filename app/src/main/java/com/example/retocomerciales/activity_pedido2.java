@@ -69,7 +69,7 @@ public class activity_pedido2 extends AppCompatActivity {
         datos = Datos.getInstance();
 
         //datos de los spinners
-        final ArrayAdapter adapterPoductos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getListNombres(datos.getProductos()));
+        final ArrayAdapter adapterPoductos = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos.getNombresProductos());
         adapterPoductos.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerProductos.setAdapter(adapterPoductos);
 
@@ -118,7 +118,7 @@ public class activity_pedido2 extends AppCompatActivity {
         addToPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addToPedido();
+                anadirAPedido();
             }
         });
 
@@ -184,15 +184,6 @@ public class activity_pedido2 extends AppCompatActivity {
         }
     }
 
-    public String[] getListNombres(Producto[] list){
-        String[] nombres = new String[list.length];
-
-        for(int i = 0; i < list.length; i++){
-            nombres[i] = list[i].getNombre();
-        }
-        return nombres;
-    }
-
     //metodo para calcular y escribir el precio total
     public void calcPrecioTotal() {
         try {
@@ -203,7 +194,7 @@ public class activity_pedido2 extends AppCompatActivity {
         }
     }
 
-    public void addToPedido(){
+    public void anadirAPedido(){
         try {
             int cantidad = Integer.parseInt(unidades.getText().toString());
             if (cantidad <= datos.getProducto(posicionProductoEnLista).getExistenciasCompra()) {

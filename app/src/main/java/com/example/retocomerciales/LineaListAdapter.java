@@ -18,6 +18,8 @@ import com.example.retocomerciales.Clases.Datos;
 import com.example.retocomerciales.Clases.Linea;
 import com.example.retocomerciales.Clases.Producto;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +28,9 @@ public class LineaListAdapter extends ArrayAdapter<Linea> {
     private final static String TAG = "LineaListAdapter";
     private Context context;
     int resource;
-    Button borrar;
     Datos datos;
+
+    DecimalFormat formatoDecimal;
 
 
     public LineaListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Linea> objects) {
@@ -77,7 +80,10 @@ public class LineaListAdapter extends ArrayAdapter<Linea> {
 
         nombreProd.setText(linea.getProducto().getNombre());
         cantidadProd.setText(linea.getCantidad() + " unidades");
-        prTotalProd.setText(linea.getPr_total() + "€");
+
+        formatoDecimal = new DecimalFormat("0.00");
+        formatoDecimal.setRoundingMode(RoundingMode.DOWN);
+        prTotalProd.setText(formatoDecimal.format(linea.getPr_total()) + " €");
 
         return convertView;
 

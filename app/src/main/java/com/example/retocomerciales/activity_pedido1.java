@@ -33,10 +33,8 @@ public class activity_pedido1 extends AppCompatActivity {
 
         datos = Datos.getInstance();
 
-        datos.cargarExistencias();//cargar existenciasCompras = existencias (nuevo pedido cancelando los cambios hechos anteriormente)
-
         //Spinner partners
-        final ArrayAdapter adapterPartners = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getListNombres(datos.getPartners()));
+        final ArrayAdapter adapterPartners = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos.getNombresPartners());
         adapterPartners.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnPartners.setAdapter(adapterPartners);
 
@@ -47,6 +45,7 @@ public class activity_pedido1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(activity_pedido1.this, activity_pedido2.class);
+                datos.setPosPartner(spnPartners.getSelectedItemPosition());
                 datos.getPedido().setPartner(datos.getPartner(spnPartners.getSelectedItemPosition()));
                 startActivityForResult(intent, 123);
             }
@@ -70,23 +69,5 @@ public class activity_pedido1 extends AppCompatActivity {
                 finish();
             }
         }
-    }
-
-    //devuelven lista de nombres
-    public String[] getListNombres(Producto[] list){
-        String[] nombres = new String[list.length];
-
-        for(int i = 0; i < list.length; i++){
-            nombres[i] = list[i].getNombre();
-        }
-        return nombres;
-    }
-    public String[] getListNombres(Partner[] list){
-        String[] nombres = new String[list.length];
-
-        for(int i = 0; i < list.length; i++){
-            nombres[i] = list[i].getNombre();
-        }
-        return nombres;
     }
 }

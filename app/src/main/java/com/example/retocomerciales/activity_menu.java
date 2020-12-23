@@ -12,7 +12,7 @@ import com.example.retocomerciales.Clases.Datos;
 
 public class activity_menu extends AppCompatActivity {
 
-    ImageButton img_calendario, img_pedidos, img_delegaciones, img_partners;
+    ImageButton calendario, pedidos, delegaciones, partners;
     Button volver;
     Intent intent;
 
@@ -22,10 +22,10 @@ public class activity_menu extends AppCompatActivity {
         setContentView(R.layout.layout_menu);
 
         //findViewById
-        img_calendario = findViewById(R.id.img_calendario);
-        img_pedidos = findViewById(R.id.img_gestionPedidos);
-        img_delegaciones = findViewById(R.id.img_envioDelegacion);
-        img_partners = findViewById(R.id.img_gestionPartners);
+        calendario = findViewById(R.id.img_calendario);
+        pedidos = findViewById(R.id.img_gestionPedidos);
+        delegaciones = findViewById(R.id.img_envioDelegacion);
+        partners = findViewById(R.id.img_gestionPartners);
         volver = findViewById(R.id.btn_volver);
 
 
@@ -39,7 +39,7 @@ public class activity_menu extends AppCompatActivity {
             }
         });
 
-        img_calendario.setOnClickListener(new View.OnClickListener() {
+        calendario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent = new Intent(activity_menu.this, activity_calendario.class);
@@ -47,17 +47,19 @@ public class activity_menu extends AppCompatActivity {
             }
         });
 
-        img_pedidos.setOnClickListener(new View.OnClickListener() {
+        pedidos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent = new Intent(activity_menu.this, activity_pedido1.class);
                 Datos datos = Datos.getInstance();
+
+                datos.cargarExistencias();//cargar existenciasCompras = existencias (nuevo pedido cancelando los cambios hechos anteriormente)
                 datos.nuevoPedido(datos.getComercial());
                 startActivity(intent);
             }
         });
 
-        img_delegaciones.setOnClickListener(new View.OnClickListener() {
+        delegaciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent = new Intent(activity_menu.this, activity_envios.class);
@@ -65,7 +67,7 @@ public class activity_menu extends AppCompatActivity {
             }
         });
 
-        img_partners.setOnClickListener(new View.OnClickListener() {
+        partners.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 intent = new Intent(activity_menu.this, activity_gestionPartner.class);
@@ -74,12 +76,4 @@ public class activity_menu extends AppCompatActivity {
         });
 
     }
-
-    /*public String texto (Producto[] list){//testeo
-        String text = "";
-        for(Producto prod : list){
-            text = text + prod.getCod() + "|" + prod.getNombre() + "|" + prod.getDescripcion() + "|" + prod.getPr_unidad() +"\n";
-        }
-        return  text;
-    }*/
 }

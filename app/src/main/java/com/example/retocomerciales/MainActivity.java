@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     Button _iniciar,llamar;
     Intent intent;
-    Producto[] listaProductos;
-    Partner[] listaPartners;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

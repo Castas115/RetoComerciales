@@ -8,7 +8,7 @@ public class Datos {
     private Partner[] partners;
     private Comercial[] comerciales;
     private Pedido pedido;
-    private int posComercial;
+    private int posComercial, posPartner;
 
 
     private Datos(){
@@ -52,12 +52,13 @@ public class Datos {
     }
 
     //Dato posComercial
-    public int getPosComercial(){
-        return  this.posComercial;
-    }
-    public void setPosComercial(int posComercial){
-        this.posComercial = posComercial;
-    }
+    public int getPosComercial(){return  this.posComercial;}
+    public void setPosComercial(int posComercial){this.posComercial = posComercial;}
+
+    //Dato posPartner
+    public int getPosPartner(){return  this.posPartner;}
+    public void setPosPartner(int posPartner){this.posPartner = posPartner; }
+
     //dato pedido
 
 
@@ -108,5 +109,33 @@ public class Datos {
     }
     public Comercial getComercial() {
         return comerciales[posComercial];
+    }
+
+    //devolver lista de strings con los nombres de cada lista (comerciales, partners y productos)
+    public String[] getNombresPartners(){
+        String[] nombres = new String[this.partners.length];
+
+        for(int i = 0; i < this.partners.length; i++){
+            nombres[i] = this.partners[i].getNombre();
+        }
+        return nombres;
+    }
+
+    public String[] getNombresProductos(){
+        String[] nombres = new String[this.productos.length];
+
+        for(int i = 0; i < this.productos.length; i++){
+            nombres[i] = this.productos[i].getNombre();
+        }
+        return nombres;
+    }
+
+    public String[] getNombresComerciales(){
+        String[] nombres = new String[this.comerciales.length];
+
+        for(int i = 0; i < this.comerciales.length; i++){
+            nombres[i] = this.comerciales[i].getNombre();
+        }
+        return nombres;
     }
 }
