@@ -1,17 +1,29 @@
 package com.example.retocomerciales;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.retocomerciales.Clases.Datos;
 
 public class activity_gestionPartner extends AppCompatActivity {
 
 
     Button alta,volver;
     Intent intent;
+    Spinner spnGestionPartners;
+    Datos datos;
+    TextView tbnombre , tbdireccion, tbpoblacion, tbcif, tbtlfn, tbemail;
+
+    private int posicionPartnerEnLista;//posición del partner elegido en el spinneer
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +32,47 @@ public class activity_gestionPartner extends AppCompatActivity {
         //findViewById
         alta = findViewById(R.id.btnAlta);
         volver = findViewById(R.id.btnVolver);
+        spnGestionPartners = findViewById(R.id.spinner2);
+        tbnombre = findViewById(R.id.contenidoNombre);
+        tbdireccion = findViewById(R.id.contenidoDireccion);
+        tbpoblacion = findViewById(R.id.contenidoPoblacion);
+        tbcif = findViewById(R.id.contenidoCif);
+        tbtlfn = findViewById(R.id.contenidoTlfno);
+        tbemail = findViewById(R.id.contenidoEmail);
+
+
+
+
+        datos = Datos.getInstance();
+
+        //Spinner partners
+        final ArrayAdapter adapterPartners = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos.getNombresPartners());
+        adapterPartners.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnGestionPartners.setAdapter(adapterPartners);
+
+        //listener del spinner
+        spnGestionPartners.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                posicionPartnerEnLista = position;
+
+                tbnombre.setText(String.valueOf(datos.getPartner(position).getNombre()));
+                tbdireccion.setText(String.valueOf(datos.getPartner(position).getDireccion()));
+                tbcif.setText(String.valueOf(datos.getPartner(position).getCIF()));
+                tbpoblacion.setText(String.valueOf(datos.getPartner(position).getPoblacion()));
+                tbtlfn.setText(String.valueOf(datos.getPartner(position).getTelefono()));
+                tbemail.setText(String.valueOf(datos.getPartner(position).getEmail()));
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
 
 
         alta.setOnClickListener(new View.OnClickListener() {
