@@ -28,7 +28,7 @@ public class activity_pedido1 extends AppCompatActivity {
         setContentView(R.layout.layout_pedido1);
 
         siguiente = findViewById(R.id.btn_siguiente);
-        volver = findViewById(R.id.btn_anadirArticulos);
+        volver = findViewById(R.id.btn_volver);
         spnPartners = findViewById(R.id.spn_partners);
 
         datos = Datos.getInstance();
@@ -48,7 +48,7 @@ public class activity_pedido1 extends AppCompatActivity {
             public void onClick(View v) {
                 intent = new Intent(activity_pedido1.this, activity_pedido2.class);
                 datos.getPedido().setPartner(datos.getPartner(spnPartners.getSelectedItemPosition()));
-                startActivity(intent);
+                startActivityForResult(intent, 123);
             }
         });
 
@@ -58,6 +58,18 @@ public class activity_pedido1 extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    //para vovler al menú tras la compra
+
+    @Override
+    protected void onActivityResult (int requestCode, int resultCode, Intent vuelta) {
+        super.onActivityResult(requestCode, resultCode, vuelta);
+        if (requestCode == 123 && resultCode == RESULT_OK){
+            boolean res = vuelta.getExtras().getBoolean("Volver");
+            if (res){
+                finish();
+            }
+        }
     }
 
     //devuelven lista de nombres

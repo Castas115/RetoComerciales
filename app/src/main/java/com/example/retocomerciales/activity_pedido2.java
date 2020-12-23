@@ -19,16 +19,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.example.retocomerciales.Clases.Comercial;
 import com.example.retocomerciales.Clases.Datos;
 import com.example.retocomerciales.Clases.Linea;
 import com.example.retocomerciales.Clases.Partner;
-import com.example.retocomerciales.Clases.Pedido;
 import com.example.retocomerciales.Clases.Producto;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.Calendar;
 
 public class activity_pedido2 extends AppCompatActivity {
 
@@ -53,7 +50,7 @@ public class activity_pedido2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_pedido2);
 
-        volver  = findViewById(R.id.btn_anadirArticulos);
+        volver  = findViewById(R.id.btn_volver);
         siguiente  = findViewById(R.id.btn_siguiente);
         spinnerProductos = findViewById(R.id.spinner);
         prUnidad = findViewById(R.id.txt_precioUnidad);
@@ -119,23 +116,9 @@ public class activity_pedido2 extends AppCompatActivity {
 
         //listener de boton añadir
         addToPedido.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                try {
-                    int cantidad = Integer.parseInt(unidades.getText().toString());
-                    if (cantidad <= datos.getProducto(posicionProductoEnLista).getExistenciasCompra()) {
-                        datos.getPedido().addLinea(new Linea(datos.getProducto(posicionProductoEnLista), cantidad));
-                        datos.restaExistenciasCompra(posicionProductoEnLista, cantidad);
-                        stock.setText("(" + String.valueOf(datos.getProducto(posicionProductoEnLista).getExistenciasCompra()) + " en stock)");
-                        Toast.makeText(getApplicationContext(), "Artículo añadido", Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(getApplicationContext(), "Cantidad superior al stock", Toast.LENGTH_SHORT).show();
-                    }
-                }catch (Exception e){
-                    //En caso de que no se haya elegido una cantidad
-                    Toast.makeText(getApplicationContext(), "Elige cantidad", Toast.LENGTH_SHORT).show();
-                }
+                addToPedido();
             }
         });
 
@@ -151,16 +134,29 @@ public class activity_pedido2 extends AppCompatActivity {
             public void onClick(View v) {
                 if (datos.getPedido().getLineas().size()>0) {
                     intent = new Intent(activity_pedido2.this, activity_pedido3.class);
-                    //intent.putExtra("pedido", pedido);
-                    startActivity(intent);
+                    startActivityForResult(intent, 123);
                 }else{
                     Toast.makeText(getApplicationContext(), "Añade artículos", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
     }
 
-
+    //para vovler al menú tras la compra
+    @Override
+    protected void onActivityResult (int requestCode, int resultCode, Intent vuelta) {
+        super.onActivityResult(requestCode, resultCode, vuelta);
+        if (requestCode == 123 && resultCode == RESULT_OK){
+            boolean res = vuelta.getExtras().getBoolean("Volver");
+            if (res){
+                Intent volver = new Intent();
+                volver.putExtra("Volver",true);
+                setResult(RESULT_OK, volver);
+                finish();
+            }
+        }
+    }
 
     public void cambiarImagen(String nombreImagen){
         switch (nombreImagen){
@@ -207,17 +203,20 @@ public class activity_pedido2 extends AppCompatActivity {
         }
     }
 
-    //metodo para testear
-    /*public void sysoPedido(View v){
-        System.out.println("______________________________________________");
-        System.out.println("_______________DATOS DE PEDIDO________________");
-        System.out.println("______________________________________________");
-        System.out.println(" - fecha: " + pedido.getFecha());
-        System.out.println(" - comercial: " + pedido.getComercial().getNombre() + " " + pedido.getComercial().getApellidos() + " | " + pedido.getComercial().getEmail() + " | " + pedido.getComercial().getDelegacion());
-        System.out.println(" - partner: " +  pedido.getPartner().getCIF() + " " +  pedido.getPartner().getNombre() + " | " +  pedido.getPartner().getEmail() + " | " +  pedido.getPartner().getTelefono());
-        System.out.println(" - lineas: ");
-        for (int i=0; i < pedido.getLineas().size(); i++){
-            System.out.println("    * " + pedido.getLinea(i).getProducto().getCod() + " " + pedido.getLinea(i).getProducto().getNombre() + " | "  + pedido.getLinea(i).getCantidad() + " | "  + pedido.getLinea(i).getPr_total());
+    public void addToPedido(){
+        try {
+            int cantidad = Integer.parseInt(unidades.getText().toString());
+            if (cantidad <= datos.getProducto(posicionProductoEnLista).getExistenciasCompra()) {
+                datos.getPedido().addLinea(new Linea(datos.getProducto(posicionProductoEnLista), cantidad));
+                datos.restaExistenciasCompra(posicionProductoEnLista, cantidad);
+                stock.setText("(" + String.valueOf(datos.getProducto(posicionProductoEnLista).getExistenciasCompra()) + " en stock)");
+                Toast.makeText(getApplicationContext(), "Artículo añadido", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getApplicationContext(), "Cantidad superior al stock", Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            //En caso de que no se haya elegido una cantidad
+            Toast.makeText(getApplicationContext(), "Elige cantidad", Toast.LENGTH_SHORT).show();
         }
-    }*/
+    }
 }
