@@ -21,6 +21,7 @@ import org.w3c.dom.Text;
 
 public class activity_pedido3 extends AppCompatActivity {
 
+    private TextView comercial;
     private ListView carroProductos;
     private Spinner spnPartners;
     private Datos datos;
@@ -36,12 +37,16 @@ public class activity_pedido3 extends AppCompatActivity {
         confirmar = findViewById(R.id.btn_terminarPedido);
         volver = findViewById(R.id.btn_volver);
         spnPartners = findViewById(R.id.spn_partners);
+        comercial = findViewById(R.id.lbl_comercial);
 
         datos = Datos.getInstance();
 
+        //mostrar nombre del comercial
+        comercial.setText("Comercial: " + datos.getPedido().getComercial().getNombre() + " " + datos.getPedido().getComercial().getApellidos());
+
+        //adapter creado por nosotros aplicado al listview
         final LineaListAdapter adapter = new LineaListAdapter(this, R.layout.list_item_productos, datos.getPedido().getLineas());
         carroProductos.setAdapter(adapter);
-
 
         //Spinner partnerss
         final ArrayAdapter adapterPartners = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos.getNombresPartners());
@@ -51,6 +56,7 @@ public class activity_pedido3 extends AppCompatActivity {
         int num = datos.getPosPartner();
         spnPartners.setSelection(datos.getPosPartner());
 
+        //boton confimar
         confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,6 +64,7 @@ public class activity_pedido3 extends AppCompatActivity {
             }
         });
 
+        //boton volver
         volver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +72,7 @@ public class activity_pedido3 extends AppCompatActivity {
             }
         });
 
+        //spinner partners
         spnPartners.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
