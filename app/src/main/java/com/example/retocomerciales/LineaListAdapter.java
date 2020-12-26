@@ -88,18 +88,4 @@ public class LineaListAdapter extends ArrayAdapter<Linea> {
         return convertView;
 
     }
-
-    /*private boolean seguro(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(LineaListAdapter.this)
-                .setIcon(android.R.drawable.ic_delete)
-                .setTitle("¿Estas seguro?")
-                .setMessage("¿Quieres eliminar este producto de la lista?")
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-
-    }*/
 }
