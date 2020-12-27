@@ -16,6 +16,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/pinguino" />
 
+    <Spinner
+        android:id="@+id/spn_eligeComercial"
+        android:layout_width="220dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_logoPistacho" />
+
     <TextView
         android:id="@+id/lbl_nomEmpresa9"
         android:layout_width="wrap_content"
@@ -77,6 +85,16 @@
         app:layout_constraintTop_toBottomOf="@+id/lbl_direccionDelegacion" />
 
     <Button
+        android:id="@+id/btnLlamar"
+        android:layout_width="80dp"
+        android:layout_height="37dp"
+        android:text="Llamar"
+        app:layout_constraintBottom_toBottomOf="@+id/lbl_telefDelegacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/lbl_telefDelegacion"
+        app:layout_constraintTop_toTopOf="@+id/lbl_telefDelegacion" />
+
+    <Button
         android:id="@+id/btn_iniciar"
         android:layout_width="362dp"
         android:layout_height="49dp"
@@ -87,22 +105,25 @@
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btnLlamar"
-        android:layout_width="80dp"
-        android:layout_height="37dp"
-        android:text="Llamar"
-        app:layout_constraintBottom_toBottomOf="@+id/lbl_telefDelegacion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/lbl_telefDelegacion"
-        app:layout_constraintTop_toTopOf="@+id/lbl_telefDelegacion" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="396dp"
+        android:layout_height="297dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="68dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <Spinner
-        android:id="@+id/spn_eligeComercial"
-        android:layout_width="220dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_logoPistacho" />
+        <fragment
+            android:id="@+id/map2"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="366dp"
+            android:layout_height="270dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".MapsActivity"
+            tools:layout="@layout/activity_main" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
