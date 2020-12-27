@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/btnCorreo"
+        android:layout_width="82dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="16dp"
+        android:text="Abrir"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.83"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
+
     <ImageView
         android:id="@+id/img_logoPistacho"
         android:layout_width="52dp"
@@ -66,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:text="Email:"
+        android:text="Enviar correo a la delegacion"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,8 +103,10 @@
         android:text="Llamar"
         app:layout_constraintBottom_toBottomOf="@+id/lbl_telefDelegacion"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.775"
         app:layout_constraintStart_toEndOf="@+id/lbl_telefDelegacion"
-        app:layout_constraintTop_toTopOf="@+id/lbl_telefDelegacion" />
+        app:layout_constraintTop_toTopOf="@+id/lbl_telefDelegacion"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btn_iniciar"
@@ -106,6 +120,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="396dp"
         android:layout_height="297dp"
         android:layout_marginStart="4dp"
@@ -114,7 +129,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <fragment
-            android:id="@+id/map2"
+            android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="366dp"
             android:layout_height="270dp"

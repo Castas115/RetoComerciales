@@ -31,7 +31,7 @@ import com.google.android.gms.maps.model.MarkerOptions;*/
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    Button _iniciar,llamar;
+    Button _iniciar,llamar,correo;
     Intent intent;
     private GoogleMap mMap;
 
@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         _iniciar=findViewById(R.id.btn_iniciar);
         llamar = findViewById(R.id.btnLlamar);
+        correo = findViewById(R.id.btnCorreo);
 
         llamar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +52,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 intent.setData(Uri.parse("tel:688847776"));
                 startActivity(intent);
+            }
+        });
+
+        correo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                crearCorreo();
             }
         });
 
@@ -64,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map2);
+                .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
 
@@ -74,10 +82,24 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng cebanc = new LatLng(43.30472446500069, -2.0168812128018994);
+        mMap.addMarker(new MarkerOptions().position(cebanc).title("Cebanc"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(cebanc));
+
+        LatLng ibermatica = new LatLng(43.287434143240006, -1.9855139867497127);
+        mMap.addMarker(new MarkerOptions().position(ibermatica).title("Ibermatica"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(ibermatica));
+
+        LatLng dosSystem = new LatLng(43.323055210313285, -1.9822306305925652);
+        mMap.addMarker(new MarkerOptions().position(dosSystem).title("DosSystem"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(dosSystem));
     }
 
+    public void crearCorreo() {
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","pistachophone@gmail.com", null));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
 
 }
