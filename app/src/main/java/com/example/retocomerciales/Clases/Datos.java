@@ -1,5 +1,20 @@
 package com.example.retocomerciales.Clases;
 
+import android.content.Context;
+import android.content.res.AssetManager;
+
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+
+import static java.security.AccessController.getContext;
+
 public class Datos {
 
     private static Datos datos;
@@ -11,11 +26,11 @@ public class Datos {
     private int posComercial, posPartner;
 
 
-    private Datos(){
+    private Datos() {
 
         comerciales = new Comercial[]{
-            new Comercial("jcastander@mlarramendi.com", "Jon", "Castander Illarramendi", "Guipuzcoa", "627739436", "delegGuipuzcoa@pistacho.es"),
-            new Comercial("iperez@pistachito.com", "Iker", "Pérez Juez", "Navarra", "688847776", "delegNavarra@pistacho.es")
+                new Comercial("jcastander@mlarramendi.com", "Jon", "Castander Illarramendi", "Guipuzcoa", "627739436", "delegGuipuzcoa@pistacho.es"),
+                new Comercial("iperez@pistachito.com", "Iker", "Pérez Juez", "Navarra", "688847776", "delegNavarra@pistacho.es")
         };
 
         productos = new Producto[]{
@@ -26,63 +41,77 @@ public class Datos {
                 new Producto("PPO+", "PistachoO+", "movil", 293.45f, 10),
                 new Producto("PPod", "PistachoPods", "airpodsPistacho", 24.95f, 10),
                 new Producto("Carg", "Cargador Pistacho", "cargadorPistacho", 12.34f, 10),
-                new Producto("FPB_", "Funda PistachoB", "Funda diseñada para proteger de tu PistachoPhone Beta",  "fundaPistacho", 7f, 10),
+                new Producto("FPB_", "Funda PistachoB", "Funda diseñada para proteger de tu PistachoPhone Beta", "fundaPistacho", 7f, 10),
                 new Producto("FPA_", "Funda PistachoA", "Funda diseñada para proteger de tu PistachoPhone Alfa", "fundaPistacho", 7f, 10),
                 new Producto("FPA+", "Funda PistachoA+", "Funda diseñada para proteger de tu PistachoPhone Alfa+", "fundaPistacho", 8.54f, 10),
                 new Producto("FPO_", "Funda PistachoO", "Funda diseñada para proteger de tu PistachoPhone Omega", "fundaPistacho", 8f, 10),
                 new Producto("FPO+", "Funda PistachoO+", "Funda diseñada para proteger de tu PistachoPhone Omega+", "fundaPistacho", 9.54f, 10)
         };
         partners = new Partner[]{
-                new Partner("1", "Cebanc", "Berio Pasealekua, 50, 20018 Donostia, Gipuzkoa", "A20045548", "Donostia" ,"943316900", "contacto@cebanc.com"),
-                new Partner("2", "Ibermática", "Mikeletegi Pasealekua, 5, 20009 Donostia, Gipuzkoa", "A20038915", "Donostia" ,"943413500", "contacto@ibermatica.com"),
-                new Partner("3", "Dosystem S.L.", "Sagardotegi Kalea, 1, 20160 Lasarte-Oria, SS", "A20040547", "Lasarte-Oria" ,"943369533", "contacto@dosystem.com")
+                new Partner("1", "Cebanc", "Berio Pasealekua, 50, 20018 Donostia, Gipuzkoa", "A20045548", "Donostia", "943316900", "contacto@cebanc.com"),
+                new Partner("2", "Ibermática", "Mikeletegi Pasealekua, 5, 20009 Donostia, Gipuzkoa", "A20038915", "Donostia", "943413500", "contacto@ibermatica.com"),
+                new Partner("3", "Dosystem S.L.", "Sagardotegi Kalea, 1, 20160 Lasarte-Oria, SS", "A20040547", "Lasarte-Oria", "943369533", "contacto@dosystem.com")
         };
         comerciales = new Comercial[]{
-                new Comercial("Ejemplo1" , "1", "1", "1" , "1", "1"),
-                new Comercial("Ejemplo2" , "2", "2", "2" , "2", "2"),
-                new Comercial("Ejemplo3" , "3", "3", "3" , "3", "3")
+                new Comercial("Ejemplo1", "1", "1", "1", "1", "1"),
+                new Comercial("Ejemplo2", "2", "2", "2", "2", "2"),
+                new Comercial("Ejemplo3", "3", "3", "3", "3", "3")
         };
     }
 
-    public static Datos getInstance(){
-        if (datos == null){
+    public static Datos getInstance() {
+        if (datos == null) {
             datos = new Datos();
         }
         return datos;
     }
 
     //Dato posComercial
-    public int getPosComercial(){return  this.posComercial;}
-    public void setPosComercial(int posComercial){this.posComercial = posComercial;}
+    public int getPosComercial() {
+        return this.posComercial;
+    }
+
+    public void setPosComercial(int posComercial) {
+        this.posComercial = posComercial;
+    }
 
     //Dato posPartner
-    public int getPosPartner(){return  this.posPartner;}
-    public void setPosPartner(int posPartner){this.posPartner = posPartner; }
+    public int getPosPartner() {
+        return this.posPartner;
+    }
+
+    public void setPosPartner(int posPartner) {
+        this.posPartner = posPartner;
+    }
 
     //dato pedido
 
 
-    public Pedido getPedido() {return pedido;}
+    public Pedido getPedido() {
+        return pedido;
+    }
 
-    public void nuevoPedido(Comercial comercial){
+    public void nuevoPedido(Comercial comercial) {
         pedido = new Pedido(comercial);
     }
 
     /**
      * Métodos para lista de productos
      */
-    public Producto[] getProductos(){
+    public Producto[] getProductos() {
         return productos;
     }
-    public Producto getProducto(int posicion){
+
+    public Producto getProducto(int posicion) {
         return productos[posicion];
     }
 
-    public void restaExistenciasCompra(int posicion, int existenciasRestadas){
+    public void restaExistenciasCompra(int posicion, int existenciasRestadas) {
         productos[posicion].setExistenciasCompra(productos[posicion].getExistenciasCompra() - existenciasRestadas);
     }
-    public void cargarExistencias(){
-        for (Producto producto : productos){
+
+    public void cargarExistencias() {
+        for (Producto producto : productos) {
             producto.setExistenciasCompra(producto.getExistencias());
         }
     }
@@ -90,11 +119,11 @@ public class Datos {
     /**
      * Métodos para lista de Partners
      */
-    public Partner[] getPartners(){
+    public Partner[] getPartners() {
         return partners;
     }
 
-    public Partner getPartner(int posicion){
+    public Partner getPartner(int posicion) {
         return partners[posicion];
     }
 
@@ -104,38 +133,41 @@ public class Datos {
     public Comercial[] getComerciales() {
         return comerciales;
     }
+
     public Comercial getComercial(int pos) {
         return comerciales[pos];
     }
+
     public Comercial getComercial() {
         return comerciales[posComercial];
     }
 
     //devolver lista de strings con los nombres de cada lista (comerciales, partners y productos)
-    public String[] getNombresPartners(){
+    public String[] getNombresPartners() {
         String[] nombres = new String[this.partners.length];
 
-        for(int i = 0; i < this.partners.length; i++){
+        for (int i = 0; i < this.partners.length; i++) {
             nombres[i] = this.partners[i].getNombre();
         }
         return nombres;
     }
 
-    public String[] getNombresProductos(){
+    public String[] getNombresProductos() {
         String[] nombres = new String[this.productos.length];
 
-        for(int i = 0; i < this.productos.length; i++){
+        for (int i = 0; i < this.productos.length; i++) {
             nombres[i] = this.productos[i].getNombre();
         }
         return nombres;
     }
 
-    public String[] getNombresComerciales(){
+    public String[] getNombresComerciales() {
         String[] nombres = new String[this.comerciales.length];
 
-        for(int i = 0; i < this.comerciales.length; i++){
+        for (int i = 0; i < this.comerciales.length; i++) {
             nombres[i] = this.comerciales[i].getNombre();
         }
         return nombres;
     }
+
 }
