@@ -155,8 +155,8 @@
 
     <EditText
         android:id="@+id/txt_precioTotal"
-        android:layout_width="103dp"
-        android:layout_height="43dp"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
         android:layout_marginStart="12dp"
         android:editable="false"
         android:ems="10"

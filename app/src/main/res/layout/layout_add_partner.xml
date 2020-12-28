@@ -93,7 +93,7 @@
             android:layout_margin="10dp"
             android:ems="10"
             android:hint="Teléfono"
-            android:inputType="textPersonName" />
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/tbEmailAddPartner"
@@ -102,7 +102,7 @@
             android:layout_margin="10dp"
             android:ems="10"
             android:hint="Email"
-            android:inputType="textPersonName" />
+            android:inputType="textEmailAddress" />
 
     </LinearLayout>
 

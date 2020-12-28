@@ -52,8 +52,7 @@ public class activity_pedido3 extends AppCompatActivity {
         final ArrayAdapter adapterPartners = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos.getNombresPartners());
         adapterPartners.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnPartners.setAdapter(adapterPartners);
-            //partner seleccionado anteriormente seleccionado por defecto
-        int num = datos.getPosPartner();
+            //partner seleccionado anteriormente seleccionado por defect
         spnPartners.setSelection(datos.getPosPartner());
 
         //boton confimar

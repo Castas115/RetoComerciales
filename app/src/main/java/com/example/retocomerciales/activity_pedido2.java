@@ -63,7 +63,7 @@ public class activity_pedido2 extends AppCompatActivity {
 
         //el partner del intent del anterior activity (pedido1)
         extras = getIntent();
-        partner = (Partner) extras.getSerializableExtra("partner");
+        partner = (Partner) extras.getSerializableExtra("partner");//cambiar
 
         //instancia de los datos
         datos = Datos.getInstance();
@@ -196,7 +196,7 @@ public class activity_pedido2 extends AppCompatActivity {
 
     public void anadirAPedido(){
         try {
-            int cantidad = Integer.parseInt(unidades.getText().toString());
+            int cantidad = Integer.parseInt(unidades.getText().toString());//fallo
             if (cantidad <= datos.getProducto(posicionProductoEnLista).getExistenciasCompra()) {
                 datos.getPedido().addLinea(new Linea(datos.getProducto(posicionProductoEnLista), cantidad));
                 datos.restaExistenciasCompra(posicionProductoEnLista, cantidad);

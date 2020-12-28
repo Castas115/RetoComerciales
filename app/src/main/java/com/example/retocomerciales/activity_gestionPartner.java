@@ -53,7 +53,6 @@ public class activity_gestionPartner extends AppCompatActivity {
         //listener del spinner
         spnGestionPartners.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            @SuppressLint("SetTextI18n")
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 posicionPartnerEnLista = position;
@@ -68,9 +67,7 @@ public class activity_gestionPartner extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
 
         });
 
