@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RetoComerciales</string>
+    <string name="app_name">Pistacho Phone: Comerciales</string>
 
     <string name="lbl_nomEmpresa">Pistacho</string>
     <string name="btn_volver">Volver</string>
@@ -31,7 +31,7 @@
     <string name="lbl_cantidad">Cantidad:</string>
     <string name="lbl_precioTot">Precio total:</string>
     <string name="btn_addToPedido">Añadir linea</string>
-    <string name="title_activity_maps">Inicio</string>
+    <string name="title_activity_maps">Pistacho Phone</string>
     <string name="todo">TODO</string>
 
     <!-- pedid3 -->
