@@ -4,11 +4,8 @@
 
 package com.example.retocomerciales.Clases;
 
-import java.io.Serializable;
+public class Comercial  {
 
-public class Comercial implements Serializable {
-
-    final static long serialVersionUID = 1l;
     private String email, nombre, apellidos, delegacion, telefonoDelegacion, emailDelegacion;
 
     //constructor
