@@ -73,12 +73,18 @@ public class activity_menu extends AppCompatActivity {
             }
         });
 
-        /*
+
 
 
         delegaciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                intent = new Intent(activity_menu.this, activity_envios.class);
+                startActivity(intent);
+
+                /*
+
 
                 try {
                     crearCorreo();
@@ -87,13 +93,13 @@ public class activity_menu extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-
+ */
             }
 
 
         });
 
-         */
+
 
         partners.setOnClickListener(new View.OnClickListener() {
             @Override

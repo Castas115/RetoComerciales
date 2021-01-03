@@ -73,6 +73,7 @@ public class activity_pedido1 extends AppCompatActivity {
 
                 //addEvent(title,location,begin,end);
                elegirFecha();
+
             }
         });
 
@@ -84,6 +85,9 @@ public class activity_pedido1 extends AppCompatActivity {
                 intent = new Intent(activity_pedido1.this, activity_pedido2.class);
                 datos.setPosPartner(spnPartners.getSelectedItemPosition());
                 datos.getPedido().setPartner(datos.getPartner(spnPartners.getSelectedItemPosition()));
+
+                datos.getPedido().setFecha(mostrarFecha.getText().toString());
+
                 startActivityForResult(intent, 123);
             }
         });
@@ -133,10 +137,13 @@ public class activity_pedido1 extends AppCompatActivity {
                 @Override
                 public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                     mostrarFecha.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+
                 }
             }
                     , dia, mes, ano);
             datePickerDialog.show();
+
+
 
     }
 }

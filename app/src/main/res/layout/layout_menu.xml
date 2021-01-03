@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="@string/txt_envioDelegacion"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
             app:layout_constraintEnd_toEndOf="@+id/img_envioDelegacion"
             app:layout_constraintStart_toStartOf="@+id/img_envioDelegacion"
             app:layout_constraintTop_toBottomOf="@id/img_envioDelegacion" />
@@ -37,6 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="@string/txt_gestionPartners"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
             app:layout_constraintEnd_toEndOf="@id/img_gestionPartners"
             app:layout_constraintStart_toStartOf="@id/img_gestionPartners"
             app:layout_constraintTop_toBottomOf="@id/img_gestionPartners" />
@@ -47,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="@string/txt_gestionPedido"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
             app:layout_constraintEnd_toEndOf="@+id/img_gestionPedidos"
             app:layout_constraintStart_toStartOf="@+id/img_gestionPedidos"
             app:layout_constraintTop_toBottomOf="@+id/img_gestionPedidos" />
@@ -69,16 +72,18 @@
             android:layout_height="150dp"
             android:layout_marginTop="100dp"
             android:layout_marginEnd="40dp"
+            android:background="@drawable/borde"
+            android:contentDescription="TODO"
             android:scaleType="centerInside"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/pedidos"
-            android:contentDescription="TODO" />
+            app:srcCompat="@drawable/pedidos" />
 
         <ImageButton
             android:id="@+id/img_envioDelegacion"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:background="@drawable/borde"
             android:scaleType="centerInside"
             app:layout_constraintStart_toStartOf="@+id/img_gestionPedidos"
             app:layout_constraintTop_toTopOf="@+id/img_gestionPartners"
@@ -89,6 +94,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="60dp"
+            android:background="@drawable/borde"
             android:scaleType="centerInside"
             app:layout_constraintEnd_toEndOf="@+id/img_calendario"
             app:layout_constraintStart_toStartOf="@+id/img_calendario"
@@ -100,6 +106,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginStart="40dp"
+            android:background="@drawable/borde"
             android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="@+id/img_gestionPedidos"
             app:layout_constraintStart_toStartOf="parent"
@@ -112,6 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="@string/txt_calendario"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
             app:layout_constraintEnd_toEndOf="@+id/img_calendario"
             app:layout_constraintStart_toStartOf="@+id/img_calendario"
             app:layout_constraintTop_toBottomOf="@+id/img_calendario" />

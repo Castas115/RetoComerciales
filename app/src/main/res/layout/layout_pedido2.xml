@@ -1,181 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity_pedido2">
 
-    <Button
-        android:id="@+id/btn_siguiente"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/btn_siguiente"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_volver"
-        android:layout_width="75dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/btn_volver"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <ImageView
+            android:id="@+id/img_logoPistacho8"
+            android:layout_width="52dp"
+            android:layout_height="62dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/pinguino" />
 
-    <ImageView
-        android:id="@+id/img_logoPistacho8"
-        android:layout_width="52dp"
-        android:layout_height="62dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/pinguino" />
+        <TextView
+            android:id="@+id/lbl_nomEmpresa7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="292dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/lbl_nomEmpresa"
+            android:textColor="@android:color/background_dark"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/lbl_nomEmpresa7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:text="@string/lbl_nomEmpresa"
-        android:textColor="@android:color/background_dark"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/img_logoPistacho8"
-        app:layout_constraintEnd_toStartOf="@+id/img_logoPistacho8"
-        app:layout_constraintTop_toTopOf="@+id/img_logoPistacho8" />
+        <TextView
+            android:id="@+id/lbl_anadirArticulos"
+            android:layout_width="135dp"
+            android:layout_height="27dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/lbl_anadirArticulos"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/lbl_anadirArticulos"
-        android:layout_width="135dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/lbl_anadirArticulos"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout3"
+            android:layout_width="405dp"
+            android:layout_height="481dp"
+            android:background="@drawable/borde"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.421">
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="214dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="25dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_anadirArticulos" />
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="214dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/txt_precioUnidad"
-        android:layout_width="61dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="10dp"
-        android:editable="false"
-        android:ems="10"
-        android:inputType="none"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinner"
-        app:layout_constraintStart_toEndOf="@+id/spinner"
-        app:layout_constraintTop_toTopOf="@+id/spinner" />
+            <EditText
+                android:id="@+id/txt_precioUnidad"
+                android:layout_width="61dp"
+                android:layout_height="41dp"
+                android:layout_marginEnd="32dp"
+                android:editable="false"
+                android:ems="10"
+                android:inputType="none"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/spinner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/spinner" />
 
-    <EditText
-        android:id="@+id/txt_descripcion"
-        android:layout_width="156dp"
-        android:layout_height="239dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:editable="false"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="none"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbl_stock" />
+            <EditText
+                android:id="@+id/txt_descripcion"
+                android:layout_width="156dp"
+                android:layout_height="239dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:editable="false"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="none"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lbl_stock" />
 
-    <ImageView
-        android:id="@+id/imagen"
-        android:layout_width="192dp"
-        android:layout_height="208dp"
-        android:background="#717171"
-        app:layout_constraintBottom_toBottomOf="@+id/txt_descripcion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txt_descripcion"
-        app:layout_constraintTop_toTopOf="@+id/txt_descripcion"
-        app:layout_constraintVertical_bias="0.322"
-        app:srcCompat="@drawable/movil" />
+            <ImageView
+                android:id="@+id/imagen"
+                android:layout_width="196dp"
+                android:layout_height="236dp"
+                android:layout_marginEnd="4dp"
+                android:background="#717171"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_descripcion"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/movil" />
 
-    <TextView
-        android:id="@+id/lbl_precioTot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="40dp"
-        android:inputType="none"
-        android:text="@string/lbl_precioTot"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_cantidades" />
+            <TextView
+                android:id="@+id/lbl_cantidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="216dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/lbl_cantidad"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imagen" />
 
-    <Button
-        android:id="@+id/btn_addToPedido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:text="@string/btn_addToPedido"
-        app:layout_constraintBottom_toBottomOf="@+id/lbl_precioTot"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/lbl_precioTot"
-        app:layout_constraintVertical_bias="0.517" />
+            <EditText
+                android:id="@+id/txt_cantidades"
+                android:layout_width="58dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="28dp"
+                android:ems="10"
+                android:inputType="number"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/lbl_cantidad"
+                app:layout_constraintStart_toEndOf="@+id/lbl_cantidad"
+                app:layout_constraintTop_toTopOf="@+id/lbl_cantidad"
+                app:layout_constraintVertical_bias="0.3" />
 
-    <EditText
-        android:id="@+id/txt_cantidades"
-        android:layout_width="58dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="12dp"
-        android:ems="10"
-        android:inputType="number"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/lbl_cantidad"
-        app:layout_constraintStart_toEndOf="@+id/lbl_cantidad"
-        app:layout_constraintTop_toTopOf="@+id/lbl_cantidad"
-        app:layout_constraintVertical_bias="0.65" />
+            <TextView
+                android:id="@+id/lbl_precioTot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="28dp"
+                android:inputType="none"
+                android:text="@string/lbl_precioTot"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/lbl_cantidad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="232dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/lbl_cantidad"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_descripcion" />
+            <EditText
+                android:id="@+id/txt_precioTotal"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="20dp"
+                android:editable="false"
+                android:ems="10"
+                android:importantForAutofill="no"
+                android:inputType="none"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.455"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/txt_precioTotal"
-        android:layout_width="100dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="12dp"
-        android:editable="false"
-        android:ems="10"
-        android:importantForAutofill="no"
-        android:inputType="none"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/lbl_precioTot"
-        app:layout_constraintStart_toEndOf="@+id/lbl_precioTot"
-        app:layout_constraintTop_toTopOf="@+id/lbl_precioTot"
-        app:layout_constraintVertical_bias="0.529" />
+            <Button
+                android:id="@+id/btn_addToPedido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="@string/btn_addToPedido"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/lbl_stock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textSize="12sp"
-        android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="@+id/spinner"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+            <TextView
+                android:id="@+id/lbl_stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="@+id/spinner"
+                app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btn_volver"
+            android:layout_width="75dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/btn_volver"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+
+        <Button
+            android:id="@+id/btn_siguiente"
+            android:layout_width="106dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/btn_siguiente"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

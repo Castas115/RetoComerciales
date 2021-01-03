@@ -11,106 +11,114 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Spinner
-            android:id="@+id/spn_partners"
-            android:layout_width="303dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_cambiaPartner" />
-
-        <Button
-            android:id="@+id/btn_volver"
-            android:layout_width="75dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="@string/btn_volver"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/lbl_nomEmpresa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:text="@string/lbl_nomEmpresa"
-            android:textColor="@android:color/background_dark"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_logoPistacho"
-            app:layout_constraintEnd_toStartOf="@+id/img_logoPistacho"
-            app:layout_constraintTop_toTopOf="@+id/img_logoPistacho" />
-
         <ImageView
             android:id="@+id/img_logoPistacho"
             android:layout_width="52dp"
             android:layout_height="62dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="4dp"
             android:contentDescription="@string/todo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/pinguino" />
 
-        <Button
-            android:id="@+id/btn_elegirFecha"
-            android:layout_width="82dp"
-            android:layout_height="37dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="20dp"
-            android:text="@string/btn_elegirFecha"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_logoPistacho" />
-
         <TextView
-            android:id="@+id/lbl_fecha"
+            android:id="@+id/lbl_nomEmpresa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:inputType="none"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_elegirFecha"
-            app:layout_constraintEnd_toStartOf="@+id/btn_elegirFecha"
-            app:layout_constraintTop_toTopOf="@+id/btn_elegirFecha" />
+            android:layout_marginStart="296dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/lbl_nomEmpresa"
+            android:textColor="@android:color/background_dark"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="393dp"
+            android:layout_height="493dp"
+            android:layout_marginTop="72dp"
+            android:background="@drawable/borde"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/btn_elegirFecha"
+                android:layout_width="82dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="276dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/btn_elegirFecha"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/lbl_fecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:inputType="none"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_elegirFecha"
+                app:layout_constraintEnd_toStartOf="@+id/btn_elegirFecha"
+                app:layout_constraintTop_toTopOf="@+id/btn_elegirFecha" />
+
+            <TextView
+                android:id="@+id/lbl_comercial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/lbl_comercial"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_elegirFecha" />
+
+            <TextView
+                android:id="@+id/lbl_cambiaPartner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/lbl_cambiaPartner"
+                app:layout_constraintStart_toStartOf="@+id/lbl_comercial"
+                app:layout_constraintTop_toBottomOf="@+id/lbl_comercial" />
+
+            <Spinner
+                android:id="@+id/spn_partners"
+                android:layout_width="303dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lbl_cambiaPartner" />
+
+            <ListView
+                android:id="@+id/lsv_listaProductos"
+                android:layout_width="365dp"
+                android:layout_height="262dp"
+                android:layout_marginTop="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spn_partners" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btn_volver"
+            android:layout_width="75dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginBottom="36dp"
+            android:text="@string/btn_volver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btn_terminarPedido"
             android:layout_width="106dp"
             android:layout_height="40dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="36dp"
             android:text="@string/btn_terminarPedido"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-            android:id="@+id/lbl_comercial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:text="@string/lbl_comercial"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_elegirFecha" />
-
-        <TextView
-            android:id="@+id/lbl_cambiaPartner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="@string/lbl_cambiaPartner"
-            app:layout_constraintStart_toStartOf="@+id/lbl_comercial"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_comercial" />
-
-        <ListView
-            android:id="@+id/lsv_listaProductos"
-            android:layout_width="368dp"
-            android:layout_height="269dp"
-            android:layout_marginTop="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spn_partners" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

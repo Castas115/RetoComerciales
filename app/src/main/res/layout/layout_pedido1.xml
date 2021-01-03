@@ -11,38 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/btn_siguiente"
-            android:layout_width="106dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="@string/btn_siguiente"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/btn_volver"
-            android:layout_width="75dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="20dp"
-            android:text="@string/btn_volver"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/lbl_nomEmpresa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:text="@string/lbl_nomEmpresa"
-            android:textColor="@android:color/background_dark"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_logoPistacho"
-            app:layout_constraintEnd_toStartOf="@+id/img_logoPistacho"
-            app:layout_constraintTop_toTopOf="@+id/img_logoPistacho" />
-
         <ImageView
             android:id="@+id/img_logoPistacho"
             android:layout_width="52dp"
@@ -54,43 +22,87 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/pinguino" />
 
-        <Spinner
-            android:id="@+id/spn_partners"
-            android:layout_width="302dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="30dp"
-            app:layout_constraintStart_toStartOf="@+id/btn_elegirFecha"
-            app:layout_constraintTop_toBottomOf="@+id/btn_elegirFecha" />
-
-        <Button
-            android:id="@+id/btn_elegirFecha"
-            android:layout_width="82dp"
-            android:layout_height="37dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:text="@string/btn_elegirFecha"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_nuevoComercial" />
-
         <TextView
-            android:id="@+id/lbl_fecha"
+            android:id="@+id/lbl_nomEmpresa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:inputType="none"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_elegirFecha"
-            app:layout_constraintStart_toEndOf="@+id/btn_elegirFecha"
-            app:layout_constraintTop_toTopOf="@+id/btn_elegirFecha" />
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="96dp"
+            android:text="@string/lbl_nomEmpresa"
+            android:textColor="@android:color/background_dark"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btn_nuevoComercial"
             android:layout_width="200dp"
             android:layout_height="41dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="40dp"
             android:text="@string/btn_nuevoComercial"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_logoPistacho" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="377dp"
+            android:layout_height="378dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/borde"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Spinner
+                android:id="@+id/spn_partners"
+                android:layout_width="302dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.493"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_elegirFecha"
+                android:layout_width="82dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="56dp"
+                android:text="@string/btn_elegirFecha"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spn_partners" />
+
+            <TextView
+                android:id="@+id/lbl_fecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="72dp"
+                android:inputType="none"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_elegirFecha"
+                app:layout_constraintStart_toEndOf="@+id/btn_elegirFecha"
+                app:layout_constraintTop_toTopOf="@+id/btn_elegirFecha" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btn_volver"
+            android:layout_width="75dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/btn_volver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_siguiente"
+            android:layout_width="106dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/btn_siguiente"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
