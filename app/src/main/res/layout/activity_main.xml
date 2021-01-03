@@ -139,6 +139,7 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:context=".MapsActivity"
             tools:layout="@layout/activity_main" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

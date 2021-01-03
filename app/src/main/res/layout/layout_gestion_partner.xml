@@ -25,152 +25,152 @@
             android:id="@+id/spinner2"
             android:layout_width="355dp"
             android:layout_height="36dp"
-            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.555"
+            app:layout_constraintHorizontal_bias="0.517"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_logoPistacho7" />
+            tools:layout_editor_absoluteY="65dp" />
 
         <TextView
             android:id="@+id/lbl_nomEmpresa5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="20dp"
             android:text="@string/lbl_nomEmpresa"
             android:textColor="@android:color/background_dark"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.708"
+            app:layout_constraintHorizontal_bias="0.89"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="395dp"
-            android:layout_height="453dp"
-            android:backgroundTint="#DC0707"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <ScrollView
+            android:layout_width="354dp"
+            android:layout_height="452dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.68"
+            app:layout_constraintHorizontal_bias="0.526"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner2"
-            app:layout_constraintVertical_bias="0.115">
+            app:layout_constraintTop_toBottomOf="@+id/spinner2">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp"
-                android:text="Nombre:"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/contenidoNombre"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="#B2E7ED"
-                android:text="TextView" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tbDireccion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp"
-                android:text="Direccion:"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="Nombre:"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/contenidoDireccion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="#B2E7ED"
-                android:text="TextView" />
+                <TextView
+                    android:id="@+id/contenidoNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#B2E7ED"
+                    android:text="TextView" />
 
-            <TextView
-                android:id="@+id/tbPoblacion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp"
-                android:text="Poblacion:"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tbDireccion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="Direccion:"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/contenidoPoblacion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="#B2E7ED"
-                android:text="TextView" />
+                <TextView
+                    android:id="@+id/contenidoDireccion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#B2E7ED"
+                    android:text="TextView" />
 
-            <TextView
-                android:id="@+id/tbCif"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp"
-                android:text="CIF:"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/contenidoPoblacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#B2E7ED"
+                    android:text="TextView" />
 
-            <TextView
-                android:id="@+id/contenidoCif"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="#B2E7ED"
-                android:text="TextView" />
+                <TextView
+                    android:id="@+id/contenidoCif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#B2E7ED"
+                    android:text="TextView" />
 
-            <TextView
-                android:id="@+id/tbTlfn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp"
-                android:text="Telefono:"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tbEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="Email:"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/contenidoTlfno"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="#B2E7ED"
-                android:text="TextView" />
+                <TextView
+                    android:id="@+id/contenidoEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#B2E7ED"
+                    android:text="TextView" />
 
-            <TextView
-                android:id="@+id/tbEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="15dp"
-                android:text="Email:"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/tbCif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="CIF:"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/contenidoEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="#B2E7ED"
-                android:text="TextView" />
+                <TextView
+                    android:id="@+id/tbTlfn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="Telefono:"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="16sp" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tbPoblacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="Poblacion:"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/contenidoTlfno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#B2E7ED"
+                    android:text="TextView" />
+            </LinearLayout>
+        </ScrollView>
 
         <Button
             android:id="@+id/btnVolver"

@@ -62,14 +62,6 @@
             app:layout_constraintStart_toStartOf="@+id/btn_elegirFecha"
             app:layout_constraintTop_toBottomOf="@+id/btn_elegirFecha" />
 
-        <Spinner
-            android:id="@+id/spn_comerciales"
-            android:layout_width="302dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="100dp"
-            app:layout_constraintStart_toStartOf="@+id/btn_elegirFecha"
-            app:layout_constraintTop_toBottomOf="@+id/btn_elegirFecha" />
-
         <Button
             android:id="@+id/btn_elegirFecha"
             android:layout_width="82dp"
@@ -99,6 +91,7 @@
             android:text="@string/btn_nuevoComercial"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_logoPistacho" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
