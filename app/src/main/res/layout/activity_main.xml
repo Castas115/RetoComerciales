@@ -13,24 +13,26 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/lbl_nomEmpresa9"
+            android:id="@+id/lbl_nomEmpresa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="88dp"
             android:text="@string/lbl_nomEmpresa"
             android:textColor="@android:color/background_dark"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/img_logoPistacho"
+            app:layout_constraintEnd_toStartOf="@+id/img_logoPistacho"
+            app:layout_constraintHorizontal_bias="0.98"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/img_logoPistacho" />
 
         <ImageView
             android:id="@+id/img_logoPistacho"
             android:layout_width="52dp"
             android:layout_height="62dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.97"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/pinguino" />
 
@@ -45,12 +47,11 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
-            android:layout_width="398dp"
-            android:layout_height="198dp"
+            android:layout_width="370dp"
+            android:layout_height="199dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/borde"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.461"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spn_eligeComercial">
 
@@ -120,9 +121,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
-            android:layout_width="391dp"
-            android:layout_height="223dp"
-            android:layout_marginTop="24dp"
+            android:layout_width="370dp"
+            android:layout_height="270dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_iniciar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
@@ -130,8 +131,8 @@
             <fragment
                 android:id="@+id/map"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="364dp"
-                android:layout_height="198dp"
+                android:layout_width="370dp"
+                android:layout_height="270dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.481"
@@ -145,7 +146,7 @@
             android:id="@+id/btn_iniciar"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/btn_iniciar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

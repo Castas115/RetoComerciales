@@ -13,25 +13,26 @@
         android:layout_height="186dp">
 
         <TextView
-            android:id="@+id/lbl_nomEmpresa4"
-            android:layout_width="71dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="248dp"
-            android:layout_marginTop="24dp"
+            android:id="@+id/lbl_nomEmpresa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/lbl_nomEmpresa"
             android:textColor="@android:color/background_dark"
             android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_logoPistacho"
+            app:layout_constraintEnd_toStartOf="@+id/img_logoPistacho"
+            app:layout_constraintHorizontal_bias="0.98"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/img_logoPistacho" />
 
         <ImageView
-            android:id="@+id/img_logoPistacho5"
-            android:layout_width="59dp"
-            android:layout_height="77dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/todo"
+            android:id="@+id/img_logoPistacho"
+            android:layout_width="52dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.97"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/pinguino" />
 

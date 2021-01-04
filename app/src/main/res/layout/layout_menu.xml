@@ -11,13 +11,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/lbl_nomEmpresa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_nomEmpresa"
+            android:textColor="@android:color/background_dark"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_logoPistacho"
+            app:layout_constraintEnd_toStartOf="@+id/img_logoPistacho"
+            app:layout_constraintHorizontal_bias="0.98"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/img_logoPistacho" />
+
         <ImageView
-            android:id="@+id/img_logoPistacho2"
+            android:id="@+id/img_logoPistacho"
             android:layout_width="52dp"
             android:layout_height="62dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.97"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/pinguino" />
 
@@ -54,28 +68,17 @@
             app:layout_constraintStart_toStartOf="@+id/img_gestionPedidos"
             app:layout_constraintTop_toBottomOf="@+id/img_gestionPedidos" />
 
-        <TextView
-            android:id="@+id/lbl_nomEmpresa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:text="@string/lbl_nomEmpresa"
-            android:textColor="@android:color/background_dark"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_logoPistacho2"
-            app:layout_constraintEnd_toStartOf="@+id/img_logoPistacho2"
-            app:layout_constraintTop_toTopOf="@+id/img_logoPistacho2" />
 
         <ImageButton
             android:id="@+id/img_gestionPedidos"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="100dp"
-            android:layout_marginEnd="40dp"
             android:background="@drawable/borde"
             android:contentDescription="TODO"
             android:scaleType="centerInside"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_calendario"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/pedidos" />
 
@@ -105,12 +108,14 @@
             android:id="@+id/img_calendario"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_marginStart="40dp"
             android:background="@drawable/borde"
             android:scaleType="centerInside"
             app:layout_constraintBottom_toBottomOf="@+id/img_gestionPedidos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.134"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/img_gestionPedidos"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/calendario" />
 
         <TextView
