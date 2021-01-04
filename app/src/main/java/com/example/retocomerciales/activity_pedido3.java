@@ -26,7 +26,7 @@ public class activity_pedido3 extends AppCompatActivity {
     private Spinner spnPartners;
     private Datos datos;
     private Button confirmar, volver;
-
+    private boolean primer;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,7 @@ public class activity_pedido3 extends AppCompatActivity {
         volver = findViewById(R.id.btn_volver);
         spnPartners = findViewById(R.id.spn_partners);
         comercial = findViewById(R.id.lbl_comercial);
+        primer = true;
 
         datos = Datos.getInstance();
 
@@ -52,7 +53,7 @@ public class activity_pedido3 extends AppCompatActivity {
         final ArrayAdapter adapterPartners = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos.getNombresPartners());
         adapterPartners.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnPartners.setAdapter(adapterPartners);
-            //partner seleccionado anteriormente seleccionado por defect
+        //partner seleccionado anteriormente seleccionado por defect
         spnPartners.setSelection(datos.getPosPartner());
 
         //boton confimar
@@ -76,7 +77,11 @@ public class activity_pedido3 extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 datos.getPedido().setPartner(datos.getPartner(position));
-                Toast.makeText(getApplicationContext(), "Partner cambiado", Toast.LENGTH_SHORT).show();
+                if (!primer) {
+                    Toast.makeText(getApplicationContext(), "Partner cambiado", Toast.LENGTH_SHORT).show();
+                } else {
+                    primer = false;
+                }
             }
 
             @Override
@@ -88,13 +93,13 @@ public class activity_pedido3 extends AppCompatActivity {
     }
 
 
-    public void realizarPedido(){
+    public void realizarPedido() {
         //introducir escritura en xml
 
         Toast.makeText(getApplicationContext(), "Compra realizada", Toast.LENGTH_SHORT).show();
         //para vovler al menú tras la compra
         Intent volver = new Intent();
-        volver.putExtra("Volver",true);
+        volver.putExtra("Volver", true);
         setResult(RESULT_OK, volver);
         finish();
     }

@@ -38,7 +38,7 @@ public class activity_pedido2 extends AppCompatActivity {
     TextView stock;
     ImageView imagen;
     Button addToPedido, volver, siguiente;
-    Intent intent, extras;
+    Intent intent;
     Datos datos;
 
     private static DecimalFormat formatoDecimal;
@@ -62,8 +62,6 @@ public class activity_pedido2 extends AppCompatActivity {
         addToPedido = findViewById(R.id.btn_addToPedido);
 
         //el partner del intent del anterior activity (pedido1)
-        extras = getIntent();
-        partner = (Partner) extras.getSerializableExtra("partner");//cambiar
 
         //instancia de los datos
         datos = Datos.getInstance();
