@@ -11,10 +11,10 @@
     android:textSize="18sp"
 
 
-    >
+    android:baselineAligned="false">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/borde">
@@ -23,10 +23,11 @@
             android:id="@+id/lsv_lbl_nomArt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="5dp"
-            android:text="nombre"
+            android:layout_marginTop="8dp"
+            android:text="@string/nombre"
             android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.071"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,35 +35,42 @@
             android:id="@+id/lsv_lbl_cantArt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cantidad"
+            android:text="@string/cantidad"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/lsv_lbl_nomArt"
-            app:layout_constraintTop_toBottomOf="@+id/lsv_lbl_nomArt" />
+            app:layout_constraintTop_toBottomOf="@+id/lsv_lbl_nomArt"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/lsv_lbl_prTotalArt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="100dp"
             android:gravity="left"
-            android:text="prTotal"
+            android:text="@string/prtotal"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.649"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.617" />
 
         <Button
             android:id="@+id/btn_borrar"
             android:layout_width="75dp"
             android:layout_height="35dp"
-            android:layout_marginEnd="5dp"
             android:fontFamily="sans-serif"
             android:text="@string/btn_borrar"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.133" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

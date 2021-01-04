@@ -28,18 +28,21 @@
             android:id="@+id/img_logoPistacho"
             android:layout_width="52dp"
             android:layout_height="62dp"
-            android:layout_marginTop="5dp"
+            android:contentDescription="@string/logo"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.97"
+            app:layout_constraintHorizontal_bias="0.988"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.006"
             app:srcCompat="@drawable/pinguino" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="393dp"
-            android:layout_height="493dp"
-            android:layout_marginTop="72dp"
+            android:id="@+id/constraintLayout6"
+            android:layout_width="396dp"
+            android:layout_height="504dp"
             android:background="@drawable/borde"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -48,11 +51,13 @@
                 android:id="@+id/btn_elegirFecha"
                 android:layout_width="82dp"
                 android:layout_height="37dp"
-                android:layout_marginStart="276dp"
-                android:layout_marginTop="4dp"
                 android:text="@string/btn_elegirFecha"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.98"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.004" />
 
             <TextView
                 android:id="@+id/lbl_fecha"
@@ -68,11 +73,14 @@
                 android:id="@+id/lbl_comercial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
                 android:layout_marginTop="30dp"
                 android:text="@string/lbl_comercial"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.076"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_elegirFecha" />
+                app:layout_constraintTop_toBottomOf="@+id/btn_elegirFecha"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/lbl_cambiaPartner"
@@ -80,23 +88,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="@string/lbl_cambiaPartner"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/lbl_comercial"
-                app:layout_constraintTop_toBottomOf="@+id/lbl_comercial" />
+                app:layout_constraintTop_toBottomOf="@+id/lbl_comercial"
+                app:layout_constraintVertical_bias="0.0" />
 
             <Spinner
                 android:id="@+id/spn_partners"
                 android:layout_width="303dp"
                 android:layout_height="30dp"
-                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.366"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lbl_cambiaPartner" />
+                app:layout_constraintTop_toBottomOf="@+id/lbl_cambiaPartner"
+                app:layout_constraintVertical_bias="0.029" />
 
             <ListView
                 android:id="@+id/lsv_listaProductos"
                 android:layout_width="365dp"
                 android:layout_height="262dp"
                 android:layout_marginTop="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spn_partners" />
@@ -107,21 +123,27 @@
             android:id="@+id/btn_volver"
             android:layout_width="75dp"
             android:layout_height="40dp"
-            android:layout_marginStart="44dp"
-            android:layout_marginBottom="36dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/btn_volver"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.047"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
+            app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/btn_terminarPedido"
             android:layout_width="106dp"
             android:layout_height="40dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="36dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/btn_terminarPedido"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.947"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout6"
+            app:layout_constraintVertical_bias="0.954" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

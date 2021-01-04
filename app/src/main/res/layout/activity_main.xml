@@ -29,21 +29,26 @@
             android:id="@+id/img_logoPistacho"
             android:layout_width="52dp"
             android:layout_height="62dp"
-            android:layout_marginTop="5dp"
+            android:contentDescription="@string/logo"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.97"
+            app:layout_constraintHorizontal_bias="0.953"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.023"
             app:srcCompat="@drawable/pinguino" />
 
         <Spinner
             android:id="@+id/spn_eligeComercial"
             android:layout_width="220dp"
             android:layout_height="29dp"
-            android:layout_marginStart="168dp"
             android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.572"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_logoPistacho" />
+            app:layout_constraintTop_toBottomOf="@+id/img_logoPistacho"
+            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
@@ -51,9 +56,12 @@
             android:layout_height="199dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/borde"
+            app:layout_constraintBottom_toTopOf="@+id/btn_iniciar"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.565"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spn_eligeComercial">
+            app:layout_constraintTop_toBottomOf="@+id/spn_eligeComercial"
+            app:layout_constraintVertical_bias="0.039">
 
             <TextView
                 android:id="@+id/lbl_nomDelegacion"
@@ -91,7 +99,7 @@
                 android:id="@+id/btnLlamar"
                 android:layout_width="80dp"
                 android:layout_height="37dp"
-                android:text="Llamar"
+                android:text="@string/llamar"
                 app:layout_constraintBottom_toBottomOf="@+id/lbl_telefDelegacion"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/lbl_telefDelegacion"
@@ -102,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
-                android:text="Enviar correo a la delegacion"
+                android:text="@string/enviar_correo_a_la_delegacion"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -112,7 +120,7 @@
                 android:id="@+id/btnCorreo"
                 android:layout_width="82dp"
                 android:layout_height="37dp"
-                android:text="Abrir"
+                android:text="@string/abrir"
                 app:layout_constraintBottom_toBottomOf="@+id/textView4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView4" />
@@ -131,8 +139,8 @@
             <fragment
                 android:id="@+id/map"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="370dp"
-                android:layout_height="270dp"
+                android:layout_width="359dp"
+                android:layout_height="257dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.481"
@@ -146,10 +154,12 @@
             android:id="@+id/btn_iniciar"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:text="@string/btn_iniciar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.976" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

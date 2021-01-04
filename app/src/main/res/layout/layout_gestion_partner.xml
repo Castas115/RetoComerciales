@@ -28,31 +28,35 @@
             android:id="@+id/img_logoPistacho"
             android:layout_width="52dp"
             android:layout_height="62dp"
-            android:layout_marginTop="5dp"
+            android:contentDescription="@string/logo"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.97"
+            app:layout_constraintHorizontal_bias="0.988"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.011"
             app:srcCompat="@drawable/pinguino" />
 
         <Spinner
             android:id="@+id/spinner2"
-            android:layout_width="355dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="64dp"
+            android:layout_width="380dp"
+            android:layout_height="42dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.13" />
 
         <ScrollView
-            android:layout_width="354dp"
-            android:layout_height="452dp"
-            android:layout_marginTop="28dp"
+            android:id="@+id/scrollView3"
+            android:layout_width="345dp"
+            android:layout_height="443dp"
             android:background="@drawable/borde"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.508"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner2">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.64">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -65,7 +69,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="15dp"
-                    android:text="Nombre:"
+                    android:text="@string/nombre"
                     android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:textSize="16sp" />
 
@@ -74,8 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:background="#B2E7ED"
-                    android:text="TextView" />
+                    android:background="#B2E7ED" />
 
                 <TextView
                     android:id="@+id/tbDireccion"
@@ -84,7 +87,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="15dp"
-                    android:text="Direccion:"
+                    android:text="@string/direccion"
                     android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:textSize="16sp" />
 
@@ -93,65 +96,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:background="#B2E7ED"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/contenidoPoblacion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:background="#B2E7ED"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/contenidoCif"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:background="#B2E7ED"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/tbEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="15dp"
-                    android:text="Email:"
-                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/contenidoEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:background="#B2E7ED"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/tbCif"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="15dp"
-                    android:text="CIF:"
-                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tbTlfn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="15dp"
-                    android:text="Telefono:"
-                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                    android:textSize="16sp" />
+                    android:background="#B2E7ED" />
 
                 <TextView
                     android:id="@+id/tbPoblacion"
@@ -160,7 +105,61 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="15dp"
-                    android:text="Poblacion:"
+                    android:text="@string/poblacion"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/contenidoPoblacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#B2E7ED" />
+
+                <TextView
+                    android:id="@+id/tbCif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/cif"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/contenidoCif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#B2E7ED" />
+
+                <TextView
+                    android:id="@+id/tbEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/email"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/contenidoEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="#B2E7ED" />
+
+                <TextView
+                    android:id="@+id/tbTlfn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/telefono"
                     android:textColor="@color/common_google_signin_btn_text_dark_focused"
                     android:textSize="16sp" />
 
@@ -169,8 +168,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:background="#B2E7ED"
-                    android:text="TextView" />
+                    android:background="#B2E7ED" />
             </LinearLayout>
         </ScrollView>
 
@@ -178,21 +176,27 @@
             android:id="@+id/btnVolver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
-            android:text="Volver"
+            android:text="@string/volver"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView3"
+            app:layout_constraintVertical_bias="1.0" />
 
         <Button
             android:id="@+id/btnAlta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:text="Dar de Alta"
+            android:text="@string/dar_de_alta"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.953"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView3"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

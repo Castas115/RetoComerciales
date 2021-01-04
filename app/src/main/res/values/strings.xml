@@ -40,6 +40,33 @@
     <string name="lbl_cambiaPartner">Cambiar partner:</string>
     <string name="btn_anadirArticulos">Añadir articulos</string>
     <string name="btn_borrar">borrar</string>
+    <string name="dar_de_alta">Dar de Alta</string>
+    <string name="nombre">Nombre:</string>
+    <string name="textview">TextView</string>
+    <string name="direccion">Direccion:</string>
+    <string name="poblacion">Poblacion:</string>
+    <string name="cif">CIF:</string>
+    <string name="email">Email:</string>
+    <string name="telefono">Telefono:</string>
+    <string name="volver">Volver</string>
+    <string name="logo">logo</string>
+    <string name="llamar">Llamar</string>
+    <string name="enviar_correo_a_la_delegacion">Enviar correo a la delegacion</string>
+    <string name="abrir">Abrir</string>
+    <string name="a_adir">Añadir</string>
+    <string name="calendario">Calendario</string>
+    <string name="descripci_n">Descripción</string>
+    <string name="a_adir_evento">Añadir Evento</string>
+    <string name="guardar">Guardar</string>
+    <string name="envios_a_delegaciones">Envios a Delegaciones</string>
+    <string name="enviar">Enviar</string>
+    <string name="adjuntar">Adjuntar</string>
+    <string name="pedido">pedido</string>
+    <string name="todo">TODO</string>
+    <string name="todo">TODO</string>
+    <string name="todo">TODO</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="prtotal">prTotal</string>
 
 
 </resources>
