@@ -32,7 +32,7 @@
     <string name="lbl_precioTot">Precio total:</string>
     <string name="btn_addToPedido">Añadir linea</string>
     <string name="title_activity_maps">Pistacho Phone</string>
-    <string name="todo">TODO</string>
+    <string name="todo2">TODO2</string>
 
     <!-- pedid3 -->
     <string name="btn_terminarPedido">Confirmar</string>
@@ -62,8 +62,6 @@
     <string name="enviar">Enviar</string>
     <string name="adjuntar">Adjuntar</string>
     <string name="pedido">pedido</string>
-    <string name="todo">TODO</string>
-    <string name="todo">TODO</string>
     <string name="todo">TODO</string>
     <string name="cantidad">Cantidad</string>
     <string name="prtotal">prTotal</string>
