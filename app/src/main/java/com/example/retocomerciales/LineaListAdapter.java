@@ -21,7 +21,7 @@ import com.example.retocomerciales.Clases.Producto;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class LineaListAdapter extends ArrayAdapter<Linea> {
 
@@ -39,12 +39,12 @@ public class LineaListAdapter extends ArrayAdapter<Linea> {
         this.resource = resource;
     }
 
-    @SuppressLint("ViewHolder")
+    @SuppressLint({"ViewHolder", "SetTextI18n"})
     @NonNull
     @Override
     public View getView(final int pos, @Nullable View convertView, @NonNull ViewGroup parent) {
-        Producto producto = getItem(pos).getProducto();
-        int cantidad = getItem(pos).getCantidad();
+        Producto producto = Objects.requireNonNull(getItem(pos)).getProducto();
+        int cantidad = Objects.requireNonNull(getItem(pos)).getCantidad();
         //String prTotal = getItem(pos).getPr_total() + "€";
 
         Linea linea =new Linea(producto, cantidad);
