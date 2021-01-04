@@ -3,7 +3,6 @@ package com.example.retocomerciales;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,27 +16,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.retocomerciales.Clases.Datos;
 
-import org.w3c.dom.Text;
 
 public class activity_pedido3 extends AppCompatActivity {
 
-    private TextView comercial;
-    private ListView carroProductos;
-    private Spinner spnPartners;
     private Datos datos;
-    private Button confirmar, volver;
     private boolean primer;
 
 
+    @SuppressLint("SetTextI18n")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_pedido3);
 
-        carroProductos = findViewById(R.id.lsv_listaProductos);
-        confirmar = findViewById(R.id.btn_terminarPedido);
-        volver = findViewById(R.id.btn_volver);
-        spnPartners = findViewById(R.id.spn_partners);
-        comercial = findViewById(R.id.lbl_comercial);
+        ListView carroProductos = findViewById(R.id.lsv_listaProductos);
+        Button confirmar = findViewById(R.id.btn_terminarPedido);
+        Button volver = findViewById(R.id.btn_volver);
+        Spinner spnPartners = findViewById(R.id.spn_partners);
+        TextView comercial = findViewById(R.id.lbl_comercial);
         primer = true;
 
         datos = Datos.getInstance();

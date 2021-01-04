@@ -21,17 +21,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.retocomerciales.Clases.Datos;
 import com.example.retocomerciales.Clases.Linea;
-import com.example.retocomerciales.Clases.Partner;
-import com.example.retocomerciales.Clases.Producto;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 public class activity_pedido2 extends AppCompatActivity {
 
-
-    //info que viene del intentç
-    Partner partner;
 
     Spinner spinnerProductos;
     EditText prUnidad, descripcion, prTotal, unidades;
@@ -61,7 +57,6 @@ public class activity_pedido2 extends AppCompatActivity {
         unidades = findViewById(R.id.txt_cantidades);
         addToPedido = findViewById(R.id.btn_addToPedido);
 
-        //el partner del intent del anterior activity (pedido1)
 
         //instancia de los datos
         datos = Datos.getInstance();
@@ -85,8 +80,8 @@ public class activity_pedido2 extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 posicionProductoEnLista = position;
 
-                prUnidad.setText(String.valueOf(datos.getProducto(position).getPr_unidad()) + "€");
-                stock.setText("(" + String.valueOf(datos.getProducto(position).getExistenciasCompra()) + " en stock)");
+                prUnidad.setText(datos.getProducto(position).getPr_unidad() + "€");
+                stock.setText("(" + datos.getProducto(position).getExistenciasCompra() + " en stock)");
                 descripcion.setText(datos.getProducto(position).getDescripcion());
                 cambiarImagen(datos.getProducto(position).getImagen());
                 calcPrecioTotal();
@@ -146,7 +141,7 @@ public class activity_pedido2 extends AppCompatActivity {
     protected void onActivityResult (int requestCode, int resultCode, Intent vuelta) {
         super.onActivityResult(requestCode, resultCode, vuelta);
         if (requestCode == 123 && resultCode == RESULT_OK){
-            boolean res = vuelta.getExtras().getBoolean("Volver");
+            boolean res = Objects.requireNonNull(vuelta.getExtras()).getBoolean("Volver");
             if (res){
                 Intent volver = new Intent();
                 volver.putExtra("Volver",true);
@@ -183,27 +178,29 @@ public class activity_pedido2 extends AppCompatActivity {
     }
 
     //metodo para calcular y escribir el precio total
+    @SuppressLint("SetTextI18n")
     public void calcPrecioTotal() {
         try {
             float result = datos.getProducto(posicionProductoEnLista).getPr_unidad() * Float.parseFloat(unidades.getText().toString());
-            prTotal.setText(String.valueOf(formatoDecimal.format(result)) + "€");
+            prTotal.setText(formatoDecimal.format(result) + "€");
         }catch (Exception e){
             prTotal.setText("0.0€");
         }
     }
 
+    @SuppressLint("SetTextI18n")
     public void anadirAPedido(){
         try {
             int cantidad = Integer.parseInt(unidades.getText().toString());//fallo
             if (cantidad <= datos.getProducto(posicionProductoEnLista).getExistenciasCompra()) {
                 datos.getPedido().addLinea(new Linea(datos.getProducto(posicionProductoEnLista), cantidad));
                 datos.restaExistenciasCompra(posicionProductoEnLista, cantidad);
-                stock.setText("(" + String.valueOf(datos.getProducto(posicionProductoEnLista).getExistenciasCompra()) + " en stock)");
+                stock.setText("(" + datos.getProducto(posicionProductoEnLista).getExistenciasCompra() + " en stock)");
                 Toast.makeText(getApplicationContext(), "Artículo añadido", Toast.LENGTH_SHORT).show();
             }else{
                 Toast.makeText(getApplicationContext(), "Cantidad superior al stock", Toast.LENGTH_SHORT).show();
             }
-        }catch (Exception e){
+       }catch (Exception e){
             //En caso de que no se haya elegido una cantidad
             Toast.makeText(getApplicationContext(), "Elige cantidad", Toast.LENGTH_SHORT).show();
         }

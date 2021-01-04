@@ -20,7 +20,7 @@ public class Linea {
 
         this.producto = producto;
         this.cantidad = cantidad;
-        this.pr_total = Double.parseDouble(formatoDecimal.format( (double) producto.getPr_unidad() * cantidad));
+        this.pr_total = (double) producto.getPr_unidad() * cantidad;
     }
 
     //Getter
@@ -31,7 +31,7 @@ public class Linea {
     //Setter de la cantidad (actualiza el precio)
     public void setCantidad(int cantidad){
         this.cantidad = cantidad;
-        this.pr_total = Double.parseDouble(formatoDecimal.format( (double) producto.getPr_unidad() * cantidad));
+        this.pr_total = (double) producto.getPr_unidad() * cantidad;
     }
 
     //para pruebas

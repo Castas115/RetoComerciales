@@ -1,5 +1,6 @@
 package com.example.retocomerciales;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +9,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -20,6 +20,7 @@ import com.example.retocomerciales.Clases.Datos;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 
 public class activity_pedido1 extends AppCompatActivity {
@@ -105,7 +106,7 @@ public class activity_pedido1 extends AppCompatActivity {
     protected void onActivityResult (int requestCode, int resultCode, Intent vuelta) {
         super.onActivityResult(requestCode, resultCode, vuelta);
         if (requestCode == 123 && resultCode == RESULT_OK){
-            boolean res = vuelta.getExtras().getBoolean("Volver");
+            boolean res = Objects.requireNonNull(vuelta.getExtras()).getBoolean("Volver");
             if (res){
                 finish();
             }
@@ -134,6 +135,7 @@ public class activity_pedido1 extends AppCompatActivity {
             dia = c.get(Calendar.YEAR);
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                @SuppressLint("SetTextI18n")
                 @Override
                 public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                     mostrarFecha.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
