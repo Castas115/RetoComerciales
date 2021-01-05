@@ -39,8 +39,8 @@
 
         <Spinner
             android:id="@+id/spinner2"
-            android:layout_width="380dp"
-            android:layout_height="42dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,8 +49,9 @@
 
         <ScrollView
             android:id="@+id/scrollView3"
-            android:layout_width="345dp"
-            android:layout_height="443dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
             android:background="@drawable/borde"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

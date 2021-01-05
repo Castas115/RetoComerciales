@@ -63,9 +63,11 @@
 
         <EditText
             android:id="@+id/descEvento"
-            android:layout_width="389dp"
-            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
+            android:layout_marginRight="5dp"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/descripci_n"
             android:inputType="textPersonName"
@@ -73,8 +75,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/calendarView2"
-            app:layout_constraintVertical_bias="0.098"
-            android:autofillHints="" />
+            app:layout_constraintVertical_bias="0.098" />
 
         <Button
             android:id="@+id/btnAddEvento"

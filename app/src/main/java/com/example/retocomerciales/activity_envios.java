@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
+
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.TextView;
 import android.widget.Toast;
 public class activity_envios extends Activity{
@@ -67,9 +67,9 @@ public class activity_envios extends Activity{
                 emailIntent.putExtra(Intent.EXTRA_STREAM, URI);
             }
             emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, message);
-            this.startActivity(Intent.createChooser(emailIntent, "Sending email..."));
+            this.startActivity(Intent.createChooser(emailIntent, "Enviando correo..."));
         } catch (Throwable t) {
-            Toast.makeText(this, "Request failed try again: "+ t.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Solicitud fallida inténtalo de nuevo: "+ t.toString(), Toast.LENGTH_LONG).show();
         }
     }
     public void openFolder() {

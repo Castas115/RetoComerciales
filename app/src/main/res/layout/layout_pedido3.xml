@@ -39,8 +39,10 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout6"
-            android:layout_width="396dp"
-            android:layout_height="504dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:background="@drawable/borde"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,8 +51,8 @@
 
             <Button
                 android:id="@+id/btn_elegirFecha"
-                android:layout_width="82dp"
-                android:layout_height="37dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/btn_elegirFecha"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -121,8 +123,8 @@
 
         <Button
             android:id="@+id/btn_volver"
-            android:layout_width="75dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/btn_volver"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -134,8 +136,8 @@
 
         <Button
             android:id="@+id/btn_terminarPedido"
-            android:layout_width="106dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/btn_terminarPedido"
             app:layout_constraintBottom_toBottomOf="parent"
