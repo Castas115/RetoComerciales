@@ -3,8 +3,11 @@ package com.example.retocomerciales;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 import java.io.File;
 import java.io.FileWriter;
@@ -30,6 +33,10 @@ public class activity_addPartner extends AppCompatActivity {
 
     EditText nombrePartner, direccionPartner, poblacionPartner, cifPartner, telefonoPartner, emailPartner;
     Button anadir, volver;
+    Spinner partnerComerciales;
+
+    private int posicionComercialEnLista;
+    String idComercial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +50,26 @@ public class activity_addPartner extends AppCompatActivity {
         emailPartner = findViewById(R.id.tbEmailAddPartner);
         anadir = findViewById(R.id.btnAnadir);
         volver = findViewById(R.id.btnVolver2);
+        partnerComerciales = findViewById(R.id.spiner_partnerComerciales);
 
         final Datos datos = Datos.getInstance();
+
+        final ArrayAdapter adapterComerciales = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos.getNombresComerciales());
+        adapterComerciales.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        partnerComerciales.setAdapter(adapterComerciales);
+
+        partnerComerciales.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                posicionComercialEnLista = position;
+                idComercial = String.valueOf(datos.getComercial(position).getId());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+
+        });
 
         anadir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +82,7 @@ public class activity_addPartner extends AppCompatActivity {
                                     "Añadido", Toast.LENGTH_SHORT);
                     toast1.show();
                     try {
-                        datos.anadirPartner(R.raw.newpartners, new Partner("4", nombrePartner.toString(), direccionPartner.toString(), cifPartner.toString(), poblacionPartner.toString() ,telefonoPartner.toString(), emailPartner.toString(), "0"));
+                        datos.anadirPartner(R.raw.newpartners, new Partner("4", nombrePartner.toString(), direccionPartner.toString(), cifPartner.toString(), poblacionPartner.toString() ,telefonoPartner.toString(), emailPartner.toString(), idComercial));
                     } catch (JDOMException | IOException | ParserConfigurationException | SAXException e) {
                         Toast toast2 =
                                 Toast.makeText(getApplicationContext(),
