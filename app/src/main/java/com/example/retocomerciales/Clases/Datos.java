@@ -40,10 +40,7 @@ public class Datos {
     private Datos(Resources resources) {
 
         this.resources = resources;
-        comerciales = new Comercial[]{
-                new Comercial("jcastander@mlarramendi.com", "Jon", "Castander Illarramendi", "Guipuzcoa", "627739436", "delegGuipuzcoa@pistacho.es"),
-                new Comercial("iperez@pistachito.com", "Iker", "Pérez Juez", "Navarra", "688847776", "delegNavarra@pistacho.es")
-        };
+
 
         productos = new Producto[]{
                 new Producto("PPB_", "PistachoB", "movil", 79.95f, 10),
@@ -65,9 +62,9 @@ public class Datos {
                 new Partner("3", "Dosystem S.L.", "Sagardotegi Kalea, 1, 20160 Lasarte-Oria, SS", "A20040547", "Lasarte-Oria", "943369533", "contacto@dosystem.com")
         };
         comerciales = new Comercial[]{
-                new Comercial("Ejemplo1", "1", "1", "1", "1", "1"),
-                new Comercial("Ejemplo2", "2", "2", "2", "2", "2"),
-                new Comercial("Ejemplo3", "3", "3", "3", "3", "3")
+                new Comercial("ikerperez@pistacho.com", "Iker", "Perez", "Albacete", "978645123", "pistachoAlbacete@pistacho.com"),
+                new Comercial("joncastander@pistacho.com", "Jon", "Castander", "Gipuzkoa", "943454320", "pistachoGipuzkoa@pistacho.com"),
+                new Comercial("mikelinsausti@pistacho.com", "Mikel", "Insausti", "Bizkaia", "945457512", "pistachoBizkaia@pistacho.com")
         };
     }
 
