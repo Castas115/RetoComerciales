@@ -1,6 +1,7 @@
 package com.example.retocomerciales;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.retocomerciales.Clases.Datos;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         _iniciar=findViewById(R.id.btn_iniciar);
         llamar = findViewById(R.id.btnLlamar);
         correo = findViewById(R.id.btnCorreo);
+
+        Datos.getInstance(getResources());
 
         llamar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -9,6 +9,8 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -100,9 +102,9 @@ public class activity_addPartner extends AppCompatActivity {
 
 
         /*Añadir los elementos del partner.*/
-        Element id_partner = new Element("id_partner");
-        partner.addContent(id_partner);
-        id_partner.setText(id);
+
+        partner.setAttribute("id", id);
+
         Element nom = new Element("nombre");
         partner.addContent(nom);
         nom.setText(nombre);
@@ -123,7 +125,7 @@ public class activity_addPartner extends AppCompatActivity {
         mail.setText(email);
         Element id_comercial = new Element("id_comercial");
         partner.addContent(id_comercial);
-        id_comercial.setText("1");
+        id_comercial.setText("1");//cambiar
 
 
 
