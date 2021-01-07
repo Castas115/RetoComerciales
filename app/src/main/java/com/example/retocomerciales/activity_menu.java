@@ -3,6 +3,7 @@ package com.example.retocomerciales;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -21,7 +22,10 @@ public class activity_menu extends AppCompatActivity {
     String subject;
     Uri attachment ;
 
-
+    String title;
+    String location;
+    long begin;
+    long end;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +53,18 @@ public class activity_menu extends AppCompatActivity {
         calendario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(activity_menu.this, activity_calendario.class);
-                startActivity(intent);
+                //Para acceder al layout de calendario para utilizar con BD en la segunda fase
+                /*intent = new Intent(activity_menu.this, activity_calendario.class);
+                startActivity(intent);*/
+                Intent intent = new Intent(Intent.ACTION_INSERT)
+                        .setData(CalendarContract.Events.CONTENT_URI)
+                        .putExtra(CalendarContract.Events.TITLE, title)
+                        .putExtra(CalendarContract.Events.EVENT_LOCATION, location)
+                        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin)
+                        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, end);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }
             }
         });
 
