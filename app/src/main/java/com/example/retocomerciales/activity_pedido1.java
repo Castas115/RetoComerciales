@@ -4,22 +4,15 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.retocomerciales.Clases.Datos;
-
-
-import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Objects;
 
 
@@ -30,23 +23,9 @@ public class activity_pedido1 extends AppCompatActivity {
     Datos datos;
     TextView mostrarFecha;
 
+    private int dia,mes,ano;
 
-
-
-    private int dia,mes,ano,hora,minutos;
-
-
-    Spinner spnPartners,spnComerciales;
-
-    String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-
-    String title;
-    String location;
-    long begin;
-    long end;
-
-// textView is the TextView view that should display it
-
+    Spinner spnPartners;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +51,7 @@ public class activity_pedido1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //addEvent(title,location,begin,end);
                elegirFecha();
-
             }
         });
 
@@ -100,7 +77,6 @@ public class activity_pedido1 extends AppCompatActivity {
             }
         });
     }
-    //para vovler al menú tras la compra
 
     @Override
     protected void onActivityResult (int requestCode, int resultCode, Intent vuelta) {
@@ -113,26 +89,13 @@ public class activity_pedido1 extends AppCompatActivity {
         }
     }
 
-    public void addEvent(String title, String location, long begin, long end) {
-        Intent intent = new Intent(Intent.ACTION_INSERT)
-                .setData(CalendarContract.Events.CONTENT_URI)
-                .putExtra(CalendarContract.Events.TITLE, title)
-                .putExtra(CalendarContract.Events.EVENT_LOCATION, location)
-                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin)
-                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, end);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
-    }
 
     public void elegirFecha() {
-
-
 
             final Calendar c = Calendar.getInstance();
             dia = c.get(Calendar.DAY_OF_MONTH);
             mes = c.get(Calendar.MONTH);
-            dia = c.get(Calendar.YEAR);
+            ano = c.get(Calendar.YEAR);
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                 @SuppressLint("SetTextI18n")
@@ -141,8 +104,7 @@ public class activity_pedido1 extends AppCompatActivity {
                     mostrarFecha.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
 
                 }
-            }
-                    , dia, mes, ano);
+            }, dia, mes, ano);
             datePickerDialog.show();
 
 
