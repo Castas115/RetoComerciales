@@ -41,151 +41,144 @@
             android:id="@+id/spinner2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="80dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="370dp"
+            android:layout_height="340dp"
+            android:layout_marginTop="120dp"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.13" />
+            app:layout_constraintTop_toBottomOf="@+id/spinner2">
 
-        <ScrollView
-            android:id="@+id/scrollView3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/borde"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.396">
-
-            <LinearLayout
+            <ScrollView
+                android:id="@+id/scrollView3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/borde">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="15dp"
-                    android:text="@string/nombre"
-                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/contenidoNombre"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:background="#B2E7ED" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tbDireccion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="15dp"
-                    android:text="@string/direccion"
-                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/nombre"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/contenidoDireccion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:background="#B2E7ED" />
+                    <TextView
+                        android:id="@+id/contenidoNombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="#B2E7ED" />
 
-                <TextView
-                    android:id="@+id/tbPoblacion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="15dp"
-                    android:text="@string/poblacion"
-                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/tbDireccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/direccion"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/contenidoPoblacion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:background="#B2E7ED" />
+                    <TextView
+                        android:id="@+id/contenidoDireccion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="#B2E7ED" />
 
-                <TextView
-                    android:id="@+id/tbCif"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="15dp"
-                    android:text="@string/cif"
-                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/tbPoblacion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/poblacion"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/contenidoCif"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:background="#B2E7ED" />
+                    <TextView
+                        android:id="@+id/contenidoPoblacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="#B2E7ED" />
 
-                <TextView
-                    android:id="@+id/tbEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="15dp"
-                    android:text="@string/email"
-                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/tbCif"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/cif"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/contenidoEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:background="#B2E7ED" />
+                    <TextView
+                        android:id="@+id/contenidoCif"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="#B2E7ED" />
 
-                <TextView
-                    android:id="@+id/tbTlfn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="15dp"
-                    android:text="@string/telefono"
-                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/tbEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/email"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/contenidoTlfno"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:background="#B2E7ED" />
-            </LinearLayout>
-        </ScrollView>
+                    <TextView
+                        android:id="@+id/contenidoEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="#B2E7ED" />
 
-        <Button
-            android:id="@+id/btnVolver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="@string/volver"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.049"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView3"
-            app:layout_constraintVertical_bias="1.0" />
+                    <TextView
+                        android:id="@+id/tbTlfn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="15dp"
+                        android:text="@string/telefono"
+                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/contenidoTlfno"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="#B2E7ED" />
+
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnAlta"
@@ -197,8 +190,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.953"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scrollView3"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+
+        <Button
+            android:id="@+id/btnVolver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/volver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.15"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
