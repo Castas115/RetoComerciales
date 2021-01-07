@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comerciales>
+    <comercial id="1">
+        <email>ikerperez@pistacho.com</email>
+        <nombre>Iker</nombre>
+        <apellidos>Perez</apellidos>
+        <delegacion>Albacete</delegacion>
+        <telefono>978645123</telefono>
+        <emailDelegacion>pistachoAlbacete@pistacho.com</emailDelegacion>
+    </comercial>
+    <comercial id="2">
+        <email>joncastander@pistacho.com</email>
+        <nombre>Jon</nombre>
+        <apellidos>Castander</apellidos>
+        <delegacion>Gipuzkoa</delegacion>
+        <telefono>943454320</telefono>
+        <emailDelegacion>pistachoGipuzkoa@pistacho.com</emailDelegacion>
+    </comercial>
+    <comercial id="3">
+        <email>mikelinsausti@pistacho.com</email>
+        <nombre>Mikel</nombre>
+        <apellidos>Insausti</apellidos>
+        <delegacion>Bizkaia</delegacion>
+        <telefono>945457512</telefono>
+        <emailDelegacion>pistachoBizkaia@pistacho.com</emailDelegacion>
+    </comercial>
+</comerciales>
