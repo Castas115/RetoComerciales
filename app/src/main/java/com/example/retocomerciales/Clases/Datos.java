@@ -41,7 +41,6 @@ public class Datos {
 
         this.resources = resources;
 
-
         productos = new Producto[]{
                 new Producto("PPB_", "PistachoB", "movil", 79.95f, 10),
                 new Producto("PPA_", "PistachoA", "movil", 125.95f, 10),
@@ -57,9 +56,9 @@ public class Datos {
                 new Producto("FPO+", "Funda PistachoO+", "Funda diseñada para proteger de tu PistachoPhone Omega+", "fundaPistacho", 9.54f, 10)
         };
         partners = new Partner[]{
-                new Partner("1", "Cebanc", "Berio Pasealekua, 50, 20018 Donostia, Gipuzkoa", "A20045548", "Donostia", "943316900", "contacto@cebanc.com"),
-                new Partner("2", "Ibermática", "Mikeletegi Pasealekua, 5, 20009 Donostia, Gipuzkoa", "A20038915", "Donostia", "943413500", "contacto@ibermatica.com"),
-                new Partner("3", "Dosystem S.L.", "Sagardotegi Kalea, 1, 20160 Lasarte-Oria, SS", "A20040547", "Lasarte-Oria", "943369533", "contacto@dosystem.com")
+                new Partner("1", "Cebanc", "Berio Pasealekua, 50, 20018 Donostia, Gipuzkoa", "A20045548", "Donostia", "943316900", "contacto@cebanc.com", "1"),
+                new Partner("2", "Ibermática", "Mikeletegi Pasealekua, 5, 20009 Donostia, Gipuzkoa", "A20038915", "Donostia", "943413500", "contacto@ibermatica.com", "1"),
+                new Partner("3", "Dosystem S.L.", "Sagardotegi Kalea, 1, 20160 Lasarte-Oria, SS", "A20040547", "Lasarte-Oria", "943369533", "contacto@dosystem.com", "2")
         };
         comerciales = new Comercial[]{
                 new Comercial("ikerperez@pistacho.com", "Iker", "Perez", "Albacete", "978645123", "pistachoAlbacete@pistacho.com"),
@@ -204,8 +203,8 @@ public class Datos {
         DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.parse(rawFileToChar(fileId));
-        document.setXmlStandalone(true); //we might not need this
         Element root = document.getDocumentElement();
+
         NodeList nodeList = root.getChildNodes();
         for (int i = 0; i < nodeList.getLength(); i++) {
             if (nodeList.item(i).getNodeName() != "#text") {
@@ -213,8 +212,7 @@ public class Datos {
             }
         }
     }
-
-    /*public void anadirPartner(int fileId, Partner p) throws JDOMException, IOException, ParserConfigurationException, SAXException {
+    public void anadirPartner(int fileId, Partner p) throws JDOMException, IOException, ParserConfigurationException, SAXException {
         DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.parse(rawFileToChar(fileId));
@@ -253,8 +251,7 @@ public class Datos {
 
         XMLOutputter outputter = new XMLOutputter();
         outputter.setFormat(Format.getPrettyFormat());
-        outputter.output(document, new FileWriter(rawFileToChar(fileId)));
-        outputter.output(doc, new FileWriter(archivo));
-    }*/
+        //outputter.output(doc, new FileWriter(archivo));
+    }
 
 }

@@ -7,10 +7,10 @@ package com.example.retocomerciales.Clases;
 
 public class Partner {
 
-    private String id, nombre, direccion,Poblacion, CIF, telefono, email;
+    private String id, nombre, direccion, Poblacion, CIF, telefono, email, idComercial;
 
     //Constructor
-    public Partner(String id, String nombre, String direccion, String CIF,String Poblacion, String telefono, String email) {
+    public Partner(String id, String nombre, String direccion, String CIF, String Poblacion, String telefono, String email, String idComercial) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -18,6 +18,7 @@ public class Partner {
         this.Poblacion = Poblacion;
         this.telefono = telefono;
         this.email = email;
+        this.idComercial = idComercial;
     }
 
     //Getters

@@ -17,10 +17,14 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+import org.xml.sax.SAXException;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.retocomerciales.Clases.Datos;
 import com.example.retocomerciales.Clases.Partner;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 public class activity_addPartner extends AppCompatActivity {
 
@@ -40,24 +44,24 @@ public class activity_addPartner extends AppCompatActivity {
         anadir = findViewById(R.id.btnAnadir);
         volver = findViewById(R.id.btnVolver2);
 
-
-
+        final Datos datos = Datos.getInstance();
 
         anadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!nombrePartner.getText().toString().isEmpty() || !direccionPartner.getText().toString().isEmpty() || !cifPartner.getText().toString().isEmpty() || !poblacionPartner.getText().toString().isEmpty() || !telefonoPartner.getText().toString().isEmpty() || !emailPartner.getText().toString().isEmpty()){
 
-                    new Partner("4", nombrePartner.toString(), direccionPartner.toString(), cifPartner.toString(), poblacionPartner.toString() ,telefonoPartner.toString(), emailPartner.toString());
+                    new Partner("4", nombrePartner.toString(), direccionPartner.toString(), cifPartner.toString(), poblacionPartner.toString() ,telefonoPartner.toString(), emailPartner.toString(), "0");
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
                                     "Añadido", Toast.LENGTH_SHORT);
                     toast1.show();
                     try {
-                        anadirPartner("4", nombrePartner.toString(), direccionPartner.toString(), cifPartner.toString(), poblacionPartner.toString() ,telefonoPartner.toString(), emailPartner.toString());
-                    }catch (Exception e){ Toast toast2 =
-                            Toast.makeText(getApplicationContext(),
-                                    "Error", Toast.LENGTH_SHORT);
+                        datos.anadirPartner(R.raw.newpartners, new Partner("4", nombrePartner.toString(), direccionPartner.toString(), cifPartner.toString(), poblacionPartner.toString() ,telefonoPartner.toString(), emailPartner.toString(), "0"));
+                    } catch (JDOMException | IOException | ParserConfigurationException | SAXException e) {
+                        Toast toast2 =
+                                Toast.makeText(getApplicationContext(),
+                                        "Error", Toast.LENGTH_SHORT);
 
                         toast2.show();
                     }
@@ -85,23 +89,23 @@ public class activity_addPartner extends AppCompatActivity {
 
     }
 
-    public static void anadirPartner(String id, String nombre, String direccion, String cif, String poblacion, String telefono, String email) throws JDOMException, IOException {
-        /* Lee XML */
+    /*public static void anadirPartner(String id, String nombre, String direccion, String cif, String poblacion, String telefono, String email) throws JDOMException, IOException {
+        //Lee XML
         SAXBuilder builder = new SAXBuilder();
         File archivo = new File("newpartners.xml");
         Document doc = builder.build(archivo);
 
-        /* Obtiene nodo raiz */
+        //Obtiene nodo raiz
         Element root = doc.getRootElement();
 
 
-        /* Añade un nuevo nodo al nodo raiz */
+        //Añade un nuevo nodo al nodo raiz
         Element partner = new Element("partner");
         //newChild.setText("partner");
         root.addContent(partner);
 
 
-        /*Añadir los elementos del partner.*/
+        //Añadir los elementos del partner.
 
         partner.setAttribute("id", id);
 
@@ -129,9 +133,9 @@ public class activity_addPartner extends AppCompatActivity {
 
 
 
-        /* Crea un fichero XML */
+        //Crea un fichero XML
         XMLOutputter outputter = new XMLOutputter();
         outputter.setFormat(Format.getPrettyFormat());
         outputter.output(doc, new FileWriter(archivo));
-    }
+    }*/
 }
