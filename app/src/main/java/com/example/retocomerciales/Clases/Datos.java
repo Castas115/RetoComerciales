@@ -61,9 +61,9 @@ public class Datos {
                 new Partner("3", "Dosystem S.L.", "Sagardotegi Kalea, 1, 20160 Lasarte-Oria, SS", "A20040547", "Lasarte-Oria", "943369533", "contacto@dosystem.com", "2")
         };
         comerciales = new Comercial[]{
-                new Comercial("ikerperez@pistacho.com", "Iker", "Perez", "Albacete", "978645123", "pistachoAlbacete@pistacho.com"),
-                new Comercial("joncastander@pistacho.com", "Jon", "Castander", "Gipuzkoa", "943454320", "pistachoGipuzkoa@pistacho.com"),
-                new Comercial("mikelinsausti@pistacho.com", "Mikel", "Insausti", "Bizkaia", "945457512", "pistachoBizkaia@pistacho.com")
+                new Comercial("1", "ikerperez@pistacho.com", "Iker", "Perez", "Albacete", "978645123", "pistachoAlbacete@pistacho.com"),
+                new Comercial("2", "joncastander@pistacho.com", "Jon", "Castander", "Gipuzkoa", "943454320", "pistachoGipuzkoa@pistacho.com"),
+                new Comercial("3", "mikelinsausti@pistacho.com", "Mikel", "Insausti", "Bizkaia", "945457512", "pistachoBizkaia@pistacho.com")
         };
     }
 
@@ -198,20 +198,7 @@ public class Datos {
         return new ByteArrayInputStream(str.getBytes());
     }
 
-    private void populateList(int fileId, List list, Class type) throws ParserConfigurationException, IOException, SAXException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        //preparar el documento para poder leer de el
-        DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.parse(rawFileToChar(fileId));
-        Element root = document.getDocumentElement();
 
-        NodeList nodeList = root.getChildNodes();
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            if (nodeList.item(i).getNodeName() != "#text") {
-                list.add(type.getConstructor(Node.class).newInstance(nodeList.item(i)));
-            }
-        }
-    }
     public void anadirPartner(int fileId, Partner p) throws JDOMException, IOException, ParserConfigurationException, SAXException {
         DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
@@ -251,7 +238,7 @@ public class Datos {
 
         XMLOutputter outputter = new XMLOutputter();
         outputter.setFormat(Format.getPrettyFormat());
-        //outputter.output(doc, new FileWriter(archivo));
+        //outputter.output(documenet, new FileWriter(archivo));
     }
 
 }
