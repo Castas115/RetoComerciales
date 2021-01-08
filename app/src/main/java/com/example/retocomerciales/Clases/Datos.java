@@ -1,6 +1,7 @@
 package com.example.retocomerciales.Clases;
 
 import android.content.res.Resources;
+import android.os.Environment;
 
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -8,16 +9,12 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -65,9 +62,6 @@ public class Datos {
                 new Comercial("2", "joncastander@pistacho.com", "Jon", "Castander", "Gipuzkoa", "943454320", "pistachoGipuzkoa@pistacho.com"),
                 new Comercial("3", "mikelinsausti@pistacho.com", "Mikel", "Insausti", "Bizkaia", "945457512", "pistachoBizkaia@pistacho.com")
         };
-    }
-
-    private Datos() {
     }
 
     public static Datos getInstance(Resources resources) {
@@ -199,10 +193,10 @@ public class Datos {
     }
 
 
-    public void escribirPartner(int fileId, Partner p) throws JDOMException, IOException, ParserConfigurationException, SAXException {
+    /*public void escribirPartner(Partner p) throws IOException, ParserConfigurationException, SAXException {
         DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.parse(rawFileToChar(fileId));
+        //Document document = builder.parse(rawFileToChar(fileId));
 
         org.jdom2.Element root = (org.jdom2.Element) document.getDocumentElement();
 
@@ -238,12 +232,12 @@ public class Datos {
         XMLOutputter outputter = new XMLOutputter();
         outputter.setFormat(Format.getPrettyFormat());
         //outputter.output(documenet, new FileWriter(archivo));
-    }
+    }*/
 
     public void escribirPedido(Pedido p) throws JDOMException, IOException {
         //Lee XML
         SAXBuilder builder = new SAXBuilder();
-        File archivo = new File("pedidos.xml");//ruta
+        File archivo = new File(Environment.getExternalStorageDirectory() + "/pedidos.xml");//ruta
         Document doc = (Document) builder.build(archivo);
 
         //Obtiene nodo raiz
@@ -410,4 +404,6 @@ public class Datos {
         }
         return listComercial;
     }
+
+
 }

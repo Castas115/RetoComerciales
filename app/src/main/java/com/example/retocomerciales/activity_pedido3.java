@@ -16,6 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.retocomerciales.Clases.Datos;
 
+import org.jdom2.JDOMException;
+
+import java.io.IOException;
+
 
 public class activity_pedido3 extends AppCompatActivity {
 
@@ -90,7 +94,11 @@ public class activity_pedido3 extends AppCompatActivity {
 
     public void realizarPedido() {
         //introducir escritura en xml
-
+        try {
+            datos.escribirPedido(datos.getPedido());
+        } catch (JDOMException | IOException e) {
+            e.printStackTrace();
+        }
         Toast.makeText(getApplicationContext(), "Compra realizada", Toast.LENGTH_SHORT).show();
         //para vovler al menú tras la compra
         Intent volver = new Intent();
