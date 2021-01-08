@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void writeToExternalStorage() throws IOException {
 
         int escribe = 6;
-        File file = new File(Environment.getExternalStorageDirectory() + "/prueba.txt");
+        File file = new File(Environment.getExternalStorageDirectory() + "/pedidos.xml");
 
         if(file.exists()){
             Toast.makeText(getApplicationContext(), "Existe ", Toast.LENGTH_SHORT).show();
