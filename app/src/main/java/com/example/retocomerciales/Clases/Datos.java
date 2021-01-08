@@ -3,14 +3,12 @@ package com.example.retocomerciales.Clases;
 import android.content.res.Resources;
 import android.os.Environment;
 
+import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.ByteArrayInputStream;
@@ -18,7 +16,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -66,9 +63,6 @@ public class Datos {
                 new Comercial("2", "joncastander@pistacho.com", "Jon", "Castander", "Gipuzkoa", "943454320", "pistachoGipuzkoa@pistacho.com"),
                 new Comercial("3", "mikelinsausti@pistacho.com", "Mikel", "Insausti", "Bizkaia", "945457512", "pistachoBizkaia@pistacho.com")
         };
-    }
-
-    private Datos() {
     }
 
     public static Datos getInstance(Resources resources) {
@@ -203,57 +197,63 @@ public class Datos {
     public void escribirPartner(Partner p) throws JDOMException, IOException, ParserConfigurationException, SAXException {
         //Lee XML
         SAXBuilder builder = new SAXBuilder();
-        File archivo = new File(Environment.getExternalStorageDirectory() + "/partners.xml");//ruta
-        Document doc = (Document) builder.build(archivo);
+        File archivo = new File("newpartners.xml");
+        Document doc = builder.build(archivo);
 
-        org.jdom2.Element root = (org.jdom2.Element) doc.getDocumentElement();
+        //Obtiene nodo raiz
+        Element root = doc.getRootElement();
 
-        org.jdom2.Element partner = new org.jdom2.Element("partner");
+
+        //Añade un nuevo nodo al nodo raiz
+        Element partner = new Element("partner");
+        //newChild.setText("partner");
         root.addContent(partner);
 
 
+        //Añadir los elementos del partner.
+
         partner.setAttribute("id", p.getId());
 
-        org.jdom2.Element nom = new org.jdom2.Element("nombre");
+        Element nom = new Element("nombre");
         partner.addContent(nom);
         nom.setText(p.getNombre());
-        org.jdom2.Element dir = new org.jdom2.Element("direccion");
+        Element dir = new Element("direccion");
         partner.addContent(dir);
         dir.setText(p.getDireccion());
-        org.jdom2.Element pob = new org.jdom2.Element("poblacion");
+        Element pob = new Element("poblacion");
         partner.addContent(pob);
         pob.setText(p.getPoblacion());
-        org.jdom2.Element CIF = new org.jdom2.Element("CIF");
+        Element CIF = new Element("CIF");
         partner.addContent(CIF);
         CIF.setText(p.getCIF());
-        org.jdom2.Element tel = new org.jdom2.Element("telefono");
+        Element tel = new Element("telefono");
         partner.addContent(tel);
         tel.setText(p.getTelefono());
-        org.jdom2.Element mail = new org.jdom2.Element("email");
+        Element mail = new Element("email");
         partner.addContent(mail);
         mail.setText(p.getEmail());
-        org.jdom2.Element id_comercial = new org.jdom2.Element("id_comercial");
+        Element id_comercial = new Element("id_comercial");
         partner.addContent(id_comercial);
         id_comercial.setText("1");//cambiar
 
-
+        //Crea un fichero XML
         XMLOutputter outputter = new XMLOutputter();
         outputter.setFormat(Format.getPrettyFormat());
-        outputter.output((org.jdom2.Document) doc, new FileWriter(archivo));
+        outputter.output(doc, new FileWriter(archivo));
     }
 
     public void escribirPedido(Pedido p) throws JDOMException, IOException {
         //Lee XML
         SAXBuilder builder = new SAXBuilder();
         File archivo = new File(Environment.getExternalStorageDirectory() + "/pedidos.xml");//ruta
-        Document doc = (Document) builder.build(archivo);
+        Document doc =  builder.build(archivo);
 
         //Obtiene nodo raiz
-        Element root = (Element) doc.getDocumentElement();
+        Element root = doc.getRootElement();
 
 
         //Añade un nuevo nodo al nodo raiz
-        org.jdom2.Element pedido = new org.jdom2.Element("pedido");
+        Element pedido = new Element("pedido");
 
         root.addContent(pedido);
 
@@ -266,7 +266,7 @@ public class Datos {
 
         Double prTotal = 0.;
         for (Linea l : p.getLineas()) {
-            org.jdom2.Element linea = new org.jdom2.Element("linea");
+            Element linea = new Element("linea");
             pedido.addContent(linea);
             linea.setAttribute("codArticulo", l.getProducto().getCod());
             linea.setAttribute("cantidad", String.valueOf(l.getCantidad()));
@@ -278,7 +278,7 @@ public class Datos {
         //Crea un fichero XML
         XMLOutputter outputter = new XMLOutputter();
         outputter.setFormat(Format.getPrettyFormat());
-        outputter.output((org.jdom2.Document) doc, new FileWriter(archivo));
+        outputter.output((Document) doc, new FileWriter(archivo));
     }
 
     // lectura xmls //
