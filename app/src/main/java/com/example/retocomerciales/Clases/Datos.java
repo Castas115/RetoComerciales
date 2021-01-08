@@ -22,6 +22,12 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 public class Datos {
 
@@ -243,42 +249,50 @@ public class Datos {
     }
 
     public void escribirPedido(Pedido p) throws JDOMException, IOException {
-        //Lee XML
-        SAXBuilder builder = new SAXBuilder();
-        File archivo = new File(Environment.getExternalStorageDirectory() + "/pedidos.xml");//ruta
-        Document doc =  builder.build(archivo);
+        String filePath = Environment.getExternalStorageDirectory() + "/pedidos.xml";
+        File xmlFile = new File(filePath);
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder;
+        try {
+            dBuilder = dbFactory.newDocumentBuilder();
 
-        //Obtiene nodo raiz
-        Element root = doc.getRootElement();
+            // parse xml file and load into document
+            org.w3c.dom.Document doc = dBuilder.parse(xmlFile);
+
+            doc.getDocumentElement().normalize();
+
+            org.w3c.dom.Element pedido = doc.createElement("pedido");
+
+            pedido.setAttribute("fecha", p.getFecha());
+            pedido.setAttribute("idcomercial", p.getComercial().getId());
+            pedido.setAttribute("idpartner", p.getPartner().getId());
+
+            Double prTotal = 0.;
+            for(Linea l: p.getLineas()){
+                org.w3c.dom.Element linea = doc.createElement("linea");
+                pedido.appendChild(linea);
+                linea.setAttribute("codArticulo", l.getProducto().getCod());
+                linea.setAttribute("cantidad", String.valueOf(l.getCantidad()));
+                linea.setAttribute("precioLinea", String.valueOf(l.getPr_total()));
+                prTotal+=l.getPr_total();
+            }
+            pedido.setAttribute("precioTotal", String.valueOf(prTotal));
+
+            doc.getDocumentElement().appendChild(pedido);
 
 
-        //Añade un nuevo nodo al nodo raiz
-        Element pedido = new Element("pedido");
+            // escribir elementos en xml //
+            doc.getDocumentElement().normalize();
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(filePath));
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.transform(source, result);
 
-        root.addContent(pedido);
-
-
-        //Añadir los elementos del partner.
-
-        pedido.setAttribute("fecha", p.getFecha());
-        pedido.setAttribute("idcomercial", p.getComercial().getId());
-        pedido.setAttribute("idpartner", p.getPartner().getId());
-
-        Double prTotal = 0.;
-        for (Linea l : p.getLineas()) {
-            Element linea = new Element("linea");
-            pedido.addContent(linea);
-            linea.setAttribute("codArticulo", l.getProducto().getCod());
-            linea.setAttribute("cantidad", String.valueOf(l.getCantidad()));
-            linea.setAttribute("precioLinea", String.valueOf(l.getPr_total()));
-            prTotal += l.getPr_total();
+        } catch (SAXException | ParserConfigurationException | IOException | TransformerException e1) {
+            e1.printStackTrace();
         }
-
-        pedido.setAttribute("precioTotal", String.valueOf(prTotal));
-        //Crea un fichero XML
-        XMLOutputter outputter = new XMLOutputter();
-        outputter.setFormat(Format.getPrettyFormat());
-        outputter.output((Document) doc, new FileWriter(archivo));
     }
 
     // lectura xmls //
