@@ -39,9 +39,6 @@ public class activity_menu extends AppCompatActivity {
         partners = findViewById(R.id.img_gestionPartners);
         volver = findViewById(R.id.btn_volver);
 
-
-
-
         //Lambdas con listeners para cada ImageButton
         volver.setOnClickListener(new View.OnClickListener() {
             @Override

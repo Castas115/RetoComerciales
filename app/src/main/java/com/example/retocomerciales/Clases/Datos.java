@@ -288,11 +288,11 @@ public class Datos {
 
         try {
             SAXBuilder builder = new SAXBuilder();
-            File xml = new File("productos.xml"); //error de ruta
-            org.jdom2.Document document = builder.build(xml);
-            org.jdom2.Element root = document.getRootElement();
+            File xml = new File(Environment.getExternalStorageDirectory() + "/productos.xml"); //error de ruta
+            Document document = builder.build(xml);
+            Element root = document.getRootElement();
 
-            List<org.jdom2.Element> list = root.getChildren();
+            List<Element> list = root.getChildren();
             listProducto = new Producto[list.size()];
 
             String cod = "", nombre = "", descripcion = "", imagen = "";
@@ -300,7 +300,7 @@ public class Datos {
             int existencias = 0;
 
             for (int i = 0; i < list.size(); i++) {
-                org.jdom2.Element producto = list.get(i);
+                Element producto = list.get(i);
 
                 cod = producto.getAttributeValue("cod");
                 nombre = producto.getChildTextTrim("nombre");
@@ -333,6 +333,7 @@ public class Datos {
         } catch (JDOMException | IOException e) {
             System.out.println("Error al encontrar el xml interno");
         }
+
         return listProducto;
     }
 
@@ -341,21 +342,21 @@ public class Datos {
 
         SAXBuilder builder = new SAXBuilder();
 
-        File xml = new File("partners.xml"); //error de ruta
-        org.jdom2.Document document = null;
+        File xml = new File(Environment.getExternalStorageDirectory() + "partners.xml"); //error de ruta
+        Document document = null;
 
         try {
             document = builder.build(xml);
         } catch (JDOMException | IOException e) {
             System.out.println("Error al encontrar el xml interno");
         }
-        org.jdom2.Element root = document.getRootElement();
+        Element root = document.getRootElement();
 
-        List<org.jdom2.Element> list = root.getChildren();
+        List<Element> list = root.getChildren();
         listPartners = new Partner[list.size()];
 
         for (int i = 0; i < list.size(); i++) {
-            org.jdom2.Element partner = list.get(i);
+            Element partner = list.get(i);
 
             String id = "", nombre = "", direccion = "", poblacion = "", cif = "", telefono = "", email = "", idPartner = "";
 
@@ -380,21 +381,21 @@ public class Datos {
 
         SAXBuilder builder = new SAXBuilder();
 
-        File xml = new File("comerciales.xml"); //error de ruta
-        org.jdom2.Document document = null;
+        File xml = new File(Environment.getExternalStorageDirectory() + "comerciales.xml"); //error de ruta
+        Document document = null;
 
         try {
             document = builder.build(xml);
         } catch (JDOMException | IOException e) {
             System.out.println("Error al encontrar el xml interno");
         }
-        org.jdom2.Element root = document.getRootElement();
+        Element root = document.getRootElement();
 
-        List<org.jdom2.Element> list = root.getChildren();
+        List<Element> list = root.getChildren();
         listComercial = new Comercial[list.size()];
 
         for (int i = 0; i < list.size(); i++) {
-            org.jdom2.Element partner = list.get(i);
+            Element partner = list.get(i);
 
             String id = "", email, nombre = "", apellidos = "", delegacion = "", telefono = "", emailDelegacion = "";
 
