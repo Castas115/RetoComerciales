@@ -1,13 +1,20 @@
 package com.example.retocomerciales;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.retocomerciales.Clases.Datos;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -17,6 +24,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -25,10 +35,22 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     Intent intent;
     private GoogleMap mMap;
 
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        try {
+            checkExternalStoragePermission();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE); //ocultar el menu de navegación
 
@@ -68,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
 
+
     }
 
     public void onMapReady(GoogleMap googleMap) {
@@ -93,6 +116,41 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
+    }
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private void checkExternalStoragePermission() throws IOException {
+        int permissionCheck = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getApplicationContext(), "No Tiene permisos", Toast.LENGTH_SHORT).show();
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 225);
+
+        } else {
+            Toast.makeText(getApplicationContext(), "Tiene permisos", Toast.LENGTH_SHORT).show();
+            writeToExternalStorage();
+        }
+
+    }
+
+    private void writeToExternalStorage() throws IOException {
+
+        int escribe = 6;
+        File file = new File(Environment.getExternalStorageDirectory() + "/prueba.txt");
+
+        if(file.exists()){
+            Toast.makeText(getApplicationContext(), "Existe ", Toast.LENGTH_SHORT).show();
+            FileOutputStream f = new FileOutputStream(file);
+            f.write(escribe);
+
+            Toast.makeText(getApplicationContext(), "Escrito", Toast.LENGTH_SHORT).show();
+            f.close();
+        }else{
+            Toast.makeText(getApplicationContext(), "No existe", Toast.LENGTH_SHORT).show();
+        }
+
+
+
     }
 
 }
