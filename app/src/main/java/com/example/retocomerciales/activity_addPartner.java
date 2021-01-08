@@ -81,15 +81,6 @@ public class activity_addPartner extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),
                                     "Añadido", Toast.LENGTH_SHORT);
                     toast1.show();
-                    try {
-                        datos.anadirPartner(R.raw.newpartners, new Partner("4", nombrePartner.toString(), direccionPartner.toString(), cifPartner.toString(), poblacionPartner.toString() ,telefonoPartner.toString(), emailPartner.toString(), idComercial));
-                    } catch (JDOMException | IOException | ParserConfigurationException | SAXException e) {
-                        Toast toast2 =
-                                Toast.makeText(getApplicationContext(),
-                                        "Error", Toast.LENGTH_SHORT);
-
-                        toast2.show();
-                    }
 
                 }else{
 
@@ -114,53 +105,5 @@ public class activity_addPartner extends AppCompatActivity {
 
     }
 
-    /*public static void anadirPartner(String id, String nombre, String direccion, String cif, String poblacion, String telefono, String email) throws JDOMException, IOException {
-        //Lee XML
-        SAXBuilder builder = new SAXBuilder();
-        File archivo = new File("newpartners.xml");
-        Document doc = builder.build(archivo);
 
-        //Obtiene nodo raiz
-        Element root = doc.getRootElement();
-
-
-        //Añade un nuevo nodo al nodo raiz
-        Element partner = new Element("partner");
-        //newChild.setText("partner");
-        root.addContent(partner);
-
-
-        //Añadir los elementos del partner.
-
-        partner.setAttribute("id", id);
-
-        Element nom = new Element("nombre");
-        partner.addContent(nom);
-        nom.setText(nombre);
-        Element dir = new Element("direccion");
-        partner.addContent(dir);
-        dir.setText(direccion);
-        Element pob = new Element("poblacion");
-        partner.addContent(pob);
-        pob.setText(poblacion);
-        Element CIF = new Element("CIF");
-        partner.addContent(CIF);
-        CIF.setText(cif);
-        Element tel = new Element("telefono");
-        partner.addContent(tel);
-        tel.setText(telefono);
-        Element mail = new Element("email");
-        partner.addContent(mail);
-        mail.setText(email);
-        Element id_comercial = new Element("id_comercial");
-        partner.addContent(id_comercial);
-        id_comercial.setText("1");//cambiar
-
-
-
-        //Crea un fichero XML
-        XMLOutputter outputter = new XMLOutputter();
-        outputter.setFormat(Format.getPrettyFormat());
-        outputter.output(doc, new FileWriter(archivo));
-    }*/
 }
