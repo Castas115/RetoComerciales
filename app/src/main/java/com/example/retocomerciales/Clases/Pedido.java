@@ -3,20 +3,16 @@
  */
 package com.example.retocomerciales.Clases;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Pedido implements Serializable {
+public class Pedido  {
 
-    final static long serialVersionUID = 1l;
     private String fecha;
     private Partner partner;
     private Comercial comercial;
     private ArrayList<Linea> lineas;
 
     //constructor por defecto con comercial
-
-
     public Pedido(Comercial comercial) {
         this.comercial = comercial;
         this.lineas = new ArrayList<>();
@@ -49,7 +45,7 @@ public class Pedido implements Serializable {
      *
      * @param linea: linea a añadir
      */
-    public void addLinea(Linea linea){
+    public void addLinea(Linea linea) {
         int posProd = existeProd(linea.getProducto());
         if (posProd < 0){
             lineas.add(linea);
@@ -63,7 +59,7 @@ public class Pedido implements Serializable {
      * @param pos: posición de la linea
      * @param cantidad: cantidad que se quiere asignar a la linea
      */
-    public void setLineaCantidad(int pos, int cantidad){
+    public void setLineaCantidad(int pos, int cantidad) {
         this.lineas.get(pos).setCantidad(cantidad);
     }
 

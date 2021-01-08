@@ -2,12 +2,12 @@ package com.example.retocomerciales.Clases;
 
 import android.content.res.Resources;
 
+import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -185,7 +185,7 @@ public class Datos {
         return nombres;
     }
 
-    /* Escritura en xml */
+    // Escritura en xml //
 
     //para poder escribir en raw
     private InputStream rawFileToChar(int fileId) throws IOException {
@@ -199,7 +199,7 @@ public class Datos {
     }
 
 
-    public void anadirPartner(int fileId, Partner p) throws JDOMException, IOException, ParserConfigurationException, SAXException {
+    public void escribirPartner(int fileId, Partner p) throws JDOMException, IOException, ParserConfigurationException, SAXException {
         DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document document = builder.parse(rawFileToChar(fileId));
@@ -235,10 +235,179 @@ public class Datos {
         id_comercial.setText("1");//cambiar
 
 
-
         XMLOutputter outputter = new XMLOutputter();
         outputter.setFormat(Format.getPrettyFormat());
         //outputter.output(documenet, new FileWriter(archivo));
     }
 
+    public void escribirPedido(Pedido p) throws JDOMException, IOException {
+        //Lee XML
+        SAXBuilder builder = new SAXBuilder();
+        File archivo = new File("pedidos.xml");//ruta
+        Document doc = (Document) builder.build(archivo);
+
+        //Obtiene nodo raiz
+        org.jdom2.Element root = (org.jdom2.Element) doc.getDocumentElement();
+
+
+        //Añade un nuevo nodo al nodo raiz
+        org.jdom2.Element pedido = new org.jdom2.Element("pedido");
+
+        root.addContent(pedido);
+
+
+        //Añadir los elementos del partner.
+
+        pedido.setAttribute("fecha", p.getFecha());
+        pedido.setAttribute("idcomercial", p.getComercial().getId());
+        pedido.setAttribute("idpartner", p.getPartner().getId());
+
+        Double prTotal = 0.;
+        for (Linea l : p.getLineas()) {
+            org.jdom2.Element linea = new org.jdom2.Element("linea");
+            pedido.addContent(linea);
+            linea.setAttribute("codArticulo", l.getProducto().getCod());
+            linea.setAttribute("cantidad", String.valueOf(l.getCantidad()));
+            linea.setAttribute("precioLinea", String.valueOf(l.getPr_total()));
+            prTotal += l.getPr_total();
+        }
+
+        pedido.setAttribute("precioTotal", String.valueOf(prTotal));
+        //Crea un fichero XML
+        XMLOutputter outputter = new XMLOutputter();
+        outputter.setFormat(Format.getPrettyFormat());
+        //outputter.output(doc, new FileWriter(archivo));
+    }
+
+    // lectura xmls //
+
+    public static Producto[] leeProductos() {
+        Producto[] listProducto = null;
+
+        try {
+            SAXBuilder builder = new SAXBuilder();
+            File xml = new File("productos.xml"); //error de ruta
+            org.jdom2.Document document = builder.build(xml);
+            org.jdom2.Element root = document.getRootElement();
+
+            List<org.jdom2.Element> list = root.getChildren();
+            listProducto = new Producto[list.size()];
+
+            String cod = "", nombre = "", descripcion = "", imagen = "";
+            float pr_unidad = 0f;
+            int existencias = 0;
+
+            for (int i = 0; i < list.size(); i++) {
+                org.jdom2.Element producto = list.get(i);
+
+                cod = producto.getAttributeValue("cod");
+                nombre = producto.getChildTextTrim("nombre");
+                descripcion = producto.getChildTextTrim("descripcion");
+                imagen = producto.getChildTextTrim("imagen");
+
+
+                try {
+                    pr_unidad = Float.parseFloat(producto.getChildTextTrim("precio"));
+                } catch (Exception e) {
+                    pr_unidad = 0f;
+                }
+
+                try {
+                    existencias = Integer.parseInt(producto.getChildTextTrim("existencias"));
+                } catch (Exception e) {
+                    existencias = 0;
+                }
+
+                if (descripcion == null) {
+                    descripcion = "";
+                }
+                if (descripcion.length() == 0) {
+                    listProducto[i] = new Producto(cod, nombre, imagen, pr_unidad, existencias);
+                } else {
+                    listProducto[i] = new Producto(cod, nombre, descripcion, imagen, pr_unidad, existencias);
+                }
+            }
+
+        } catch (JDOMException | IOException e) {
+            System.out.println("Error al encontrar el xml interno");
+        }
+        return listProducto;
+    }
+
+    public static Partner[] leePartners() {
+        Partner[] listPartners;
+
+        SAXBuilder builder = new SAXBuilder();
+
+        File xml = new File("partners.xml"); //error de ruta
+        org.jdom2.Document document = null;
+
+        try {
+            document = builder.build(xml);
+        } catch (JDOMException | IOException e) {
+            System.out.println("Error al encontrar el xml interno");
+        }
+        org.jdom2.Element root = document.getRootElement();
+
+        List<org.jdom2.Element> list = root.getChildren();
+        listPartners = new Partner[list.size()];
+
+        for (int i = 0; i < list.size(); i++) {
+            org.jdom2.Element partner = list.get(i);
+
+            String id = "", nombre = "", direccion = "", poblacion = "", cif = "", telefono = "", email = "", idPartner = "";
+
+            org.jdom2.Element campo = list.get(i);
+
+            id = campo.getAttributeValue("id");
+            nombre = campo.getChildTextTrim("nombre");
+            direccion = campo.getChildTextTrim("direccion");
+            poblacion = campo.getChildTextTrim("poblacion");
+            cif = campo.getChildTextTrim("CIF");
+            telefono = campo.getChildTextTrim("telefono");
+            email = campo.getChildTextTrim("email");
+            idPartner = campo.getChildTextTrim("idPartner");
+
+            listPartners[i] = new Partner(id, nombre, direccion, poblacion, cif, telefono, email, idPartner);
+        }
+        return listPartners;
+    }
+
+    public static Comercial[] leeComerciales() {
+        Comercial[] listComercial;
+
+        SAXBuilder builder = new SAXBuilder();
+
+        File xml = new File("comerciales.xml"); //error de ruta
+        org.jdom2.Document document = null;
+
+        try {
+            document = builder.build(xml);
+        } catch (JDOMException | IOException e) {
+            System.out.println("Error al encontrar el xml interno");
+        }
+        org.jdom2.Element root = document.getRootElement();
+
+        List<org.jdom2.Element> list = root.getChildren();
+        listComercial = new Comercial[list.size()];
+
+        for (int i = 0; i < list.size(); i++) {
+            org.jdom2.Element partner = list.get(i);
+
+            String id = "", email, nombre = "", apellidos = "", delegacion = "", telefono = "", emailDelegacion = "";
+
+            Element campo = list.get(i);
+
+            id = campo.getAttributeValue("id");
+            email = campo.getChildTextTrim("email");
+            nombre = campo.getChildTextTrim("nombre");
+            apellidos = campo.getChildTextTrim("apellidos");
+            delegacion = campo.getChildTextTrim("delegacion");
+            telefono = campo.getChildTextTrim("telefono");
+            emailDelegacion = campo.getChildTextTrim("emailDelegacion");
+
+            listComercial[i] = new Comercial(id, email, nombre, apellidos, delegacion, telefono,  emailDelegacion);
+        }
+        return listComercial;
+    }
 }
