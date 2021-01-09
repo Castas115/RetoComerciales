@@ -15,6 +15,7 @@ import org.xml.sax.SAXException;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -258,6 +259,7 @@ public class Datos {
 
             String filePath = Environment.getExternalStorageDirectory() + "/productos.xml";
             File xmlFile = new File(filePath);
+            FileOutputStream fos = new FileOutputStream(xmlFile);
              DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
              DocumentBuilder dBuilder;
 
