@@ -2,6 +2,7 @@ package com.example.retocomerciales;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.PeriodicSync;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -20,7 +21,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.retocomerciales.Clases.Comercial;
 import com.example.retocomerciales.Clases.Datos;
+import com.example.retocomerciales.Clases.Partner;
+import com.example.retocomerciales.Clases.Producto;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -68,6 +72,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         nomDelegacion = findViewById(R.id.lbl_nomDelegacion);
 
         final Datos datos = Datos.getInstance(getResources());
+        try {
+            datos.cargarAssets(getAssets().open("productos.xml"), getAssets().open("partners.xml"), getAssets().open("comerciales.xml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //Spinner Comerciales
         final ArrayAdapter adapterComerciales = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos.getNombresComerciales());

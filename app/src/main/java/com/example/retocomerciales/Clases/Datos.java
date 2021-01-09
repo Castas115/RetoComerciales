@@ -11,6 +11,8 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import java.io.ByteArrayInputStream;
@@ -19,6 +21,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -50,7 +53,7 @@ public class Datos {
 
         this.resources = resources;
 
-        productos = new Producto[]{
+        /*productos = new Producto[]{
                 new Producto("PPB_", "PistachoB", "movil", 79.95f, 10),
                 new Producto("PPA_", "PistachoA", "movil", 125.95f, 10),
                 new Producto("PPA+", "PistachoA+", "movil", 153.45f, 10),
@@ -73,7 +76,7 @@ public class Datos {
                 new Comercial("1", "ikerperez@pistacho.com", "Iker", "Perez", "Albacete", "978645123", "pistachoAlbacete@pistacho.com"),
                 new Comercial("2", "joncastander@pistacho.com", "Jon", "Castander", "Gipuzkoa", "943454320", "pistachoGipuzkoa@pistacho.com"),
                 new Comercial("3", "mikelinsausti@pistacho.com", "Mikel", "Insausti", "Bizkaia", "945457512", "pistachoBizkaia@pistacho.com")
-        };
+        };*/
     }
 
     public static Datos getInstance(Resources resources) {
@@ -255,39 +258,41 @@ public class Datos {
 
     public void escribirExistencias() throws JDOMException, IOException, ParserConfigurationException, SAXException {
         Producto[] p = datos.productos;
-        try{
+        try {
 
             String filePath = Environment.getExternalStorageDirectory() + "/productos.xml";
             File xmlFile = new File(filePath);
             FileOutputStream fos = new FileOutputStream(xmlFile);
-             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-             DocumentBuilder dBuilder;
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder;
 
-             dBuilder = dbFactory.newDocumentBuilder();
+            dBuilder = dbFactory.newDocumentBuilder();
 
-             org.w3c.dom.Document doc = dBuilder.parse(xmlFile);
+            org.w3c.dom.Document doc = dBuilder.parse(xmlFile);
 
             doc.getDocumentElement().normalize();
 
-                NodeList productos = doc.getElementsByTagName("producto");
-                org.w3c.dom.Element producto;
-                // loop for each producto
-                for (int i = 0; i < productos.getLength(); i++) {
-                    producto = (org.w3c.dom.Element) productos.item(i);
-                    Node exist = producto.getElementsByTagName("existencias").item(0).getFirstChild();
-                    exist.setTextContent(String.valueOf(p[i].getExistencias()));
+            NodeList productos = doc.getElementsByTagName("producto");
+            org.w3c.dom.Element producto;
+            // loop for each producto
+            for (int i = 0; i < productos.getLength(); i++) {
+                producto = (org.w3c.dom.Element) productos.item(i);
+                Node exist = producto.getElementsByTagName("existencias").item(0).getFirstChild();
+                exist.setTextContent(String.valueOf(p[i].getExistencias()));
 
-                }
+            }
 
-                doc.getDocumentElement().normalize();
-                TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                Transformer transformer = transformerFactory.newTransformer();
-                DOMSource source = new DOMSource(doc);
-                StreamResult result = new StreamResult(new File(Environment.getExternalStorageDirectory() + "/productos.xml"));
-                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                transformer.transform(source, result);
+            doc.getDocumentElement().normalize();
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(Environment.getExternalStorageDirectory() + "/productos.xml"));
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.transform(source, result);
 
-            }catch(Exception e) {System.out.println("Error");}
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
 
     }
 
@@ -312,13 +317,13 @@ public class Datos {
             pedido.setAttribute("idpartner", p.getPartner().getId());
 
             Double prTotal = 0.;
-            for(Linea l: p.getLineas()){
+            for (Linea l : p.getLineas()) {
                 org.w3c.dom.Element linea = doc.createElement("linea");
                 pedido.appendChild(linea);
                 linea.setAttribute("codArticulo", l.getProducto().getCod());
                 linea.setAttribute("cantidad", String.valueOf(l.getCantidad()));
                 linea.setAttribute("precioLinea", String.valueOf(l.getPr_total()));
-                prTotal+=l.getPr_total();
+                prTotal += l.getPr_total();
             }
             pedido.setAttribute("precioTotal", String.valueOf(prTotal));
 
@@ -340,47 +345,72 @@ public class Datos {
     }
 
     // lectura xmls //
+    private static org.w3c.dom.Document readXml(InputStream is) throws SAXException, IOException, ParserConfigurationException {
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
-    public static Producto[] leeProductos() {
+        dbf.setValidating(false);
+        dbf.setIgnoringComments(false);
+        dbf.setIgnoringElementContentWhitespace(true);
+        dbf.setNamespaceAware(true);
+        // dbf.setCoalescing(true);
+        // dbf.setExpandEntityReferences(true);
+
+        DocumentBuilder db = null;
+        db = dbf.newDocumentBuilder();
+        db.setEntityResolver(new NullResolver());
+
+        // db.setErrorHandler( new MyErrorHandler());
+
+        return db.parse(is);
+    }
+
+    private static Producto[] leeProductos(InputStream is) {
         Producto[] listProducto = null;
 
         try {
             SAXBuilder builder = new SAXBuilder();
-            File xml = new File(Environment.getExternalStorageDirectory() + "/productos.xml"); //error de ruta
-            Document document = builder.build(xml);
-            Element root = document.getRootElement();
+            org.w3c.dom.Document document = readXml(is);
+            org.w3c.dom.Element root = document.getDocumentElement();
 
-            List<Element> list = root.getChildren();
-            listProducto = new Producto[list.size()];
+            NodeList list = document.getElementsByTagName("producto");
+            listProducto = new Producto[list.getLength()];
 
             String cod = "", nombre = "", descripcion = "", imagen = "";
             float pr_unidad = 0f;
             int existencias = 0;
 
-            for (int i = 0; i < list.size(); i++) {
-                Element producto = list.get(i);
+            for (int i = 0; i < list.getLength(); i++) {
+                org.w3c.dom.Element elementosProducto = (org.w3c.dom.Element) list.item(i);
+                cod = elementosProducto.getAttribute("cod");
 
-                cod = producto.getAttributeValue("cod");
-                nombre = producto.getChildTextTrim("nombre");
-                descripcion = producto.getChildTextTrim("descripcion");
-                imagen = producto.getChildTextTrim("imagen");
+                Node nNombre = elementosProducto.getElementsByTagName("nombre").item(0).getFirstChild();
+                nombre = nNombre.getNodeValue();
+
+                try {
+                    Node nDescripcion = elementosProducto.getElementsByTagName("descripcion").item(0).getFirstChild();
+                    descripcion = nDescripcion.getNodeValue();
+                } catch (Exception e) {
+                    descripcion = "";
+                }
+
+                Node nImagen = elementosProducto.getElementsByTagName("imagen").item(0).getFirstChild();
+                imagen = nImagen.getNodeValue();
 
 
                 try {
-                    pr_unidad = Float.parseFloat(producto.getChildTextTrim("precio"));
+                    Node iPr_unidad = elementosProducto.getElementsByTagName("precio").item(0).getFirstChild();
+                    pr_unidad = Float.parseFloat(iPr_unidad.getNodeValue());
                 } catch (Exception e) {
                     pr_unidad = 0f;
                 }
 
                 try {
-                    existencias = Integer.parseInt(producto.getChildTextTrim("existencias"));
+                    Node iExistencias = elementosProducto.getElementsByTagName("existencias").item(0).getFirstChild();
+                    existencias = Integer.parseInt(iExistencias.getNodeValue());
                 } catch (Exception e) {
                     existencias = 0;
                 }
 
-                if (descripcion == null) {
-                    descripcion = "";
-                }
                 if (descripcion.length() == 0) {
                     listProducto[i] = new Producto(cod, nombre, imagen, pr_unidad, existencias);
                 } else {
@@ -388,87 +418,132 @@ public class Datos {
                 }
             }
 
-        } catch (JDOMException | IOException e) {
+        } catch (IOException | SAXException | ParserConfigurationException e) {
             System.out.println("Error al encontrar el xml interno");
         }
 
         return listProducto;
     }
 
-    public static Partner[] leePartners() {
-        Partner[] listPartners;
-
-        SAXBuilder builder = new SAXBuilder();
-
-        File xml = new File(Environment.getExternalStorageDirectory() + "partners.xml"); //error de ruta
-        Document document = null;
+    private static Partner[] leePartners(InputStream is){
+        Partner[] listPartners = null;
 
         try {
-            document = builder.build(xml);
-        } catch (JDOMException | IOException e) {
-            System.out.println("Error al encontrar el xml interno");
-        }
-        Element root = document.getRootElement();
+            SAXBuilder builder = new SAXBuilder();
+            org.w3c.dom.Document document = readXml(is);
+            org.w3c.dom.Element root = document.getDocumentElement();
 
-        List<Element> list = root.getChildren();
-        listPartners = new Partner[list.size()];
+            NodeList list = document.getElementsByTagName("partner");
+            listPartners = new Partner[list.getLength()];
 
-        for (int i = 0; i < list.size(); i++) {
-            Element partner = list.get(i);
+            String id = "", nombre = "", direccion = "", poblacion = "", cif = "", telefono = "", email = "", idComercial = "";
 
-            String id = "", nombre = "", direccion = "", poblacion = "", cif = "", telefono = "", email = "", idPartner = "";
+            for (int i = 0; i < list.getLength(); i++) {
+                org.w3c.dom.Element elementosPartner = (org.w3c.dom.Element) list.item(i);
 
-            org.jdom2.Element campo = list.get(i);
 
-            id = campo.getAttributeValue("id");
-            nombre = campo.getChildTextTrim("nombre");
-            direccion = campo.getChildTextTrim("direccion");
-            poblacion = campo.getChildTextTrim("poblacion");
-            cif = campo.getChildTextTrim("CIF");
-            telefono = campo.getChildTextTrim("telefono");
-            email = campo.getChildTextTrim("email");
-            idPartner = campo.getChildTextTrim("idPartner");
+                id = elementosPartner.getAttribute("id_partner");
 
-            listPartners[i] = new Partner(id, nombre, direccion, poblacion, cif, telefono, email, idPartner);
+                Node nNombre = elementosPartner.getElementsByTagName("nombre").item(0).getFirstChild();
+                nombre = nNombre.getNodeValue();
+                Node nDireccion = elementosPartner.getElementsByTagName("direccion").item(0).getFirstChild();
+                direccion = nDireccion.getNodeValue();
+                Node nPoblacion = elementosPartner.getElementsByTagName("poblacion").item(0).getFirstChild();
+                poblacion = nPoblacion.getNodeValue();
+                Node nCIF = elementosPartner.getElementsByTagName("CIF").item(0).getFirstChild();
+                cif = nCIF.getNodeValue();
+                Node nTelefono = elementosPartner.getElementsByTagName("telefono").item(0).getFirstChild();
+                telefono = nTelefono.getNodeValue();
+                Node nEmail = elementosPartner.getElementsByTagName("email").item(0).getFirstChild();
+                email = nEmail.getNodeValue();
+                Node nIdComercial = elementosPartner.getElementsByTagName("id_comercial").item(0).getFirstChild();
+                idComercial = nIdComercial.getNodeValue();
+
+                listPartners[i] = new Partner(id, nombre, direccion, poblacion, cif, telefono, email, idComercial);
+            }
+
+        } catch (IOException | SAXException | ParserConfigurationException e) {
+            System.out.println("Error");
         }
         return listPartners;
     }
 
-    public static Comercial[] leeComerciales() {
-        Comercial[] listComercial;
-
-        SAXBuilder builder = new SAXBuilder();
-
-        File xml = new File(Environment.getExternalStorageDirectory() + "comerciales.xml"); //error de ruta
-        Document document = null;
+    private static Comercial[] leeComerciales(InputStream is) {
+        Comercial[] listComercial = null;
 
         try {
-            document = builder.build(xml);
-        } catch (JDOMException | IOException e) {
-            System.out.println("Error al encontrar el xml interno");
-        }
-        Element root = document.getRootElement();
+            SAXBuilder builder = new SAXBuilder();
+            org.w3c.dom.Document document = readXml(is);
+            org.w3c.dom.Element root = document.getDocumentElement();
 
-        List<Element> list = root.getChildren();
-        listComercial = new Comercial[list.size()];
-
-        for (int i = 0; i < list.size(); i++) {
-            Element partner = list.get(i);
+            NodeList list = document.getElementsByTagName("comercial");
+            listComercial = new Comercial[list.getLength()];
 
             String id = "", email, nombre = "", apellidos = "", delegacion = "", telefono = "", emailDelegacion = "";
 
-            Element campo = list.get(i);
+            for (int i = 0; i < list.getLength(); i++) {
+                org.w3c.dom.Element elementosComercial = (org.w3c.dom.Element) list.item(i);
 
-            id = campo.getAttributeValue("id");
-            email = campo.getChildTextTrim("email");
-            nombre = campo.getChildTextTrim("nombre");
-            apellidos = campo.getChildTextTrim("apellidos");
-            delegacion = campo.getChildTextTrim("delegacion");
-            telefono = campo.getChildTextTrim("telefono");
-            emailDelegacion = campo.getChildTextTrim("emailDelegacion");
 
-            listComercial[i] = new Comercial(id, email, nombre, apellidos, delegacion, telefono,  emailDelegacion);
+                id = elementosComercial.getAttribute("id");
+
+
+                Node nEmail = elementosComercial.getElementsByTagName("email").item(0).getFirstChild();
+                email = nEmail.getNodeValue();
+                Node nNombre = elementosComercial.getElementsByTagName("nombre").item(0).getFirstChild();
+                nombre = nNombre.getNodeValue();
+                Node nApellidos = elementosComercial.getElementsByTagName("apellidos").item(0).getFirstChild();
+                apellidos = nApellidos.getNodeValue();
+                Node nDelegacion = elementosComercial.getElementsByTagName("delegacion").item(0).getFirstChild();
+                delegacion = nDelegacion.getNodeValue();
+                Node nTelefono = elementosComercial.getElementsByTagName("telefono").item(0).getFirstChild();
+                telefono = nTelefono.getNodeValue();
+                Node nEmailDelegacion = elementosComercial.getElementsByTagName("emailDelegacion").item(0).getFirstChild();
+                emailDelegacion = nEmailDelegacion.getNodeValue();
+
+
+                listComercial[i] = new Comercial(id, email, nombre, apellidos, delegacion, telefono, emailDelegacion);
+            }
+        }catch (Exception e){
+            System.out.println("Error");
         }
         return listComercial;
+    }
+
+    public void cargarAssets(InputStream isProductos, InputStream isPartners, InputStream isComerciales){
+        this.productos = leeProductos(isProductos);
+        this.partners = leePartners(isPartners);
+        this.comerciales = leeComerciales(isComerciales);
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//nada que ver aquí
+
+//...
+
+
+
+
+
+class NullResolver implements EntityResolver {
+    public InputSource resolveEntity(String publicId, String systemId) throws SAXException,
+            IOException {
+        return new InputSource(new StringReader(""));
     }
 }
