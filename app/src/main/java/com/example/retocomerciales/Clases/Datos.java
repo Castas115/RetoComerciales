@@ -15,7 +15,6 @@ import org.xml.sax.SAXException;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -186,7 +185,7 @@ public class Datos {
         String[] nombres = new String[this.comerciales.length];
 
         for (int i = 0; i < this.comerciales.length; i++) {
-            nombres[i] = this.comerciales[i].getNombre() + " " + this.comerciales[i].getApellidos();
+            nombres[i] = this.comerciales[i].getNombre();
         }
         return nombres;
     }
@@ -255,13 +254,12 @@ public class Datos {
 
     public void escribirExistencias() throws JDOMException, IOException, ParserConfigurationException, SAXException {
         Producto[] p = datos.productos;
-        try{
+        String filePath = Environment.getExternalStorageDirectory() + "/productos.xml";
+        File xmlFile = new File(filePath);
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder;
 
-            String filePath = Environment.getExternalStorageDirectory() + "/productos.xml";
-            File xmlFile = new File(filePath);
-            FileOutputStream fos = new FileOutputStream(xmlFile);
-             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-             DocumentBuilder dBuilder;
+        try{
 
              dBuilder = dbFactory.newDocumentBuilder();
 
