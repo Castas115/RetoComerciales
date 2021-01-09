@@ -16,6 +16,12 @@
         android:textColor="@android:color/background_dark"
         android:textSize="14sp" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
     <ImageView
         android:id="@+id/img_logoPistacho"
         android:layout_width="52dp"

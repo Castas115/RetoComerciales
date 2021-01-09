@@ -135,16 +135,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private void writeToExternalStorage() throws IOException {
 
-        int escribe = 6;
+
         File file = new File(Environment.getExternalStorageDirectory() + "/productos.xml");
 
         if(file.exists()){
             Toast.makeText(getApplicationContext(), "Existe ", Toast.LENGTH_SHORT).show();
-            FileOutputStream f = new FileOutputStream(file);
-            f.write(escribe);
 
-            Toast.makeText(getApplicationContext(), "Escrito", Toast.LENGTH_SHORT).show();
-            f.close();
         }else{
             Toast.makeText(getApplicationContext(), "No existe", Toast.LENGTH_SHORT).show();
         }
