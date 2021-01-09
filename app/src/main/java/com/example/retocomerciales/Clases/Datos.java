@@ -252,7 +252,8 @@ public class Datos {
         outputter.output(doc, new FileWriter(archivo));
     }
 
-    public void escribirExistencias(Producto[] p) throws JDOMException, IOException, ParserConfigurationException, SAXException {
+    public void escribirExistencias() throws JDOMException, IOException, ParserConfigurationException, SAXException {
+        Producto[] p = datos.productos;
         try{
 
             String filePath = Environment.getExternalStorageDirectory() + "/productos.xml";

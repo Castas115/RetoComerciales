@@ -17,8 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.retocomerciales.Clases.Datos;
 
 import org.jdom2.JDOMException;
+import org.xml.sax.SAXException;
 
 import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 
 public class activity_pedido3 extends AppCompatActivity {
@@ -96,7 +99,12 @@ public class activity_pedido3 extends AppCompatActivity {
         //introducir escritura en xml
         try {
             datos.escribirPedido(datos.getPedido());
+            datos.escribirExistencias();
         } catch (JDOMException | IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
             e.printStackTrace();
         }
         Toast.makeText(getApplicationContext(), "Compra realizada", Toast.LENGTH_SHORT).show();
