@@ -23,8 +23,6 @@ public class activity_pedido1 extends AppCompatActivity {
     Datos datos;
     TextView mostrarFecha;
 
-    private int dia,mes,ano;
-
     Spinner spnPartners;
 
     @Override
@@ -92,22 +90,22 @@ public class activity_pedido1 extends AppCompatActivity {
 
     public void elegirFecha() {
 
-            final Calendar c = Calendar.getInstance();
-            dia = c.get(Calendar.DAY_OF_MONTH);
-            mes = c.get(Calendar.MONTH);
-            ano = c.get(Calendar.YEAR);
+        final Calendar cldr = Calendar.getInstance();
+        int dia = cldr.get(Calendar.DAY_OF_MONTH);
+        int mes = cldr.get(Calendar.MONTH);
+        int ano = cldr.get(Calendar.YEAR);
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
                 @SuppressLint("SetTextI18n")
                 @Override
-                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                    mostrarFecha.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    mostrarFecha.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
 
                 }
-            }, dia, mes, ano);
+            }, ano, mes, dia);
             datePickerDialog.show();
 
-
-
     }
+
+
 }
