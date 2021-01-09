@@ -185,7 +185,7 @@ public class Datos {
         String[] nombres = new String[this.comerciales.length];
 
         for (int i = 0; i < this.comerciales.length; i++) {
-            nombres[i] = this.comerciales[i].getNombre();
+            nombres[i] = this.comerciales[i].getNombre() + " " + this.comerciales[i].getApellidos();
         }
         return nombres;
     }

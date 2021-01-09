@@ -9,7 +9,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     Button _iniciar,llamar,correo;
     Intent intent;
     private GoogleMap mMap;
+    Spinner spComercial;
+    String telf, emailDelegacion;
+    TextView nomDelegacion, direccionDelegacion;
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
@@ -57,14 +64,39 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         _iniciar=findViewById(R.id.btn_iniciar);
         llamar = findViewById(R.id.btnLlamar);
         correo = findViewById(R.id.btnCorreo);
+        spComercial = findViewById(R.id.spn_eligeComercial);
+        nomDelegacion = findViewById(R.id.lbl_nomDelegacion);
 
-        Datos.getInstance(getResources());
+        final Datos datos = Datos.getInstance(getResources());
+
+        //Spinner Comerciales
+        final ArrayAdapter adapterComerciales = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos.getNombresComerciales());
+        adapterComerciales.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spComercial.setAdapter(adapterComerciales);
+
+        spComercial.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                datos.setPosPartner(position);
+
+                nomDelegacion.setText("Delegación provincial " + datos.getComercial(position).getDelegacion());
+                emailDelegacion = datos.getComercial(position).getEmailDelegacion();
+                telf = datos.getComercial(position).getTelefonoDelegacion();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         llamar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:688847776"));
+                intent.setData(Uri.parse("tel:" + telf));
                 startActivity(intent);
             }
         });
@@ -112,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void crearCorreo() {
-        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto","pistachophone@gmail.com", null));
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", emailDelegacion, null));
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
