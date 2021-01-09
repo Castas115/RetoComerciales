@@ -100,11 +100,7 @@ public class activity_pedido3 extends AppCompatActivity {
         try {
             datos.escribirPedido(datos.getPedido());
             datos.escribirExistencias();
-        } catch (JDOMException | IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
+        } catch (JDOMException | IOException |SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
         Toast.makeText(getApplicationContext(), "Compra realizada", Toast.LENGTH_SHORT).show();
