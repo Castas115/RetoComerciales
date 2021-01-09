@@ -18,9 +18,7 @@ public class activity_menu extends AppCompatActivity {
     ImageButton calendario, pedidos, delegaciones, partners;
     Button volver;
     Intent intent;
-    String addresses;
-    String subject;
-    Uri attachment ;
+
 
     String title;
     String location;
