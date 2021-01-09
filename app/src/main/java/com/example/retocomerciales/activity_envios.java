@@ -1,6 +1,7 @@
 package com.example.retocomerciales;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 
@@ -13,7 +14,10 @@ import android.widget.Button;
 
 import android.widget.TextView;
 import android.widget.Toast;
-    public class activity_envios extends Activity{
+
+import com.example.retocomerciales.Clases.Datos;
+
+public class activity_envios extends Activity{
         TextView etEmail;
         TextView etSubject;
         TextView etMessage;
@@ -24,6 +28,7 @@ import android.widget.Toast;
         String message;
         Uri URI = null;
         private static final int PICK_FROM_GALLERY = 101;
+        @SuppressLint("SetTextI18n")
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -33,9 +38,10 @@ import android.widget.Toast;
             etMessage = findViewById(R.id.etMessage);
             attachment = findViewById(R.id.btAttachment);
 
+            Datos datos = Datos.getInstance();
             Send = findViewById(R.id.btSend);
             Send.setEnabled(false);
-            etEmail.setText("pistachopohone@gmail.com");
+            etEmail.setText(datos.getComercial(datos.getPosComercial()).getEmailDelegacion());
             etSubject.setText("Envio semanal de XML");
             etMessage.setText("Envio el XML de Partners semanal adjunto");
             Send.setOnClickListener(new View.OnClickListener() {

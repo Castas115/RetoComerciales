@@ -1,6 +1,5 @@
 package com.example.retocomerciales;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +22,6 @@ public class activity_gestionPartner extends AppCompatActivity {
     Datos datos;
     TextView tbnombre , tbdireccion, tbpoblacion, tbcif, tbtlfn, tbemail;
 
-    private int posicionPartnerEnLista;//posición del partner elegido en el spinneer
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +53,6 @@ public class activity_gestionPartner extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                posicionPartnerEnLista = position;
 
                 tbnombre.setText(String.valueOf(datos.getPartner(position).getNombre()));
                 tbdireccion.setText(String.valueOf(datos.getPartner(position).getDireccion()));

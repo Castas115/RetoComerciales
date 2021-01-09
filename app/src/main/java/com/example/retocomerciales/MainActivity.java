@@ -1,14 +1,12 @@
 package com.example.retocomerciales;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.PeriodicSync;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,10 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.retocomerciales.Clases.Comercial;
 import com.example.retocomerciales.Clases.Datos;
-import com.example.retocomerciales.Clases.Partner;
-import com.example.retocomerciales.Clases.Producto;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -33,7 +28,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 
@@ -44,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     Spinner spComercial;
     String telf, emailDelegacion;
-    TextView nomDelegacion, direccionDelegacion;
+    TextView nomDelegacion;
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
@@ -84,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         spComercial.setAdapter(adapterComerciales);
 
         spComercial.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 datos.setPosPartner(position);
