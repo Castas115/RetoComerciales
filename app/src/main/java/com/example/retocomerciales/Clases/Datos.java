@@ -9,6 +9,8 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.ByteArrayInputStream;
@@ -24,8 +26,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
@@ -247,6 +251,43 @@ public class Datos {
         outputter.setFormat(Format.getPrettyFormat());
         outputter.output(doc, new FileWriter(archivo));
     }
+
+    public void escribirExistencias(Producto[] p) throws JDOMException, IOException, ParserConfigurationException, SAXException {
+        try{
+
+            String filePath = Environment.getExternalStorageDirectory() + "/productos.xml";
+            File xmlFile = new File(filePath);
+             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+             DocumentBuilder dBuilder;
+
+             dBuilder = dbFactory.newDocumentBuilder();
+
+             org.w3c.dom.Document doc = dBuilder.parse(xmlFile);
+
+            doc.getDocumentElement().normalize();
+
+                NodeList productos = doc.getElementsByTagName("producto");
+                org.w3c.dom.Element producto;
+                // loop for each producto
+                for (int i = 0; i < productos.getLength(); i++) {
+                    producto = (org.w3c.dom.Element) productos.item(i);
+                    Node exist = producto.getElementsByTagName("existencias").item(0).getFirstChild();
+                    exist.setTextContent(String.valueOf(p[i].getExistencias()));
+
+                }
+
+                doc.getDocumentElement().normalize();
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                DOMSource source = new DOMSource(doc);
+                StreamResult result = new StreamResult(new File(Environment.getExternalStorageDirectory() + "/productos.xml"));
+                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                transformer.transform(source, result);
+
+            }catch(Exception e) {System.out.println("Error");}
+
+    }
+
 
     public void escribirPedido(Pedido p) throws JDOMException, IOException {
         String filePath = Environment.getExternalStorageDirectory() + "/pedidos.xml";
