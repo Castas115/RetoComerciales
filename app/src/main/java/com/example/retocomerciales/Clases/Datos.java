@@ -126,10 +126,6 @@ public class Datos {
     /**
      * Métodos para lista de productos
      */
-    public Producto[] getProductos() {
-        return productos;
-    }
-
     public Producto getProducto(int posicion) {
         return productos[posicion];
     }
@@ -158,9 +154,6 @@ public class Datos {
     /**
      * métodos para comerciales
      */
-    public Comercial[] getComerciales() {
-        return comerciales;
-    }
 
     public Comercial getComercial(int pos) {
         return comerciales[pos];
@@ -253,47 +246,6 @@ public class Datos {
             e.printStackTrace();
             Log.e("Datos class error", "Error a la hora de escribir a un archvo XML");
         }
-    }
-
-
-    public void escribirExistencias() throws JDOMException, IOException, ParserConfigurationException, SAXException {
-        Producto[] p = datos.productos;
-        try {
-
-            String filePath = Environment.getExternalStorageDirectory() + "/productos.xml";
-            File xmlFile = new File(filePath);
-            FileOutputStream fos = new FileOutputStream(xmlFile);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder;
-
-            dBuilder = dbFactory.newDocumentBuilder();
-
-            org.w3c.dom.Document doc = dBuilder.parse(xmlFile);
-
-            doc.getDocumentElement().normalize();
-
-            NodeList productos = doc.getElementsByTagName("producto");
-            org.w3c.dom.Element producto;
-            // loop for each producto
-            for (int i = 0; i < productos.getLength(); i++) {
-                producto = (org.w3c.dom.Element) productos.item(i);
-                Node exist = producto.getElementsByTagName("existencias").item(0).getFirstChild();
-                exist.setTextContent(String.valueOf(p[i].getExistencias()));
-
-            }
-
-            doc.getDocumentElement().normalize();
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File(Environment.getExternalStorageDirectory() + "/productos.xml"));
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.transform(source, result);
-
-        } catch (Exception e) {
-            System.out.println("Error");
-        }
-
     }
 
     private void escribirPedidoDOM(){
