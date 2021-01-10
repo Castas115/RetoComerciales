@@ -1,40 +1,29 @@
+/**
+ * Esta clase, es un singelton. Es una clase que se instancia una sola vez y se puede acceder a esa instancia durante la ejecución.
+ * A traves de esta linea, centralizamos la información y varios métodos de nuestra aplicación. Nos facilita el diseño y hace que sea más óptimo
+ *
+ */
+
 package com.example.retocomerciales.Clases;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Environment;
-import android.provider.Telephony;
 import android.util.Log;
 
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.EntityResolver;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.nio.charset.StandardCharsets;
+import java.io.InputStream;;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -43,25 +32,22 @@ import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 public class Datos {
 
-    private static Datos datos;
+    private static Datos datos;             //la propia instancia de la clase
     //atributos:
-    private Producto[] productos;
-    private Partner[] partners;
-    private Comercial[] comerciales;
-    private Pedido pedido;
-    private int posComercial, posPartner;
-    private static Resources resources;
-    private Context context;
-    private File XML_FILE_LOCATION_PATH;
+    private Producto[] productos;           //Array de los productos. se carga del xml
+    private Partner[] partners;             //Array de los partners. se carga del xml
+    private Comercial[] comerciales;        //Array de los comerciales. se carga del xml
+    private Pedido pedido;                  //El pedido que se esté produciendo
+    private int posComercial, posPartner;   //la posición del comercial y el partner en su respectivo array. Se inicializa en cada spinner que se modifique.
+    private static Resources resources;     //para poder acceder a resources y cargar los xmls al instalar la aplicación.
+    private Context context;                //Contexto de la aplicaión. permite acceder a la ubicación de la memoria interna
+    private File XML_FILE_LOCATION_PATH;    //carpeta de la memoria interna del movil.
 
 
     private Datos(Resources resources, Context context) {

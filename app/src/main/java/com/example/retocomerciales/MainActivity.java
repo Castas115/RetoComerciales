@@ -27,10 +27,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -42,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     String telf, emailDelegacion;
     TextView nomDelegacion;
 
+    //permisos de almacenamiento
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -53,13 +51,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //comprobar permisos
         try {
             checkExternalStoragePermission();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE); //ocultar el menu de navegación
 
         _iniciar=findViewById(R.id.btn_iniciar);
         llamar = findViewById(R.id.btnLlamar);
@@ -67,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         spComercial = findViewById(R.id.spn_eligeComercial);
         nomDelegacion = findViewById(R.id.lbl_nomDelegacion);
 
+        //cargar los datos necesarios para la clase Datos
         final Datos datos = Datos.getInstance(getResources(), getBaseContext());
         datos.cargarAssets();
 
@@ -92,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-
+        //llamada
         llamar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+        //correo a delegación
         correo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-
+        //botón iniciar
         _iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,11 +117,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
+        //fragmento mapa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
+    //obicaciones marcadas en le mapa
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
