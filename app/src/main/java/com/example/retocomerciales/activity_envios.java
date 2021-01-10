@@ -43,7 +43,7 @@ public class activity_envios extends Activity{
             Send.setEnabled(false);
             etEmail.setText(datos.getComercial(datos.getPosComercial()).getEmailDelegacion());
             etSubject.setText("Envio semanal de XML");
-            etMessage.setText("Envio el XML de Partners semanal adjunto");
+            etMessage.setText("Envio el XML adjunto");
             Send.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
