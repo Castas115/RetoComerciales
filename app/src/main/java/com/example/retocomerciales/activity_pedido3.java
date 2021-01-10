@@ -97,12 +97,9 @@ public class activity_pedido3 extends AppCompatActivity {
 
     public void realizarPedido() {
         //introducir escritura en xml
-        try {
-            datos.escribirPedidoDOM();
-            datos.escribirExistencias();
-        } catch (JDOMException | IOException |SAXException | ParserConfigurationException e) {
-            e.printStackTrace();
-        }
+        datos.escribirPedidoDOM();
+        datos.escribirProductoDOM();
+
         Toast.makeText(getApplicationContext(), "Compra realizada", Toast.LENGTH_SHORT).show();
         //para vovler al menú tras la compra
         Intent volver = new Intent();

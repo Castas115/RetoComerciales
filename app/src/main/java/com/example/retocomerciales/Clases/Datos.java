@@ -373,6 +373,39 @@ public class Datos {
         }
     }
 
+    public void escribirProductoDOM(){
+        try {
+            //generar el nuevo documento
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            org.w3c.dom.Document document = builder.newDocument();
+
+            //generar el elemento principal
+            org.w3c.dom.Element rootElement = document.createElementNS("PistachoPhone", "producto");
+            document.appendChild(rootElement);
+
+            //cargar el archivo de destino
+            Source source = new DOMSource(document);
+            File file = new File(XML_FILE_LOCATION_PATH, "productos.xml");
+            Result result = new StreamResult(file);
+
+            //agregar todos los elementos XML al elemento principal
+            for (Producto element : productos) {
+                rootElement.appendChild(element.toElement(document));
+            }
+
+            //escribir el contenido de Document a un archivo local
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.transform(source, result);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Datos class error", "Error a la hora de escribir a un archvo XML");
+        }
+    }
+
     // lectura xmls //
     private static org.w3c.dom.Document readXml(InputStream is) throws SAXException, IOException, ParserConfigurationException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -393,12 +426,15 @@ public class Datos {
         return db.parse(is);
     }
 
-    private static Producto[] leeProductos(InputStream is) {
+    private Producto[] leeProductos(String fileName) {
         Producto[] listProducto = null;
 
         try {
-            SAXBuilder builder = new SAXBuilder();
-            org.w3c.dom.Document document = readXml(is);
+            DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+
+            File file = new File(XML_FILE_LOCATION_PATH, fileName);
+            org.w3c.dom.Document document = builder.parse(new FileInputStream(file));
             org.w3c.dom.Element root = document.getDocumentElement();
 
             NodeList list = document.getElementsByTagName("producto");
@@ -546,8 +582,8 @@ public class Datos {
         return listComercial;
     }
 
-    public void cargarAssets(InputStream isProductos, InputStream isPartners, InputStream isComerciales){
-        this.productos = leeProductos(isProductos);
+    public void cargarAssets(){
+        this.productos = leeProductos("productos.xml");
         this.partners = leePartners("partners.xml");
         this.comerciales = leeComerciales("comerciales.xml");
     }

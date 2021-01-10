@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<catalogo>
-	<productos>
+<productos>
 		<producto cod="PPB_">
 			<nombre>PistachoB</nombre>
 			<imagen>movil</imagen>
@@ -85,4 +84,3 @@
 			<existencias>44</existencias>
 		</producto>
 	</productos>
-</catalogo>

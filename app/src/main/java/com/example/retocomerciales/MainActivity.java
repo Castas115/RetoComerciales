@@ -68,11 +68,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         nomDelegacion = findViewById(R.id.lbl_nomDelegacion);
 
         final Datos datos = Datos.getInstance(getResources(), getBaseContext());
-        try {
-            datos.cargarAssets(getAssets().open("productos.xml"), getAssets().open("partners.xml"), getAssets().open("comerciales.xml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        datos.cargarAssets();
 
         //Spinner Comerciales
         final ArrayAdapter adapterComerciales = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos.getNombresComerciales());
