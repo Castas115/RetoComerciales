@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         spComercial = findViewById(R.id.spn_eligeComercial);
         nomDelegacion = findViewById(R.id.lbl_nomDelegacion);
 
-        final Datos datos = Datos.getInstance(getResources());
+        final Datos datos = Datos.getInstance(getResources(), getBaseContext());
         try {
             datos.cargarAssets(getAssets().open("productos.xml"), getAssets().open("partners.xml"), getAssets().open("comerciales.xml"));
         } catch (IOException e) {
@@ -125,9 +125,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
-
     }
 
     public void onMapReady(GoogleMap googleMap) {

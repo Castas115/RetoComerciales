@@ -1,7 +1,9 @@
 package com.example.retocomerciales.Clases;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Environment;
+import android.util.Log;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -15,14 +17,19 @@ import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -47,12 +54,21 @@ public class Datos {
     private Pedido pedido;
     private int posComercial, posPartner;
     private static Resources resources;
+    private Context context;
+    private File XML_FILE_LOCATION_PATH;
 
 
-    private Datos(Resources resources) {
-
+    private Datos(Resources resources, Context context) {
         this.resources = resources;
-
+        this.context = context;
+        XML_FILE_LOCATION_PATH = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
+        try {
+            loadFilesFromAssetsToLocal();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Datos class error" , "Error a la hora de leer la información desde un XML");
+        }
         /*productos = new Producto[]{
                 new Producto("PPB_", "PistachoB", "movil", 79.95f, 10),
                 new Producto("PPA_", "PistachoA", "movil", 125.95f, 10),
@@ -79,9 +95,9 @@ public class Datos {
         };*/
     }
 
-    public static Datos getInstance(Resources resources) {
+    public static Datos getInstance(Resources resources, Context context) {
         if (datos == null) {
-            datos = new Datos(resources);
+            datos = new Datos(resources, context);
         }
         return datos;
     }
@@ -196,6 +212,21 @@ public class Datos {
 
     // Escritura en xml //
 
+    //Si no existen los archivos locales se carga el contenido desde assets
+    private void loadFilesFromAssetsToLocal() throws IOException {
+        String files [] = {"comerciales.xml", "partners.xml", "pedidos.xml", "productos.xml"};
+        for(String name : files) {
+                File file = new File(XML_FILE_LOCATION_PATH, name);
+                if(!file.exists()) {
+                    FileOutputStream fos = new FileOutputStream(file);
+                    InputStream is = new BufferedInputStream(resources.getAssets().open(name));
+                    byte[] buffer = new byte[is.available()];
+                    is.read(buffer);
+                    fos.write(buffer,0,buffer.length);
+                }
+        }
+    }
+
     //para poder escribir en raw
     private InputStream rawFileToChar(int fileId) throws IOException {
         InputStream is = resources.openRawResource(fileId);
@@ -216,7 +247,6 @@ public class Datos {
 
         //Obtiene nodo raiz
         Element root = doc.getRootElement();
-
 
         //Añade un nuevo nodo al nodo raiz
         Element partner = new Element("partner");

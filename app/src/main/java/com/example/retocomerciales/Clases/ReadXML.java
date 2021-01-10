@@ -1,8 +1,5 @@
 package com.example.retocomerciales.Clases;
 
-import android.content.Context;
-import android.provider.Contacts;
-
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -12,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import static java.security.AccessController.getContext;
 
 public class ReadXML {
 
