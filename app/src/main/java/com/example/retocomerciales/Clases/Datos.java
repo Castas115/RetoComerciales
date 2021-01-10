@@ -73,30 +73,6 @@ public class Datos {
             e.printStackTrace();
             Log.e("Datos class error" , "Error a la hora de leer la información desde un XML");
         }
-        /*productos = new Producto[]{
-                new Producto("PPB_", "PistachoB", "movil", 79.95f, 10),
-                new Producto("PPA_", "PistachoA", "movil", 125.95f, 10),
-                new Producto("PPA+", "PistachoA+", "movil", 153.45f, 10),
-                new Producto("PPO_", "PistachoO", "movil", 279.95f, 10),
-                new Producto("PPO+", "PistachoO+", "movil", 293.45f, 10),
-                new Producto("PPod", "PistachoPods", "airpodsPistacho", 24.95f, 10),
-                new Producto("Carg", "Cargador Pistacho", "cargadorPistacho", 12.34f, 10),
-                new Producto("FPB_", "Funda PistachoB", "Funda diseñada para proteger de tu PistachoPhone Beta", "fundaPistacho", 7f, 10),
-                new Producto("FPA_", "Funda PistachoA", "Funda diseñada para proteger de tu PistachoPhone Alfa", "fundaPistacho", 7f, 10),
-                new Producto("FPA+", "Funda PistachoA+", "Funda diseñada para proteger de tu PistachoPhone Alfa+", "fundaPistacho", 8.54f, 10),
-                new Producto("FPO_", "Funda PistachoO", "Funda diseñada para proteger de tu PistachoPhone Omega", "fundaPistacho", 8f, 10),
-                new Producto("FPO+", "Funda PistachoO+", "Funda diseñada para proteger de tu PistachoPhone Omega+", "fundaPistacho", 9.54f, 10)
-        };
-        partners = new Partner[]{
-                new Partner("1", "Cebanc", "Berio Pasealekua, 50, 20018 Donostia, Gipuzkoa", "A20045548", "Donostia", "943316900", "contacto@cebanc.com", "1"),
-                new Partner("2", "Ibermática", "Mikeletegi Pasealekua, 5, 20009 Donostia, Gipuzkoa", "A20038915", "Donostia", "943413500", "contacto@ibermatica.com", "1"),
-                new Partner("3", "Dosystem S.L.", "Sagardotegi Kalea, 1, 20160 Lasarte-Oria, SS", "A20040547", "Lasarte-Oria", "943369533", "contacto@dosystem.com", "2")
-        };
-        comerciales = new Comercial[]{
-                new Comercial("1", "ikerperez@pistacho.com", "Iker", "Perez", "Albacete", "978645123", "pistachoAlbacete@pistacho.com"),
-                new Comercial("2", "joncastander@pistacho.com", "Jon", "Castander", "Gipuzkoa", "943454320", "pistachoGipuzkoa@pistacho.com"),
-                new Comercial("3", "mikelinsausti@pistacho.com", "Mikel", "Insausti", "Bizkaia", "945457512", "pistachoBizkaia@pistacho.com")
-        };*/
     }
 
     public static Datos getInstance(Resources resources, Context context) {
@@ -137,6 +113,14 @@ public class Datos {
 
     public void nuevoPedido(Comercial comercial) {
         pedido = new Pedido(comercial);
+    }
+
+    public void realizarPedido(){
+        for(Producto prod: productos){
+            prod.setExistencias(prod.getExistenciasCompra());
+        }
+        escribirPedidoDOM();
+        escribirProductoDOM();
     }
 
     /**
@@ -272,7 +256,47 @@ public class Datos {
     }
 
 
-    public void escribirPedidoDOM(){
+    public void escribirExistencias() throws JDOMException, IOException, ParserConfigurationException, SAXException {
+        Producto[] p = datos.productos;
+        try {
+
+            String filePath = Environment.getExternalStorageDirectory() + "/productos.xml";
+            File xmlFile = new File(filePath);
+            FileOutputStream fos = new FileOutputStream(xmlFile);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder;
+
+            dBuilder = dbFactory.newDocumentBuilder();
+
+            org.w3c.dom.Document doc = dBuilder.parse(xmlFile);
+
+            doc.getDocumentElement().normalize();
+
+            NodeList productos = doc.getElementsByTagName("producto");
+            org.w3c.dom.Element producto;
+            // loop for each producto
+            for (int i = 0; i < productos.getLength(); i++) {
+                producto = (org.w3c.dom.Element) productos.item(i);
+                Node exist = producto.getElementsByTagName("existencias").item(0).getFirstChild();
+                exist.setTextContent(String.valueOf(p[i].getExistencias()));
+
+            }
+
+            doc.getDocumentElement().normalize();
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File(Environment.getExternalStorageDirectory() + "/productos.xml"));
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.transform(source, result);
+
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+
+    }
+
+    private void escribirPedidoDOM(){
         try {
             //generar el nuevo documento
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -303,7 +327,7 @@ public class Datos {
         }
     }
 
-    public void escribirProductoDOM(){
+    private void escribirProductoDOM(){
         try {
             //generar el nuevo documento
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
