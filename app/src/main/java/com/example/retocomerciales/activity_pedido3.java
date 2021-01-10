@@ -50,6 +50,8 @@ public class activity_pedido3 extends AppCompatActivity {
         //mostrar nombre del comercial
         comercial.setText("Comercial: " + datos.getPedido().getComercial().getNombre() + " " + datos.getPedido().getComercial().getApellidos());
 
+
+
         //adapter creado por nosotros aplicado al listview
         final LineaListAdapter adapter = new LineaListAdapter(this, R.layout.list_item_productos, datos.getPedido().getLineas());
         carroProductos.setAdapter(adapter);
@@ -96,6 +98,7 @@ public class activity_pedido3 extends AppCompatActivity {
         });
 
     }
+
 
 
     public void realizarPedido() {

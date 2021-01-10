@@ -64,6 +64,7 @@ public class activity_envios extends Activity{
             super.onActivityResult(requestCode, resultCode, data);
             if (requestCode == PICK_FROM_GALLERY && resultCode == RESULT_OK) {
                 URI = data.getData();
+
             }
         }
 
