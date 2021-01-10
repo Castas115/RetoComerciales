@@ -153,30 +153,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         int permissionCheck = ContextCompat.checkSelfPermission(
                 this, Manifest.permission.READ_EXTERNAL_STORAGE);
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(getApplicationContext(), "No Tiene permisos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Acepta los permisos", Toast.LENGTH_SHORT).show();
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 225);
 
-        } else {
-            Toast.makeText(getApplicationContext(), "Tiene permisos", Toast.LENGTH_SHORT).show();
-            writeToExternalStorage();
         }
 
     }
 
-    private void writeToExternalStorage() throws IOException {
-
-
-        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.example.retocomerciales/files/Documents/productos.xml");
-
-        if(file.exists()){
-            Toast.makeText(getApplicationContext(), "Existe ", Toast.LENGTH_SHORT).show();
-
-        }else{
-            Toast.makeText(getApplicationContext(), "No existe", Toast.LENGTH_SHORT).show();
-        }
-
-
-
-    }
 
 }
