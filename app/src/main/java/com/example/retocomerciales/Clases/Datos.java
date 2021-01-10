@@ -21,6 +21,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -230,6 +231,7 @@ public class Datos {
         }
     }
 
+
     //para poder escribir en raw
     private InputStream rawFileToChar(int fileId) throws IOException {
         InputStream is = resources.openRawResource(fileId);
@@ -248,7 +250,6 @@ public class Datos {
             newPartners[i] = partners[i];
         newPartners[newPartners.length - 1] = partner;
         partners= newPartners;
-
 
         try {
             //generar el nuevo documento
@@ -498,12 +499,15 @@ public class Datos {
         return listProducto;
     }
 
-    private static Partner[] leePartners(InputStream is){
+    private Partner[] leePartners(String fileName){
         Partner[] listPartners = null;
 
         try {
-            SAXBuilder builder = new SAXBuilder();
-            org.w3c.dom.Document document = readXml(is);
+            DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+
+            File file = new File(XML_FILE_LOCATION_PATH, fileName);
+            org.w3c.dom.Document document = builder.parse(new FileInputStream(file));
             org.w3c.dom.Element root = document.getDocumentElement();
 
             NodeList list = document.getElementsByTagName("partner");
@@ -585,7 +589,7 @@ public class Datos {
 
     public void cargarAssets(InputStream isProductos, InputStream isPartners, InputStream isComerciales){
         this.productos = leeProductos(isProductos);
-        this.partners = leePartners(isPartners);
+        this.partners = leePartners("partners.xml");
         this.comerciales = leeComerciales(isComerciales);
     }
 
