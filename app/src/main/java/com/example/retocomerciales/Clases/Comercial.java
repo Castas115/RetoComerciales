@@ -4,6 +4,12 @@
 
 package com.example.retocomerciales.Clases;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Comercial  {
 
     private String id, email, nombre, apellidos, delegacion, telefonoDelegacion, emailDelegacion;
@@ -28,4 +34,33 @@ public class Comercial  {
     public String getDelegacion() {return delegacion;}
     public String getTelefonoDelegacion() {return telefonoDelegacion;}
     public String getEmailDelegacion() {return emailDelegacion;}
+
+    //convertire el contenido de Comerciales en un elemento XML
+    public Element toElement(Document document) {
+        ArrayList<Element> elements = new ArrayList<>(Arrays.asList(
+                document.createElement("comercial"),
+                document.createElement("email"),
+                document.createElement("nombre"),
+                document.createElement("apellidos"),
+                document.createElement("delegacion"),
+                document.createElement("telefono"),
+                document.createElement("emailDelegacion")
+
+        ));
+
+        elements.get(0).setAttribute("id", id);
+        elements.get(1).setTextContent(email);
+        elements.get(2).setTextContent(nombre);
+        elements.get(3).setTextContent(apellidos);
+        elements.get(4).setTextContent(delegacion);
+        elements.get(5).setTextContent(telefonoDelegacion);
+        elements.get(6).setTextContent(emailDelegacion);
+
+
+        //el elemento 0 es el elemento padre
+        for(int i = 1; i < elements.size(); i++) {
+            elements.get(0).appendChild(elements.get(i));
+        }
+        return elements.get(0);
+    }
 }

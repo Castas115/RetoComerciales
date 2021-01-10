@@ -283,6 +283,7 @@ public class Datos {
         }
     }
 
+
     public void escribirPartner(Partner p) throws JDOMException, IOException, ParserConfigurationException, SAXException {
         //Lee XML
         SAXBuilder builder = new SAXBuilder();
@@ -545,13 +546,18 @@ public class Datos {
         return listPartners;
     }
 
-    private static Comercial[] leeComerciales(InputStream is) {
+    private Comercial[] leeComerciales(String fileName) {
         Comercial[] listComercial = null;
 
         try {
-            SAXBuilder builder = new SAXBuilder();
-            org.w3c.dom.Document document = readXml(is);
+
+            DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+
+            File file = new File(XML_FILE_LOCATION_PATH, fileName);
+            org.w3c.dom.Document document = builder.parse(new FileInputStream(file));
             org.w3c.dom.Element root = document.getDocumentElement();
+
 
             NodeList list = document.getElementsByTagName("comercial");
             listComercial = new Comercial[list.getLength()];
@@ -590,7 +596,7 @@ public class Datos {
     public void cargarAssets(InputStream isProductos, InputStream isPartners, InputStream isComerciales){
         this.productos = leeProductos(isProductos);
         this.partners = leePartners("partners.xml");
-        this.comerciales = leeComerciales(isComerciales);
+        this.comerciales = leeComerciales("comerciales.xml");
     }
 
 
