@@ -75,13 +75,16 @@ public class activity_addPartner extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!nombrePartner.getText().toString().isEmpty() || !direccionPartner.getText().toString().isEmpty() || !cifPartner.getText().toString().isEmpty() || !poblacionPartner.getText().toString().isEmpty() || !telefonoPartner.getText().toString().isEmpty() || !emailPartner.getText().toString().isEmpty()){
-                    Partner partner = new Partner("4", nombrePartner.getText().toString(), direccionPartner.getText().toString(), cifPartner.getText().toString(), poblacionPartner.getText().toString() ,telefonoPartner.getText().toString(), emailPartner.getText().toString(), "0");
+                    int ide = (Integer.parseInt(datos.getPartner(datos.getPartners().length-1).getId()))+1;
+                    Partner partner = new Partner(String.valueOf(ide), nombrePartner.getText().toString(), direccionPartner.getText().toString(), cifPartner.getText().toString(), poblacionPartner.getText().toString() ,telefonoPartner.getText().toString(), emailPartner.getText().toString(), "0");
                     Datos.getInstance().escribirPartnerDOM(partner);
 
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
                                     "Añadido", Toast.LENGTH_SHORT);
                     toast1.show();
+
+                    finish();
 
                 }else{
 
@@ -92,6 +95,7 @@ public class activity_addPartner extends AppCompatActivity {
                     toast1.show();
 
                 }
+
 
             }
         });

@@ -48,7 +48,7 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-public class Datos  extends Thread {
+public class Datos {
 
     private static Datos datos;
     //atributos:
@@ -86,13 +86,6 @@ public class Datos  extends Thread {
         return datos;
     }
 
-    //getter ruta
-
-
-    public File getRuta() {
-        return XML_FILE_LOCATION_PATH;
-    }
-
     //Dato posComercial
     public int getPosComercial() {
         return this.posComercial;
@@ -124,7 +117,7 @@ public class Datos  extends Thread {
 
     public void realizarPedido(){
         for(Producto prod: productos){
-            prod.ajustarExistencias();
+            prod.setExistencias(prod.getExistenciasCompra());
         }
         escribirPedidoDOM();
         escribirProductoDOM();
@@ -255,6 +248,42 @@ public class Datos  extends Thread {
         }
     }
 
+    public void escribirNewPartnerDOM(Partner partner) {
+       try {
+            //generar el nuevo documento
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            org.w3c.dom.Document document = builder.newDocument();
+
+            //generar el elemento principal
+            org.w3c.dom.Element rootElement = document.createElementNS("PistachoPhone", "partners");
+            document.appendChild(rootElement);
+
+            //cargar el archivo de destino
+            Source source = new DOMSource(document);
+            File file = new File(XML_FILE_LOCATION_PATH, "newpartners.xml");
+            Result result = new StreamResult(file);
+
+            //agregar todos los elementos XML al elemento principal
+            for (Partner element : leePartners("newpartners.xml")) {
+                rootElement.appendChild(element.toElement(document));
+            }
+
+           rootElement.appendChild(partner.toElement(document));
+
+            //escribir el contenido de Document a un archivo local
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.transform(source, result);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Datos class error", "Error a la hora de escribir a un archvo XML");
+        }
+    }
+
+
     private void escribirPedidoDOM(){
         try {
             //generar el nuevo documento
@@ -271,10 +300,6 @@ public class Datos  extends Thread {
             File file = new File(XML_FILE_LOCATION_PATH, "pedidos.xml");
             Result result = new StreamResult(file);
 
-            NodeList list = document.getElementsByTagName("pedido");
-            for (int i = 0; i < list.getLength(); i++) {
-                rootElement.appendChild((org.w3c.dom.Element) list.item(i));
-            }
             //agregar todos los elementos XML al elemento principal
             rootElement.appendChild(pedido.toElement(document));
 
