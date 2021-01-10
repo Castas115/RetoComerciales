@@ -16,9 +16,9 @@ public class Linea {
     //constructor (el precio total se calcula con el precio_unidad del producto y la cantidad
     public Linea(Producto producto, int cantidad) {
 
-        DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
-        simbolos.setDecimalSeparator('.');
-        formatoDecimal = new DecimalFormat("#.##", simbolos);
+        DecimalFormatSymbols sinbolos = new DecimalFormatSymbols();
+        sinbolos.setDecimalSeparator('.');
+        formatoDecimal = new DecimalFormat("#.##", sinbolos);
         formatoDecimal.setRoundingMode(RoundingMode.DOWN);
 
         this.producto = producto;

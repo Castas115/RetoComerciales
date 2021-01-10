@@ -3,14 +3,15 @@ package com.example.retocomerciales.Clases;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Environment;
+import android.provider.Telephony;
 import android.util.Log;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.EntityResolver;
@@ -30,6 +31,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -117,7 +119,7 @@ public class Datos {
 
     public void realizarPedido(){
         for(Producto prod: productos){
-            prod.setExistencias(prod.getExistenciasCompra());
+            prod.ajustarExistencias();
         }
         escribirPedidoDOM();
         escribirProductoDOM();
@@ -130,13 +132,22 @@ public class Datos {
         return productos[posicion];
     }
 
+    public Producto getProducto(String cod){
+        for(Producto producto : productos){
+            if (producto.getCod().equals(cod)){
+                return producto;
+            }
+        }
+        return null;
+    }
+
     public void restaExistenciasCompra(int posicion, int existenciasRestadas) {
         productos[posicion].setExistenciasCompra(productos[posicion].getExistenciasCompra() - existenciasRestadas);
     }
 
     public void cargarExistencias() {
         for (Producto producto : productos) {
-            producto.setExistenciasCompra(producto.getExistencias());
+            producto.ajustarExistenciasCompra();
         }
     }
 
@@ -151,6 +162,15 @@ public class Datos {
         return partners[posicion];
     }
 
+    public Partner getPartner(String id){
+        for(Partner partner : partners){
+            if (partner.getId().equals(id)){
+                return partner;
+            }
+        }
+        return null;
+    }
+
     /**
      * métodos para comerciales
      */
@@ -161,6 +181,15 @@ public class Datos {
 
     public Comercial getComercial() {
         return comerciales[posComercial];
+    }
+
+    public Comercial getComercial(String id){
+        for(Comercial comercial : comerciales){
+            if (comercial.getId().equals(id)){
+                return comercial;
+            }
+        }
+        return null;
     }
 
     //devolver lista de strings con los nombres de cada lista (comerciales, partners y productos)
@@ -195,7 +224,7 @@ public class Datos {
 
     //Si no existen los archivos locales se carga el contenido desde assets
     private void loadFilesFromAssetsToLocal() throws IOException {
-        String files [] = {"comerciales.xml", "partners.xml", "pedidos.xml", "productos.xml"};
+        String files [] = {"comerciales.xml", "partners.xml", "pedidos.xml", "productos.xml", "newpartners.xml"};
         for(String name : files) {
                 File file = new File(XML_FILE_LOCATION_PATH, name);
                 if(!file.exists()) {
@@ -209,6 +238,7 @@ public class Datos {
     }
 
     public void escribirPartnerDOM(Partner partner) {
+        escribirNewPartnerDOM(partner);
         //añadir nuevo partner
         Partner[] newPartners = new Partner[partners.length + 1];
         for(int i = 0; i < partners.length; i++)
@@ -248,7 +278,7 @@ public class Datos {
         }
     }
 
-    public void escribirNewPartnerDOM(Partner partner) {
+    private void escribirNewPartnerDOM(Partner partner) {
        try {
             //generar el nuevo documento
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -268,8 +298,7 @@ public class Datos {
             for (Partner element : leePartners("newpartners.xml")) {
                 rootElement.appendChild(element.toElement(document));
             }
-
-           rootElement.appendChild(partner.toElement(document));
+            rootElement.appendChild(partner.toElement(document));
 
             //escribir el contenido de Document a un archivo local
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -282,7 +311,6 @@ public class Datos {
             Log.e("Datos class error", "Error a la hora de escribir a un archvo XML");
         }
     }
-
 
     private void escribirPedidoDOM(){
         try {
@@ -301,6 +329,10 @@ public class Datos {
             Result result = new StreamResult(file);
 
             //agregar todos los elementos XML al elemento principal
+
+            for (Pedido element : leePedidos("pedidos.xml")) {
+                rootElement.appendChild(element.toElement(document));
+            }
             rootElement.appendChild(pedido.toElement(document));
 
             //escribir el contenido de Document a un archivo local
@@ -310,8 +342,7 @@ public class Datos {
             transformer.transform(source, result);
         }
         catch (Exception e) {
-            e.printStackTrace();
-            Log.e("Datos class error", "Error a la hora de escribir a un archvo XML");
+            System.err.println("ERROR");
         }
     }
 
@@ -502,6 +533,52 @@ public class Datos {
             System.out.println("Error");
         }
         return listComercial;
+    }
+
+    private Pedido[] leePedidos(String fileName) {
+        Pedido[] listPedidos = null;
+
+        try {
+
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+
+            File file = new File(XML_FILE_LOCATION_PATH, fileName);
+            Document document = builder.parse(new FileInputStream(file));
+            Element root = document.getDocumentElement();
+
+
+            NodeList list = document.getElementsByTagName("pedido");
+            listPedidos = new Pedido[list.getLength()];
+
+            String fecha = "", idPartner = "", idComercial = "";
+            ArrayList<Linea> lineas;
+
+            for (int i = 0; i < list.getLength(); i++) {
+                Element elementosPedido = (Element) list.item(i);
+
+                //fecha = elementosPedido.getAttributeNode("fecha").getTextContent();  //getAttribute("fecha").toString();
+                fecha = elementosPedido.getAttribute("fecha");
+                idPartner = elementosPedido.getAttribute("idpartner");
+                idComercial = elementosPedido.getAttribute("idcomercial");
+
+                listPedidos[i] = new Pedido(fecha, getPartner(idPartner), getComercial(idComercial));
+
+                NodeList listLineas = elementosPedido.getElementsByTagName("linea");
+                for(int j = 0; j < listLineas.getLength(); j++){
+                    Element elementosLinea = (Element) listLineas.item(j);
+
+                    Producto prod = getProducto(elementosLinea.getAttribute("codArticulo"));
+                    int cantidad = Integer.parseInt(elementosLinea.getAttribute("cantidad"));
+
+                    listPedidos[i].addLinea(new Linea(prod, cantidad));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error");
+        }
+        return listPedidos;
     }
 
     public void cargarAssets(){

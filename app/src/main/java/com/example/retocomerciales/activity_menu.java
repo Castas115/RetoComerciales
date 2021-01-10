@@ -69,6 +69,7 @@ public class activity_menu extends AppCompatActivity {
                 intent = new Intent(activity_menu.this, activity_pedido1.class);
                 Datos datos = Datos.getInstance();
 
+
                 datos.cargarExistencias();//cargar existenciasCompras = existencias (nuevo pedido cancelando los cambios hechos anteriormente)
                 datos.nuevoPedido(datos.getComercial());
                 startActivity(intent);
