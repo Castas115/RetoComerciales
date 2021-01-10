@@ -52,9 +52,6 @@ public class Producto implements Serializable {
 
     //Setter
     public void setExistenciasCompra(int existencias) {this.existenciasCompra = existencias;}
-    public void restaExistencias(int existenciasRestadas) {
-        this.existenciasCompra = this.existenciasCompra - existenciasRestadas;
-    }
     public void setExistencias(int existencias) {this.existencias = existencias; }
 
     //ajustan las existencias si el pedido se ha realizado o si no se ha podido realizar
