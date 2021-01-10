@@ -231,18 +231,6 @@ public class Datos {
         }
     }
 
-
-    //para poder escribir en raw
-    private InputStream rawFileToChar(int fileId) throws IOException {
-        InputStream is = resources.openRawResource(fileId);
-        String str = null;
-        byte[] buffer = new byte[is.available()];
-        is.read(buffer);
-        str = new String(buffer, 0, buffer.length, StandardCharsets.UTF_8);
-
-        return new ByteArrayInputStream(str.getBytes());
-    }
-
     public void escribirPartnerDOM(Partner partner) {
         //añadir nuevo partner
         Partner[] newPartners = new Partner[partners.length + 1];
@@ -284,53 +272,6 @@ public class Datos {
     }
 
 
-    public void escribirPartner(Partner p) throws JDOMException, IOException, ParserConfigurationException, SAXException {
-        //Lee XML
-        SAXBuilder builder = new SAXBuilder();
-        File archivo = new File("newpartners.xml");
-        Document doc = builder.build(archivo);
-
-        //Obtiene nodo raiz
-        Element root = doc.getRootElement();
-
-        //Añade un nuevo nodo al nodo raiz
-        Element partner = new Element("partner");
-        //newChild.setText("partner");
-        root.addContent(partner);
-
-
-        //Añadir los elementos del partner.
-
-        partner.setAttribute("id", p.getId());
-
-        Element nom = new Element("nombre");
-        partner.addContent(nom);
-        nom.setText(p.getNombre());
-        Element dir = new Element("direccion");
-        partner.addContent(dir);
-        dir.setText(p.getDireccion());
-        Element pob = new Element("poblacion");
-        partner.addContent(pob);
-        pob.setText(p.getPoblacion());
-        Element CIF = new Element("CIF");
-        partner.addContent(CIF);
-        CIF.setText(p.getCIF());
-        Element tel = new Element("telefono");
-        partner.addContent(tel);
-        tel.setText(p.getTelefono());
-        Element mail = new Element("email");
-        partner.addContent(mail);
-        mail.setText(p.getEmail());
-        Element id_comercial = new Element("id_comercial");
-        partner.addContent(id_comercial);
-        id_comercial.setText("1");//cambiar
-
-        //Crea un fichero XML
-        XMLOutputter outputter = new XMLOutputter();
-        outputter.setFormat(Format.getPrettyFormat());
-        outputter.output(doc, new FileWriter(archivo));
-    }
-
     public void escribirExistencias() throws JDOMException, IOException, ParserConfigurationException, SAXException {
         Producto[] p = datos.productos;
         try {
@@ -371,51 +312,34 @@ public class Datos {
 
     }
 
-
-    public void escribirPedido(Pedido p) throws JDOMException, IOException {
-        String filePath = Environment.getExternalStorageDirectory() + "/pedidos.xml";
-        File xmlFile = new File(filePath);
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder;
+    public void escribirPedidoDOM(){
         try {
-            dBuilder = dbFactory.newDocumentBuilder();
+            //generar el nuevo documento
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            org.w3c.dom.Document document = builder.newDocument();
 
-            // parse xml file and load into document
-            org.w3c.dom.Document doc = dBuilder.parse(xmlFile);
+            //generar el elemento principal
+            org.w3c.dom.Element rootElement = document.createElementNS("PistachoPhone", "pedidos");
+            document.appendChild(rootElement);
 
-            doc.getDocumentElement().normalize();
+            //cargar el archivo de destino
+            Source source = new DOMSource(document);
+            File file = new File(XML_FILE_LOCATION_PATH, "pedidos.xml");
+            Result result = new StreamResult(file);
 
-            org.w3c.dom.Element pedido = doc.createElement("pedido");
+            //agregar todos los elementos XML al elemento principal
+            rootElement.appendChild(pedido.toElement(document));
 
-            pedido.setAttribute("fecha", p.getFecha());
-            pedido.setAttribute("idcomercial", p.getComercial().getId());
-            pedido.setAttribute("idpartner", p.getPartner().getId());
-
-            Double prTotal = 0.;
-            for (Linea l : p.getLineas()) {
-                org.w3c.dom.Element linea = doc.createElement("linea");
-                pedido.appendChild(linea);
-                linea.setAttribute("codArticulo", l.getProducto().getCod());
-                linea.setAttribute("cantidad", String.valueOf(l.getCantidad()));
-                linea.setAttribute("precioLinea", String.valueOf(l.getPr_total()));
-                prTotal += l.getPr_total();
-            }
-            pedido.setAttribute("precioTotal", String.valueOf(prTotal));
-
-            doc.getDocumentElement().appendChild(pedido);
-
-
-            // escribir elementos en xml //
-            doc.getDocumentElement().normalize();
+            //escribir el contenido de Document a un archivo local
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File(filePath));
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(source, result);
-
-        } catch (SAXException | ParserConfigurationException | IOException | TransformerException e1) {
-            e1.printStackTrace();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Datos class error", "Error a la hora de escribir a un archvo XML");
         }
     }
 

@@ -98,7 +98,7 @@ public class activity_pedido3 extends AppCompatActivity {
     public void realizarPedido() {
         //introducir escritura en xml
         try {
-            datos.escribirPedido(datos.getPedido());
+            datos.escribirPedidoDOM();
             datos.escribirExistencias();
         } catch (JDOMException | IOException |SAXException | ParserConfigurationException e) {
             e.printStackTrace();
