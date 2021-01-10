@@ -3,7 +3,11 @@
  */
 package com.example.retocomerciales.Clases;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Pedido  {
 
@@ -24,6 +28,28 @@ public class Pedido  {
         this.partner = partner;
         this.comercial = comercial;
         this.lineas = new ArrayList<>();
+    }
+
+
+    //convertire el contenido de Partners en un elemento XML
+    public Element toElement(Document document) {
+        ArrayList<Element> elements = new ArrayList<>(Arrays.asList(
+                document.createElement("pedido")
+        ));
+
+        elements.get(0).setAttribute("fecha", fecha);
+        elements.get(0).setAttribute("idcomercial", comercial.getId());
+        elements.get(0).setAttribute("idpartner", partner.getId());
+        for(int i=1; i<=lineas.size(); i++) {
+            elements.add(document.createElement("linea"));
+            elements.get(i).setAttribute("cantidad", String.valueOf(lineas.get(i-1).getCantidad()));
+            elements.get(i).setAttribute("codArticulo", lineas.get(i-1).getProducto().getCod());
+            elements.get(i).setAttribute("precioLinea", String.valueOf(lineas.get(i-1).getPr_total()));
+
+            elements.get(0).appendChild(elements.get(i));
+        }
+
+        return elements.get(0);
     }
 
     //Getters
