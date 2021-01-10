@@ -48,7 +48,7 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-public class Datos {
+public class Datos  extends Thread {
 
     private static Datos datos;
     //atributos:
@@ -86,6 +86,13 @@ public class Datos {
         return datos;
     }
 
+    //getter ruta
+
+
+    public File getRuta() {
+        return XML_FILE_LOCATION_PATH;
+    }
+
     //Dato posComercial
     public int getPosComercial() {
         return this.posComercial;
@@ -117,7 +124,7 @@ public class Datos {
 
     public void realizarPedido(){
         for(Producto prod: productos){
-            prod.setExistencias(prod.getExistenciasCompra());
+            prod.ajustarExistencias();
         }
         escribirPedidoDOM();
         escribirProductoDOM();
@@ -126,10 +133,6 @@ public class Datos {
     /**
      * Métodos para lista de productos
      */
-    public Producto[] getProductos() {
-        return productos;
-    }
-
     public Producto getProducto(int posicion) {
         return productos[posicion];
     }
@@ -158,9 +161,6 @@ public class Datos {
     /**
      * métodos para comerciales
      */
-    public Comercial[] getComerciales() {
-        return comerciales;
-    }
 
     public Comercial getComercial(int pos) {
         return comerciales[pos];
@@ -255,47 +255,6 @@ public class Datos {
         }
     }
 
-
-    public void escribirExistencias() throws JDOMException, IOException, ParserConfigurationException, SAXException {
-        Producto[] p = datos.productos;
-        try {
-
-            String filePath = Environment.getExternalStorageDirectory() + "/productos.xml";
-            File xmlFile = new File(filePath);
-            FileOutputStream fos = new FileOutputStream(xmlFile);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder;
-
-            dBuilder = dbFactory.newDocumentBuilder();
-
-            org.w3c.dom.Document doc = dBuilder.parse(xmlFile);
-
-            doc.getDocumentElement().normalize();
-
-            NodeList productos = doc.getElementsByTagName("producto");
-            org.w3c.dom.Element producto;
-            // loop for each producto
-            for (int i = 0; i < productos.getLength(); i++) {
-                producto = (org.w3c.dom.Element) productos.item(i);
-                Node exist = producto.getElementsByTagName("existencias").item(0).getFirstChild();
-                exist.setTextContent(String.valueOf(p[i].getExistencias()));
-
-            }
-
-            doc.getDocumentElement().normalize();
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File(Environment.getExternalStorageDirectory() + "/productos.xml"));
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.transform(source, result);
-
-        } catch (Exception e) {
-            System.out.println("Error");
-        }
-
-    }
-
     private void escribirPedidoDOM(){
         try {
             //generar el nuevo documento
@@ -312,6 +271,10 @@ public class Datos {
             File file = new File(XML_FILE_LOCATION_PATH, "pedidos.xml");
             Result result = new StreamResult(file);
 
+            NodeList list = document.getElementsByTagName("pedido");
+            for (int i = 0; i < list.getLength(); i++) {
+                rootElement.appendChild((org.w3c.dom.Element) list.item(i));
+            }
             //agregar todos los elementos XML al elemento principal
             rootElement.appendChild(pedido.toElement(document));
 
@@ -335,7 +298,7 @@ public class Datos {
             org.w3c.dom.Document document = builder.newDocument();
 
             //generar el elemento principal
-            org.w3c.dom.Element rootElement = document.createElementNS("PistachoPhone", "producto");
+            org.w3c.dom.Element rootElement = document.createElementNS("PistachoPhone", "productos");
             document.appendChild(rootElement);
 
             //cargar el archivo de destino
@@ -358,26 +321,6 @@ public class Datos {
             e.printStackTrace();
             Log.e("Datos class error", "Error a la hora de escribir a un archvo XML");
         }
-    }
-
-    // lectura xmls //
-    private static org.w3c.dom.Document readXml(InputStream is) throws SAXException, IOException, ParserConfigurationException {
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-
-        dbf.setValidating(false);
-        dbf.setIgnoringComments(false);
-        dbf.setIgnoringElementContentWhitespace(true);
-        dbf.setNamespaceAware(true);
-        // dbf.setCoalescing(true);
-        // dbf.setExpandEntityReferences(true);
-
-        DocumentBuilder db = null;
-        db = dbf.newDocumentBuilder();
-        db.setEntityResolver(new NullResolver());
-
-        // db.setErrorHandler( new MyErrorHandler());
-
-        return db.parse(is);
     }
 
     private Producto[] leeProductos(String fileName) {
@@ -543,30 +486,4 @@ public class Datos {
     }
 
 
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//nada que ver aquí
-
-//...
-
-
-
-class NullResolver implements EntityResolver {
-    public InputSource resolveEntity(String publicId, String systemId) {
-        return new InputSource(new StringReader(""));
-    }
 }

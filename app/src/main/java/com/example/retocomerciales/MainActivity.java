@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @SuppressLint("SetTextI18n")
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                datos.setPosPartner(position);
+                datos.setPosComercial(position);
 
                 nomDelegacion.setText("Delegación provincial " + datos.getComercial(position).getDelegacion());
                 emailDelegacion = datos.getComercial(position).getEmailDelegacion();
