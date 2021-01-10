@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void writeToExternalStorage() throws IOException {
 
 
-        File file = new File(Environment.getExternalStorageDirectory() + "/productos.xml");
+        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.example.retocomerciales/files/Documents/productos.xml");
 
         if(file.exists()){
             Toast.makeText(getApplicationContext(), "Existe ", Toast.LENGTH_SHORT).show();

@@ -37,7 +37,7 @@ public class activity_pedido1 extends AppCompatActivity {
         mostrarFecha = findViewById(R.id.lbl_fecha);
 
 
-
+        siguiente.setEnabled(false);
         datos = Datos.getInstance();
 
         //Spinner partners
@@ -100,10 +100,17 @@ public class activity_pedido1 extends AppCompatActivity {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                     mostrarFecha.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    if(mostrarFecha.length()!=0){
+                        siguiente.setEnabled(true);
+                    }
 
                 }
             }, ano, mes, dia);
             datePickerDialog.show();
+
+
+
+
 
     }
 

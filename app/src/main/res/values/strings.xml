@@ -65,6 +65,9 @@
     <string name="todo">TODO</string>
     <string name="cantidad">Cantidad</string>
     <string name="prtotal">prTotal</string>
+    <string name="lbl_fecha">Pedido a fecha de   </string>
+    <string name="realizar_pedido">Realizar Pedido</string>
+    <string name="gestion_de_partners">Gestion de Partners</string>
 
 
 </resources>

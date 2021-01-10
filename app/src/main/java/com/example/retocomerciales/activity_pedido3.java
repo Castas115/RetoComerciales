@@ -40,9 +40,12 @@ public class activity_pedido3 extends AppCompatActivity {
         Button volver = findViewById(R.id.btn_volver);
         Spinner spnPartners = findViewById(R.id.spn_partners);
         TextView comercial = findViewById(R.id.lbl_comercial);
+        TextView fecha = findViewById(R.id.lbl_fecha);
         primer = true;
 
         datos = Datos.getInstance();
+
+        fecha.setText(datos.getPedido().getFecha());
 
         //mostrar nombre del comercial
         comercial.setText("Comercial: " + datos.getPedido().getComercial().getNombre() + " " + datos.getPedido().getComercial().getApellidos());
