@@ -31,11 +31,14 @@ import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -238,6 +241,46 @@ public class Datos {
         return new ByteArrayInputStream(str.getBytes());
     }
 
+    public void escribirPartnerDOM(Partner partner) {
+        //añadir nuevo partner
+        Partner[] newPartners = new Partner[partners.length + 1];
+        for(int i = 0; i < partners.length; i++)
+            newPartners[i] = partners[i];
+        newPartners[newPartners.length - 1] = partner;
+        partners= newPartners;
+
+
+        try {
+            //generar el nuevo documento
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            org.w3c.dom.Document document = builder.newDocument();
+
+            //generar el elemento principal
+            org.w3c.dom.Element rootElement = document.createElementNS("PistachoPhone", "partners");
+            document.appendChild(rootElement);
+
+            //cargar el archivo de destino
+            Source source = new DOMSource(document);
+            File file = new File(XML_FILE_LOCATION_PATH, "partners.xml");
+            Result result = new StreamResult(file);
+
+            //agregar todos los elementos XML al elemento principal
+            for (Partner element : partners) {
+                rootElement.appendChild(element.toElement(document));
+            }
+
+            //escribir el contenido de Document a un archivo local
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.transform(source, result);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Datos class error", "Error a la hora de escribir a un archvo XML");
+        }
+    }
 
     public void escribirPartner(Partner p) throws JDOMException, IOException, ParserConfigurationException, SAXException {
         //Lee XML
