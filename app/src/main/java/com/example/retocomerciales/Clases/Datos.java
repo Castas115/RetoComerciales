@@ -578,7 +578,6 @@ public class Datos {
                 Node nEmailDelegacion = elementosComercial.getElementsByTagName("emailDelegacion").item(0).getFirstChild();
                 emailDelegacion = nEmailDelegacion.getNodeValue();
 
-
                 listComercial[i] = new Comercial(id, email, nombre, apellidos, delegacion, telefono, emailDelegacion);
             }
         }catch (Exception e){
