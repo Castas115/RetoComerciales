@@ -8,8 +8,11 @@ package com.example.retocomerciales.Clases;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.util.Log;
+
+import com.example.retocomerciales.RetoComercialesSQLiteHelper;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -46,13 +49,16 @@ public class Datos {
     private Pedido pedido;                  //El pedido que se esté produciendo
     private int posComercial, posPartner;   //la posición del comercial y el partner en su respectivo array. Se inicializa en cada spinner que se modifique.
     private static Resources resources;     //para poder acceder a resources y cargar los xmls al instalar la aplicación.
-    private Context context;                //Contexto de la aplicaión. permite acceder a la ubicación de la memoria interna
     private File XML_FILE_LOCATION_PATH;    //carpeta de la memoria interna del movil.
-
+    private RetoComercialesSQLiteHelper dbh;
+    private SQLiteDatabase db;
 
     private Datos(Resources resources, Context context) {
         this.resources = resources;
-        this.context = context;
+
+        RetoComercialesSQLiteHelper dbh = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1);
+        db = dbh.getWritableDatabase();
+
         XML_FILE_LOCATION_PATH = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
         try {
             loadFilesFromAssetsToLocal();
@@ -114,6 +120,9 @@ public class Datos {
     /**
      * Métodos para lista de productos
      */
+
+
+    public Producto[] getProductos() {return productos;}
     public Producto getProducto(int posicion) {
         return productos[posicion];
     }
@@ -569,6 +578,23 @@ public class Datos {
         return listPedidos;
     }
 
+    //inserts
+    public void insert(Producto producto){
+        String sql= "INSERT INTO PRODUCTOS (cod_producto, nombre, descripcion, imagen, existencias, pr_unidad) values ( '"
+                + producto.getCod() + "', '"  + producto.getNombre() + "', '"  + producto.getDescripcion() + "', '"  + producto.getImagen() + "', "  + producto.getExistencias() + ", "  + producto.getPr_unidad() +  " )";
+        db.execSQL(sql);
+    }
+
+    public void insertProductos(){
+        for (Producto producto: productos){
+            datos.insert(producto);
+        }
+    }
+
+
+
+
+//
     public void cargarAssets(){
         this.productos = leeProductos("productos.xml");
         this.partners = leePartners("partners.xml");

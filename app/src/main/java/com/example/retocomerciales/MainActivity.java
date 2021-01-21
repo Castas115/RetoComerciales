@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //cargar los datos necesarios para la clase Datos
         final Datos datos = Datos.getInstance(getResources(), getBaseContext());
         datos.cargarAssets();
+        datos.insertProductos();
 
         //Spinner Comerciales
         final ArrayAdapter adapterComerciales = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos.getNombresComerciales());

@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.retocomerciales.Clases.Datos;
+import com.example.retocomerciales.Clases.Producto;
+
 public class RetoComercialesSQLiteHelper extends SQLiteOpenHelper {
 
     //Sentencia SQL para crear las tablas
