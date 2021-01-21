@@ -12,11 +12,13 @@ import java.util.Arrays;
 
 public class Comercial  {
 
-    private String id, email, nombre, apellidos, delegacion, telefonoDelegacion, emailDelegacion;
+    private String id, usuario, password, email, nombre, apellidos, delegacion, telefonoDelegacion, emailDelegacion;
 
     //constructor
-    public Comercial(String id, String email, String nombre, String apellidos, String delegacion, String telefonoDelegacion, String emailDelegacion) {
+    public Comercial(String id, String usuario, String password, String email, String nombre, String apellidos, String delegacion, String telefonoDelegacion, String emailDelegacion) {
         this.id = id;
+        this.usuario = usuario;
+        this.password = password;
         this.email = email;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -28,6 +30,8 @@ public class Comercial  {
     //getters
 
     public String getId() {return id;}
+    public String getUsuario() {return usuario;}
+    public String getPassword() {return password;}
     public String getEmail() {return email;}
     public String getNombre() {return nombre;}
     public String getApellidos() {return apellidos;}
@@ -36,9 +40,11 @@ public class Comercial  {
     public String getEmailDelegacion() {return emailDelegacion;}
 
     //convertire el contenido de Comerciales en un elemento XML
-    public Element toElement(Document document) {
+    /*public Element toElement(Document document) {
         ArrayList<Element> elements = new ArrayList<>(Arrays.asList(
                 document.createElement("comercial"),
+                document.createElement("usuario"),
+                document.createElement("password"),
                 document.createElement("email"),
                 document.createElement("nombre"),
                 document.createElement("apellidos"),
@@ -49,12 +55,14 @@ public class Comercial  {
         ));
 
         elements.get(0).setAttribute("id", id);
-        elements.get(1).setTextContent(email);
-        elements.get(2).setTextContent(nombre);
-        elements.get(3).setTextContent(apellidos);
-        elements.get(4).setTextContent(delegacion);
-        elements.get(5).setTextContent(telefonoDelegacion);
-        elements.get(6).setTextContent(emailDelegacion);
+        elements.get(1).setTextContent(usuario);
+        elements.get(2).setTextContent(password);
+        elements.get(3).setTextContent(email);
+        elements.get(4).setTextContent(nombre);
+        elements.get(5).setTextContent(apellidos);
+        elements.get(6).setTextContent(delegacion);
+        elements.get(7).setTextContent(telefonoDelegacion);
+        elements.get(8).setTextContent(emailDelegacion);
 
 
         //el elemento 0 es el elemento padre
@@ -62,5 +70,5 @@ public class Comercial  {
             elements.get(0).appendChild(elements.get(i));
         }
         return elements.get(0);
-    }
+    }*/
 }

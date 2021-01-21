@@ -27,6 +27,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 
@@ -65,10 +66,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         nomDelegacion = findViewById(R.id.lbl_nomDelegacion);
 
         //cargar los datos necesarios para la clase Datos
-        final Datos datos = Datos.getInstance(getResources(), getBaseContext());
+        Datos datos = Datos.getInstance();
+        datos.setMainActivityElements(getResources(), getBaseContext());
         datos.cargarAssets();
-        datos.insertProductos();
+        if (datos.isDbExist()){
+            datos.insertAll(datos.getDb());
+        }
 
+        final Datos datos2 = datos;
         //Spinner Comerciales
         final ArrayAdapter adapterComerciales = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos.getNombresComerciales());
         adapterComerciales.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -78,11 +83,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @SuppressLint("SetTextI18n")
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                datos.setPosComercial(position);
+                datos2.setPosComercial(position);
 
-                nomDelegacion.setText("Delegación provincial " + datos.getComercial(position).getDelegacion());
-                emailDelegacion = datos.getComercial(position).getEmailDelegacion();
-                telf = datos.getComercial(position).getTelefonoDelegacion();
+                nomDelegacion.setText("Delegación provincial " + datos2.getComercial(position).getDelegacion());
+                emailDelegacion = datos2.getComercial(position).getEmailDelegacion();
+                telf = datos2.getComercial(position).getTelefonoDelegacion();
 
             }
 

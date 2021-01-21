@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <comerciales>
-    <comercial id="1">
+    <comercial usuario="haxixa" password="perro">
         <email>ikerperez@pistacho.com</email>
         <nombre>Iker</nombre>
         <apellidos>Perez</apellidos>
@@ -8,7 +8,7 @@
         <telefono>978645123</telefono>
         <emailDelegacion>pistachoAlbacete@pistacho.com</emailDelegacion>
     </comercial>
-    <comercial id="2">
+    <comercial usuario="castas" password="berengena">
         <email>joncastander@pistacho.com</email>
         <nombre>Jon</nombre>
         <apellidos>Castander</apellidos>
@@ -16,7 +16,7 @@
         <telefono>943454320</telefono>
         <emailDelegacion>pistachoGipuzkoa@pistacho.com</emailDelegacion>
     </comercial>
-    <comercial id="3">
+    <comercial usuario="mike" password="txorixo">
         <email>mikelinsausti@pistacho.com</email>
         <nombre>Mikel</nombre>
         <apellidos>Insausti</apellidos>

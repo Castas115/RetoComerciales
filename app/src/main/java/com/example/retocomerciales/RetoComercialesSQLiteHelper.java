@@ -32,6 +32,7 @@ public class RetoComercialesSQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(sqlPartners);
         db.execSQL(sqlPedidos);
         db.execSQL(sqlProductos);
+        Datos.getInstance().crearDB();
     }
 
     @Override

@@ -50,16 +50,18 @@ public class Datos {
     private int posComercial, posPartner;   //la posición del comercial y el partner en su respectivo array. Se inicializa en cada spinner que se modifique.
     private static Resources resources;     //para poder acceder a resources y cargar los xmls al instalar la aplicación.
     private File XML_FILE_LOCATION_PATH;    //carpeta de la memoria interna del movil.
-    private RetoComercialesSQLiteHelper dbh;
     private SQLiteDatabase db;
+    private boolean dbExist = false;
 
-    private Datos(Resources resources, Context context) {
+    private Datos(){}
+
+    public void setMainActivityElements(Resources resources, Context context) {
         this.resources = resources;
 
-        RetoComercialesSQLiteHelper dbh = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1);
-        db = dbh.getWritableDatabase();
+        //RetoComercialesSQLiteHelper dbh = ;
+        this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getWritableDatabase();
 
-        XML_FILE_LOCATION_PATH = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
+        this.XML_FILE_LOCATION_PATH = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
         try {
             loadFilesFromAssetsToLocal();
         }
@@ -69,16 +71,19 @@ public class Datos {
         }
     }
 
-    public static Datos getInstance(Resources resources, Context context) {
-        if (datos == null) {
-            datos = new Datos(resources, context);
+    public static Datos getInstance() {
+        if (datos == null){
+            datos = new Datos();
         }
         return datos;
     }
 
-    public static Datos getInstance() {
-        return datos;
+    public void crearDB(){
+        datos = new Datos();
+        this.dbExist = true;
     }
+
+    public boolean isDbExist() {return dbExist;}
 
     //Dato posComercial
     public int getPosComercial() {
@@ -502,13 +507,13 @@ public class Datos {
             NodeList list = document.getElementsByTagName("comercial");
             listComercial = new Comercial[list.getLength()];
 
-            String id = "", email, nombre = "", apellidos = "", delegacion = "", telefono = "", emailDelegacion = "";
+            String  usuario = "", password = "" , email= "", nombre = "", apellidos = "", delegacion = "", telefono = "", emailDelegacion = "";
 
             for (int i = 0; i < list.getLength(); i++) {
                 org.w3c.dom.Element elementosComercial = (org.w3c.dom.Element) list.item(i);
 
-
-                id = elementosComercial.getAttribute("id");
+                usuario = elementosComercial.getAttribute("usuario");
+                password = elementosComercial.getAttribute("password");
 
 
                 Node nEmail = elementosComercial.getElementsByTagName("email").item(0).getFirstChild();
@@ -524,7 +529,7 @@ public class Datos {
                 Node nEmailDelegacion = elementosComercial.getElementsByTagName("emailDelegacion").item(0).getFirstChild();
                 emailDelegacion = nEmailDelegacion.getNodeValue();
 
-                listComercial[i] = new Comercial(id, email, nombre, apellidos, delegacion, telefono, emailDelegacion);
+                listComercial[i] = new Comercial(String.valueOf(i+1), usuario, password, email, nombre, apellidos, delegacion, telefono, emailDelegacion);
             }
         }catch (Exception e){
             System.out.println("Error");
@@ -579,15 +584,28 @@ public class Datos {
     }
 
     //inserts
-    public void insert(Producto producto){
+
+    public SQLiteDatabase getDb() {return db;}
+
+    public void insert(Producto producto, SQLiteDatabase db){
         String sql= "INSERT INTO PRODUCTOS (cod_producto, nombre, descripcion, imagen, existencias, pr_unidad) values ( '"
                 + producto.getCod() + "', '"  + producto.getNombre() + "', '"  + producto.getDescripcion() + "', '"  + producto.getImagen() + "', "  + producto.getExistencias() + ", "  + producto.getPr_unidad() +  " )";
         db.execSQL(sql);
     }
+    public void insert(Comercial comercial, SQLiteDatabase db){
+        String sql= "INSERT INTO COMERCIALES ( usuario, password, nombre, apellidos, email, delegacion, telefono_delegacion, email_delegacion) values ( '" +
+                comercial.getUsuario() + "', '"  + comercial.getPassword() + "', '"  + comercial.getNombre() + "', '"  + comercial.getApellidos() + "', '" +
+                comercial.getEmail() + "', '"  + comercial.getDelegacion() + "', '"  + comercial.getTelefonoDelegacion() + "', '"  + comercial.getEmailDelegacion() + "' )";
+        db.execSQL(sql);
+    }
 
-    public void insertProductos(){
+    public void insertAll(SQLiteDatabase db){
         for (Producto producto: productos){
-            datos.insert(producto);
+            datos.insert(producto, db);
+        }
+
+        for (Comercial comercial: comerciales){
+            datos.insert(comercial, db);
         }
     }
 
