@@ -11,8 +11,7 @@ import java.util.Arrays;
  * Cada producto individual. Dato cargado del XML/base de datos
  */
 
-public class Producto implements Serializable {
-    final static long serialVersionUID = 1L;
+public class Producto {
 
     private String cod, nombre, descripcion, imagen;
     private int existencias, existenciasCompra; //existenciasCompra son las existencias que el producto tiene mientras se realiza una compra
