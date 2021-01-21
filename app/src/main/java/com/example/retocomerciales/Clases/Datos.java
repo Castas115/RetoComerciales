@@ -432,6 +432,8 @@ public class Datos {
     private Partner[] leePartners(String fileName){
         Partner[] listPartners = null;
 
+        
+
         try {
             DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
