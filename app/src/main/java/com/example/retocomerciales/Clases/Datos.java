@@ -6,6 +6,7 @@
 
 package com.example.retocomerciales.Clases;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -613,23 +614,22 @@ public class Datos {
     }
 
     public void insert(Pedido pedido, SQLiteDatabase db){
-        String sql= "INSERT INTO PEDIDOS ( fecha, id_partner, id_comercial) values ( '" +
-                pedido.getFecha() + "', '"  + pedido.getPartner().getId() + "', '"  + pedido.getComercial().getId() + "')";
-        db.execSQL(sql);
-        int id_pedido;
-        Cursor c = db.rawQuery("SELECT last_insert_rowid()", null);
-        id_pedido = c.getInt(0);
+        long id_pedido;
+
+        //valores de los inserts (values en sql)
+        ContentValues values = new ContentValues();
+        values.put("fecha", pedido.getFecha());
+        values.put("id_partner", pedido.getPartner().getId());
+        values.put("id_comercial", pedido.getComercial().getId());
+
+        id_pedido = db.insert("PEDIDOS", null, values);
+
         for (Linea linea : pedido.getLineas()){
-
             insert(linea,id_pedido, db);
-
         }
     }
 
-
-
-
-    public void insert(Linea linea, int  id_pedido, SQLiteDatabase db){
+    public void insert(Linea linea, long id_pedido, SQLiteDatabase db){
         String sql= "INSERT INTO LINEAS ( id_pedido, cod_producto, cantidad, pr_unidad) values ( " +
                 id_pedido + ", '"  + linea.getProducto().getCod() + "', "  + linea.getCantidad() + ", "  + linea.getProducto().getPr_unidad() + ")";
         db.execSQL(sql);
