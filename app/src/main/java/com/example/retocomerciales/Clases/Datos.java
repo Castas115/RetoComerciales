@@ -8,6 +8,7 @@ package com.example.retocomerciales.Clases;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 import android.util.Log;
@@ -120,6 +121,8 @@ public class Datos {
         }
         escribirPedidoDOM();
         escribirProductoDOM();
+       datos.insert(pedido, db);
+
     }
 
     /**
@@ -512,6 +515,7 @@ public class Datos {
             for (int i = 0; i < list.getLength(); i++) {
                 org.w3c.dom.Element elementosComercial = (org.w3c.dom.Element) list.item(i);
 
+
                 usuario = elementosComercial.getAttribute("usuario");
                 password = elementosComercial.getAttribute("password");
 
@@ -587,6 +591,8 @@ public class Datos {
 
     public SQLiteDatabase getDb() {return db;}
 
+
+
     public void insert(Producto producto, SQLiteDatabase db){
         String sql= "INSERT INTO PRODUCTOS (cod_producto, nombre, descripcion, imagen, existencias, pr_unidad) values ( '"
                 + producto.getCod() + "', '"  + producto.getNombre() + "', '"  + producto.getDescripcion() + "', '"  + producto.getImagen() + "', "  + producto.getExistencias() + ", "  + producto.getPr_unidad() +  " )";
@@ -599,6 +605,39 @@ public class Datos {
         db.execSQL(sql);
     }
 
+    public void insert(Partner partner, SQLiteDatabase db){
+        String sql= "INSERT INTO PARTNERS ( nombre, direccion, cif, telefono, email, id_comercial) values ( '" +
+                partner.getNombre() + "', '"  + partner.getDireccion() + "', '"  + partner.getCIF() + "', '"  + partner.getTelefono() + "', '" +
+                partner.getEmail() + "', '"  + partner.getIdComercial() + "')";
+        db.execSQL(sql);
+    }
+
+    public void insert(Pedido pedido, SQLiteDatabase db){
+        String sql= "INSERT INTO PEDIDOS ( fecha, id_partner, id_comercial) values ( '" +
+                pedido.getFecha() + "', '"  + pedido.getPartner().getId() + "', '"  + pedido.getComercial().getId() + "')";
+        db.execSQL(sql);
+        int id_pedido;
+        Cursor c = db.rawQuery("SELECT last_insert_rowid()", null);
+        id_pedido = c.getInt(0);
+        for (Linea linea : pedido.getLineas()){
+
+            insert(linea,id_pedido, db);
+
+        }
+    }
+
+
+
+
+    public void insert(Linea linea, int  id_pedido, SQLiteDatabase db){
+        String sql= "INSERT INTO LINEAS ( id_pedido, cod_producto, cantidad, pr_unidad) values ( " +
+                id_pedido + ", '"  + linea.getProducto().getCod() + "', "  + linea.getCantidad() + ", "  + linea.getProducto().getPr_unidad() + ")";
+        db.execSQL(sql);
+    }
+
+
+
+
     public void insertAll(SQLiteDatabase db){
         for (Producto producto: productos){
             datos.insert(producto, db);
@@ -607,7 +646,14 @@ public class Datos {
         for (Comercial comercial: comerciales){
             datos.insert(comercial, db);
         }
+
+        for (Partner partner: partners){
+            datos.insert(partner, db);
+        }
+
     }
+
+
 
 
 

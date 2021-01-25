@@ -36,6 +36,7 @@ public class Partner {
     public String getPoblacion() {return Poblacion;}
     public String getTelefono() {return telefono;}
     public String getEmail() {return email;}
+    public String getIdComercial() {return idComercial;}
 
     //convertire el contenido de Partners en un elemento XML
     public Element toElement(Document document) {
