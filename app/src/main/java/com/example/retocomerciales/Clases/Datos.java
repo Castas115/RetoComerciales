@@ -661,16 +661,40 @@ public class Datos {
     }
 
 
-
-
-
-
-//
     public void cargarAssets(){
         this.productos = leeProductos("productos.xml");
         this.partners = leePartners("partners.xml");
         this.comerciales = leeComerciales("comerciales.xml");
     }
 
+    public Producto[] cargarProductosDesdeBD(Context context) {
+        Producto[] listProducto = null;
+        String cod = "", nombre = "", descripcion = "", imagen = "";
+        float pr_unidad = 0f;
+        int existencias = 0;
+        int i = 0;
+        this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM PRODUCTOS ", null);
+        if(c.moveToFirst()){
+            do {
+                cod = c.getString(0);
+                nombre = c.getString(1);
+                try{
+                    descripcion = c.getString(2);
+                }catch(Exception e){
+                    descripcion = "";
+                }
+                imagen = c.getString(3);
+                existencias = c.getInt(4);
+                pr_unidad = c.getFloat(5);
+                //listProducto[i] = new Producto(cod, nombre ,descripcion, imagen, pr_unidad, existencias);
+                i+=1;
+                System.out.println("----------------------------------------------------------------------------");
+                System.out.println(cod + nombre + descripcion +imagen +pr_unidad+ existencias);
+            } while(c.moveToNext());
+        }
+        c.close();
+        return listProducto;
+    }
 
 }
