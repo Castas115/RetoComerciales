@@ -119,9 +119,16 @@ public class Datos {
     public void realizarPedido(){
         for(Producto prod: productos){
             prod.ajustarExistencias();
+            String sql= "UPDATE PRODUCTOS SET EXISTENCIAS = " +prod.getExistencias() + " WHERE COD_PRODUCTO = '"+prod.getCod() + "'";
+                    db.execSQL(sql);
         }
         escribirPedidoDOM();
-        escribirProductoDOM();
+        //escribirProductoDOM();
+
+
+
+
+
        datos.insert(pedido, db);
 
     }
