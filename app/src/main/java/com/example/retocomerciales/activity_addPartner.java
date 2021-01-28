@@ -77,7 +77,7 @@ public class activity_addPartner extends AppCompatActivity {
                 if(!nombrePartner.getText().toString().isEmpty() && !direccionPartner.getText().toString().isEmpty() && !cifPartner.getText().toString().isEmpty() && !poblacionPartner.getText().toString().isEmpty() && !telefonoPartner.getText().toString().isEmpty() && !emailPartner.getText().toString().isEmpty()){
                     int ide = (Integer.parseInt(datos.getPartner(datos.getPartners().length-1).getId()))+1;
                     Partner partner = new Partner(String.valueOf(ide), nombrePartner.getText().toString(), direccionPartner.getText().toString(), cifPartner.getText().toString(), poblacionPartner.getText().toString() ,telefonoPartner.getText().toString(), emailPartner.getText().toString(), datos.getComercial().getId());
-                    //Datos.getInstance().escribirPartnerDOM(partner);
+                    Datos.getInstance().escribirPartnerDOM(partner);
                     Datos.getInstance().insert(partner,datos.getDb());
 
                     Toast toast1 =
