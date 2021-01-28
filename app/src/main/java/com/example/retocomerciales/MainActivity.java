@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         datos.setMainActivityElements(getResources(), getBaseContext());
         datos.cargarAssets();
         if (datos.isDbExist()){
-      //      datos.insertAll(datos.getDb());
+            datos.insertAll(datos.getDb());
         }
 
         final Datos datos2 = datos;
