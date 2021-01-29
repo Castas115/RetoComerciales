@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             datos.cargarAssets();
             datos.insertAll(datos.getDb());
         }else{
-            datos.cargarProductosDesdeBD(getBaseContext());
+            datos.cargarDatosDesdeBD(getBaseContext());
         }
 
         final Datos datos2 = datos;

@@ -667,7 +667,7 @@ public class Datos {
     }
 
     public Producto[] cargarProductosDesdeBD(Context context) {
-        Producto[] listProducto;
+        Producto[] listProducto = null;
         String cod = "", nombre = "", descripcion = "", imagen = "";
         float pr_unidad = 0f;
         int existencias = 0;
@@ -690,12 +690,69 @@ public class Datos {
                 pr_unidad = c.getFloat(5);
                 listProducto[i] = new Producto(cod, nombre ,descripcion, imagen, pr_unidad, existencias);
                 i+=1;
-                System.out.println("----------------------------------------------------------------------------");
-                System.out.println(cod + nombre + descripcion +imagen +pr_unidad+ existencias);
             } while(c.moveToNext());
         }
         c.close();
         return listProducto;
+    }
+
+    public Partner[] cargarPartnersDesdeBD(Context context) {
+        Partner[] listPartner=null;
+        String nombre = "", direccion = "", cif = "", telefono = "", email = "";
+        int id, id_comercial;
+        int i = 0;
+        this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getReadableDatabase();
+
+        Cursor c = db.rawQuery("SELECT * FROM PARTNERS ", null);
+        listPartner = new Partner[c.getCount()];
+        if(c.moveToFirst()){
+            do {
+                id = c.getInt(0);
+                nombre = c.getString(1);
+                direccion = c.getString(2);
+                cif = c.getString(3);
+                telefono = c.getString(4);
+                email = c.getString(5);
+                id_comercial = c.getInt(6);
+                listPartner[i] = new Partner( String.valueOf(id), nombre ,direccion, cif,"" ,telefono, email, String.valueOf(id_comercial));
+                i+=1;
+            } while(c.moveToNext());
+        }
+        c.close();
+        return listPartner;
+    }
+
+    public Comercial[] cargarComercialesDesdeBD(Context context) {
+        Comercial[] listComercial=null;
+        String usuario = "", password= "",nombre= "",apellidos= "",email= "",delegacion= "",telefono_delegacion= "",email_delegacion= "";
+        int i =0, id;
+        this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getReadableDatabase();
+
+        Cursor c = db.rawQuery("SELECT * FROM COMERCIALES ", null);
+        listComercial = new Comercial[c.getCount()];
+        if(c.moveToFirst()){
+            do {
+                id = c.getInt(0);
+                usuario = c.getString(1);
+                password = c.getString(2);
+                nombre = c.getString(3);
+                apellidos = c.getString(4);
+                email = c.getString(5);
+                delegacion = c.getString(6);
+                telefono_delegacion = c.getString(7);
+                email_delegacion = c.getString(8);
+                listComercial[i] = new Comercial(String.valueOf(id),usuario,password,email,nombre,apellidos,delegacion,telefono_delegacion,email_delegacion);
+                i+=1;
+            } while(c.moveToNext());
+        }
+        c.close();
+        return listComercial;
+    }
+
+    public void cargarDatosDesdeBD(Context context){
+        this.productos = cargarProductosDesdeBD(context);
+        this.partners = cargarPartnersDesdeBD(context);
+        this.comerciales = cargarComercialesDesdeBD(context);
     }
 
 
