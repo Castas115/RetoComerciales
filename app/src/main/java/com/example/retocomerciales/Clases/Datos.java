@@ -399,7 +399,6 @@ public class Datos {
 
             File file = new File(XML_FILE_LOCATION_PATH, fileName);
             org.w3c.dom.Document document = builder.parse(new FileInputStream(file));
-            org.w3c.dom.Element root = document.getDocumentElement();
 
             NodeList list = document.getElementsByTagName("producto");
             listProducto = new Producto[list.getLength()];
@@ -668,13 +667,15 @@ public class Datos {
     }
 
     public Producto[] cargarProductosDesdeBD(Context context) {
-        Producto[] listProducto = null;
+        Producto[] listProducto;
         String cod = "", nombre = "", descripcion = "", imagen = "";
         float pr_unidad = 0f;
         int existencias = 0;
         int i = 0;
         this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getReadableDatabase();
+
         Cursor c = db.rawQuery("SELECT * FROM PRODUCTOS ", null);
+        listProducto = new Producto[c.getCount()];
         if(c.moveToFirst()){
             do {
                 cod = c.getString(0);
@@ -687,7 +688,7 @@ public class Datos {
                 imagen = c.getString(3);
                 existencias = c.getInt(4);
                 pr_unidad = c.getFloat(5);
-                //listProducto[i] = new Producto(cod, nombre ,descripcion, imagen, pr_unidad, existencias);
+                listProducto[i] = new Producto(cod, nombre ,descripcion, imagen, pr_unidad, existencias);
                 i+=1;
                 System.out.println("----------------------------------------------------------------------------");
                 System.out.println(cod + nombre + descripcion +imagen +pr_unidad+ existencias);
@@ -696,5 +697,6 @@ public class Datos {
         c.close();
         return listProducto;
     }
+
 
 }

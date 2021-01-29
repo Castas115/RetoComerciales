@@ -69,12 +69,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Datos datos = Datos.getInstance();
         datos.setMainActivityElements(getResources(), getBaseContext());
 
-       datos.cargarAssets();
         if (datos.isDbExist()){
+            datos.cargarAssets();
             datos.insertAll(datos.getDb());
+        }else{
+            datos.cargarProductosDesdeBD(getBaseContext());
         }
-
-       //datos.cargarProductosDesdeBD(getBaseContext());
 
         final Datos datos2 = datos;
         //Spinner Comerciales
