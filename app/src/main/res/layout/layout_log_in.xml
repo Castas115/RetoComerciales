@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity_LogIn" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_logoPistacho2"
+            android:layout_width="126dp"
+            android:layout_height="135dp"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/pinguino" />
+
+        <TextView
+            android:id="@+id/lbl_logIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/lbl_logIn"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/img_logoPistacho2"
+            app:layout_constraintStart_toStartOf="@+id/img_logoPistacho2"
+            app:layout_constraintTop_toBottomOf="@+id/img_logoPistacho2" />
+
+        <EditText
+            android:id="@+id/txt_user"
+            android:layout_width="243dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="30dp"
+            android:ems="10"
+            android:hint="Usuario"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbl_logIn" />
+
+        <EditText
+            android:id="@+id/txt_contrasena"
+            android:layout_width="247dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="@+id/txt_user"
+            app:layout_constraintStart_toStartOf="@+id/txt_user"
+            app:layout_constraintTop_toBottomOf="@+id/txt_user" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="317dp"
+            android:layout_height="53dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/btn_logIn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

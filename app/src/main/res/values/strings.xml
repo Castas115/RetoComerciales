@@ -5,6 +5,11 @@
     <string name="btn_volver">Volver</string>
     <string name="btn_siguiente">Siguiente</string>
 
+
+    <!-- Log In -->
+    <string name="lbl_logIn">Iniciar Sesión</string>
+    <string name="btn_logIn">Log In</string>
+
     <!-- principal -->
 
     <string name="btn_iniciar">Iniciar</string>

@@ -202,6 +202,7 @@ public class Datos {
         }
         return null;
     }
+    public Comercial[] getComerciales() {return comerciales;}
 
     //devolver lista de strings con los nombres de cada lista (comerciales, partners y productos)
     public String[] getNombresPartners() {

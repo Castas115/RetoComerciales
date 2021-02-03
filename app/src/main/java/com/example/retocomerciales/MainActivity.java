@@ -33,10 +33,9 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    Button _iniciar,llamar,correo;
+    Button _iniciar, llamar, correo;
     Intent intent;
     private GoogleMap mMap;
-    Spinner spComercial;
     String telf, emailDelegacion;
     TextView nomDelegacion;
 
@@ -59,45 +58,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             e.printStackTrace();
         }
 
-        _iniciar=findViewById(R.id.btn_iniciar);
+        _iniciar = findViewById(R.id.btn_iniciar);
         llamar = findViewById(R.id.btnLlamar);
         correo = findViewById(R.id.btnCorreo);
-        spComercial = findViewById(R.id.spn_eligeComercial);
         nomDelegacion = findViewById(R.id.lbl_nomDelegacion);
 
         //cargar los datos necesarios para la clase Datos
         Datos datos = Datos.getInstance();
-        datos.setMainActivityElements(getResources(), getBaseContext());
 
-        if (datos.isDbExist()){
+
+        if (datos.isDbExist()) {
             datos.cargarAssets();
             datos.insertAll(datos.getDb());
-        }else{
+        } else {
             datos.cargarDatosDesdeBD(getBaseContext());
         }
 
-        final Datos datos2 = datos;
-        //Spinner Comerciales
-        final ArrayAdapter adapterComerciales = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos.getNombresComerciales());
-        adapterComerciales.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spComercial.setAdapter(adapterComerciales);
+        //cargar datos del comercial elegido
 
-        spComercial.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                datos2.setPosComercial(position);
-
-                nomDelegacion.setText("Delegación provincial " + datos2.getComercial(position).getDelegacion());
-                emailDelegacion = datos2.getComercial(position).getEmailDelegacion();
-                telf = datos2.getComercial(position).getTelefonoDelegacion();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+        nomDelegacion.setText("Delegación provincial " + datos.getComercial().getDelegacion());
+        emailDelegacion = datos.getComercial().getEmailDelegacion();
+        telf = datos.getComercial().getTelefonoDelegacion();
 
         //llamada
         llamar.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             startActivity(intent);
         }
     }
- ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private void checkExternalStoragePermission() throws IOException {
         int permissionCheck = ContextCompat.checkSelfPermission(
