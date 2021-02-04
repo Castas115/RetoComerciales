@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.retocomerciales.Clases.Comercial;
+import com.example.retocomerciales.Clases.DBJustCreated;
 import com.example.retocomerciales.Clases.Datos;
 
 public class Activity_LogIn extends AppCompatActivity {
@@ -34,7 +35,7 @@ public class Activity_LogIn extends AppCompatActivity {
             datos.cargarAssets();
             datos.insertAll(datos.getDb());
         }else{
-            datos.cargarDatosDesdeBD(getBaseContext());
+            datos.cargarDatosDesdeBD();
         }
 
         logIn.setOnClickListener(new View.OnClickListener() {
