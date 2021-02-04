@@ -42,6 +42,7 @@ public class Activity_LogIn extends AppCompatActivity {
             datos.setPosComercial(datos.loggedUser());
             Intent intent = new Intent(Activity_LogIn.this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
 
         logIn.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +76,7 @@ public class Activity_LogIn extends AppCompatActivity {
 
             Intent intent = new Intent(Activity_LogIn.this, MainActivity.class);
             startActivity(intent);
+            finish();
         }else{
             Toast.makeText(getApplicationContext(), "Usuario y/o contraseña erróneos", Toast.LENGTH_SHORT).show();
         }

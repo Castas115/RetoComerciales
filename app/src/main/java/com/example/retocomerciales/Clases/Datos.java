@@ -117,7 +117,7 @@ public class Datos {
                     db.execSQL(sql);
         }
         escribirPedidoDOM();
-        //escribirProductoDOM();
+        escribirProductoDOM();
 
 
 
@@ -679,10 +679,11 @@ public class Datos {
         String sql= "UPDATE COMERCIALES SET loggeado = 1 where id = " + Integer.parseInt(id);
         db.execSQL(sql);
     }
-    public void logoutUser(String id){
-        String sql= "UPDATE COMERCIALES SET loggeado = 0 where id = " + Integer.parseInt(id);
+    public void logoutUser(){
+        String sql= "UPDATE COMERCIALES SET loggeado = 0 where loggeado = 1";
         db.execSQL(sql);
     }
+
 
 
     public void cargarAssets(){

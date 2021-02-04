@@ -33,11 +33,11 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    Button _iniciar, llamar, correo;
+    Button _iniciar, llamar, correo, cerrarSesion;
     Intent intent;
     private GoogleMap mMap;
     String telf, emailDelegacion;
-    TextView nomDelegacion;
+    TextView nomDelegacion,nomComercial;
 
     //permisos de almacenamiento
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -62,14 +62,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         llamar = findViewById(R.id.btnLlamar);
         correo = findViewById(R.id.btnCorreo);
         nomDelegacion = findViewById(R.id.lbl_nomDelegacion);
+        cerrarSesion = findViewById(R.id.btnCerrarSesion);
+        nomComercial = findViewById(R.id.lblNombreComercial);
 
         //cargar los datos necesarios para la clase Datos
-        Datos datos = Datos.getInstance();
+        final Datos datos = Datos.getInstance();
 
         //cargar datos del comercial elegido
+        nomComercial.setText("Bienvenido " + datos.getComercial().getNombre());
         nomDelegacion.setText("Delegación provincial " + datos.getComercial().getDelegacion());
         emailDelegacion = datos.getComercial().getEmailDelegacion();
         telf = datos.getComercial().getTelefonoDelegacion();
+
+        cerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datos.logoutUser();
+                Intent intent = new Intent( MainActivity.this, Activity_LogIn.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         //llamada
         llamar.setOnClickListener(new View.OnClickListener() {

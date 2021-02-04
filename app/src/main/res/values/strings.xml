@@ -73,6 +73,7 @@
     <string name="lbl_fecha">Pedido a fecha de   </string>
     <string name="realizar_pedido">Realizar Pedido</string>
     <string name="gestion_de_partners">Gestion de Partners</string>
+    <string name="cerrar_sesion">Cerrar Sesion</string>
 
 
 </resources>
