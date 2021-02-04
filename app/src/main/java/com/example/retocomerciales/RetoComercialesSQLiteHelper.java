@@ -4,8 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.retocomerciales.Clases.DBJustCreated;
 import com.example.retocomerciales.Clases.Datos;
+import com.example.retocomerciales.Clases.Producto;
 
 public class RetoComercialesSQLiteHelper extends SQLiteOpenHelper {
 
@@ -32,7 +32,7 @@ public class RetoComercialesSQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(sqlPartners);
         db.execSQL(sqlPedidos);
         db.execSQL(sqlProductos);
-        DBJustCreated.getInstance().dbJustCreated();
+        Datos.getInstance().crearDB();
     }
 
     @Override
