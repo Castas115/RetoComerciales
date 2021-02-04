@@ -32,7 +32,6 @@
 
 
         <activity android:name=".Activity_LogIn">
-            android:label="@string/title_activity_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,7 +39,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity">
+            android:label="@string/title_activity_maps">
+        </activity>
         <activity android:name=".activity_envios" />
         <activity android:name=".activity_calendario" />
         <activity android:name=".activity_pedido3" />

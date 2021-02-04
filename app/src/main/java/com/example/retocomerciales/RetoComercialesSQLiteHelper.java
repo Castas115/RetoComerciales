@@ -4,13 +4,13 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.retocomerciales.Clases.DBJustCreated;
 import com.example.retocomerciales.Clases.Datos;
-import com.example.retocomerciales.Clases.Producto;
 
 public class RetoComercialesSQLiteHelper extends SQLiteOpenHelper {
 
     //Sentencia SQL para crear las tablas
-    String sqlComerciales = "CREATE TABLE COMERCIALES (id INTEGER PRIMARY KEY AUTOINCREMENT,usuario TEXT, password TEXT, nombre TEXT, apellidos TEXT,email TEXT,delegacion TEXT, telefono_delegacion TEXT, email_delegacion TEXT )";
+    String sqlComerciales = "CREATE TABLE COMERCIALES (id INTEGER PRIMARY KEY AUTOINCREMENT,usuario TEXT, password TEXT, nombre TEXT, apellidos TEXT,email TEXT,delegacion TEXT, telefono_delegacion TEXT, email_delegacion TEXT, loggeado INTEGER DEFAULT 0)";
 
     String sqlLineas = "CREATE TABLE LINEAS (id_pedido INTEGER, cod_producto TEXT, cantidad INTEGER, pr_unidad DECIMAL(10,2), PRIMARY KEY (id_pedido,cod_producto), FOREIGN KEY (cod_producto) REFERENCES PRODUCTOS(cod_productos))";
 
@@ -32,7 +32,7 @@ public class RetoComercialesSQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(sqlPartners);
         db.execSQL(sqlPedidos);
         db.execSQL(sqlProductos);
-        Datos.getInstance().crearDB();
+        DBJustCreated.getInstance().dbJustCreated();
     }
 
     @Override

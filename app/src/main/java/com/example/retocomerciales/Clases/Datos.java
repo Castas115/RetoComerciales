@@ -51,14 +51,15 @@ public class Datos {
     private Pedido pedido;                  //El pedido que se esté produciendo
     private int posComercial, posPartner;   //la posición del comercial y el partner en su respectivo array. Se inicializa en cada spinner que se modifique.
     private static Resources resources;     //para poder acceder a resources y cargar los xmls al instalar la aplicación.
+    private Context context;
     private File XML_FILE_LOCATION_PATH;    //carpeta de la memoria interna del movil.
     private SQLiteDatabase db;
-    private boolean dbExist = false;
 
     private Datos(){}
 
     public void setMainActivityElements(Resources resources, Context context) {
         this.resources = resources;
+        this.context = context;
 
         //RetoComercialesSQLiteHelper dbh = ;
         this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getWritableDatabase();
@@ -79,13 +80,6 @@ public class Datos {
         }
         return datos;
     }
-
-    public void crearDB(){
-        datos = new Datos();
-        this.dbExist = true;
-    }
-
-    public boolean isDbExist() {return dbExist;}
 
     //Dato posComercial
     public int getPosComercial() {
@@ -595,10 +589,30 @@ public class Datos {
         return listPedidos;
     }
 
+    //select
+
+    public int loggedUser(){
+        int pos = -1;
+        this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getWritableDatabase();
+        String sql= "SELECT * FROM COMERCIALES WHERE LOGGEADO = 1";
+        Cursor c = db.rawQuery(sql, null);
+
+        if(c.moveToFirst()){
+            c = db.rawQuery("SELECT * FROM COMERCIALES", null);
+            c.moveToFirst();
+            do{
+                pos++;
+                if(c.getInt(9) == 1){
+                    break;
+                }
+            }while (c.moveToNext());
+        }
+        return pos;
+    }
+
     //inserts
 
     public SQLiteDatabase getDb() {return db;}
-
 
 
     public void insert(Producto producto, SQLiteDatabase db){
@@ -660,6 +674,16 @@ public class Datos {
 
     }
 
+    //UPDATE
+    public void logginUser(String id){
+        String sql= "UPDATE COMERCIALES SET loggeado = 1 where id = " + Integer.parseInt(id);
+        db.execSQL(sql);
+    }
+    public void logoutUser(String id){
+        String sql= "UPDATE COMERCIALES SET loggeado = 0 where id = " + Integer.parseInt(id);
+        db.execSQL(sql);
+    }
+
 
     public void cargarAssets(){
         this.productos = leeProductos("productos.xml");
@@ -667,7 +691,7 @@ public class Datos {
         this.comerciales = leeComerciales("comerciales.xml");
     }
 
-    public Producto[] cargarProductosDesdeBD(Context context) {
+    public Producto[] cargarProductosDesdeBD() {
         Producto[] listProducto = null;
         String cod = "", nombre = "", descripcion = "", imagen = "";
         float pr_unidad = 0f;
@@ -697,7 +721,7 @@ public class Datos {
         return listProducto;
     }
 
-    public Partner[] cargarPartnersDesdeBD(Context context) {
+    public Partner[] cargarPartnersDesdeBD() {
         Partner[] listPartner=null;
         String nombre = "", direccion = "", cif = "", telefono = "", email = "";
         int id, id_comercial;
@@ -723,7 +747,7 @@ public class Datos {
         return listPartner;
     }
 
-    public Comercial[] cargarComercialesDesdeBD(Context context) {
+    public Comercial[] cargarComercialesDesdeBD() {
         Comercial[] listComercial=null;
         String usuario = "", password= "",nombre= "",apellidos= "",email= "",delegacion= "",telefono_delegacion= "",email_delegacion= "";
         int i =0, id;
@@ -750,10 +774,10 @@ public class Datos {
         return listComercial;
     }
 
-    public void cargarDatosDesdeBD(Context context){
-        this.productos = cargarProductosDesdeBD(context);
-        this.partners = cargarPartnersDesdeBD(context);
-        this.comerciales = cargarComercialesDesdeBD(context);
+    public void cargarDatosDesdeBD(){
+        this.productos = cargarProductosDesdeBD();
+        this.partners = cargarPartnersDesdeBD();
+        this.comerciales = cargarComercialesDesdeBD();
     }
 
 

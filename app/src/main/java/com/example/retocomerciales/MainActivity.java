@@ -66,16 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         //cargar los datos necesarios para la clase Datos
         Datos datos = Datos.getInstance();
 
-
-        if (datos.isDbExist()) {
-            datos.cargarAssets();
-            datos.insertAll(datos.getDb());
-        } else {
-            datos.cargarDatosDesdeBD(getBaseContext());
-        }
-
         //cargar datos del comercial elegido
-
         nomDelegacion.setText("Delegación provincial " + datos.getComercial().getDelegacion());
         emailDelegacion = datos.getComercial().getEmailDelegacion();
         telf = datos.getComercial().getTelefonoDelegacion();

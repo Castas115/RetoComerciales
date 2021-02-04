@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.retocomerciales.Clases.Comercial;
+import com.example.retocomerciales.Clases.DBJustCreated;
 import com.example.retocomerciales.Clases.Datos;
 
 public class Activity_LogIn extends AppCompatActivity {
@@ -28,12 +29,21 @@ public class Activity_LogIn extends AppCompatActivity {
         logIn = findViewById(R.id.btn_login);
 
         datos = Datos.getInstance();
+        datos.setMainActivityElements(getResources(), getBaseContext());
 
-        if (datos.isDbExist()){
+        if (DBJustCreated.getInstance().isDbJustCreated()){
             datos.cargarAssets();
             datos.insertAll(datos.getDb());
+            datos.cargarDatosDesdeBD();
         }else{
-            datos.cargarDatosDesdeBD(getBaseContext());
+            datos.cargarDatosDesdeBD();
+            int posUser = datos.loggedUser();
+            if (posUser >= 0){
+                datos.setPosComercial(posUser);
+                Intent intent = new Intent(Activity_LogIn.this, MainActivity.class);
+                startActivity(intent);
+            }
+
         }
 
         logIn.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +67,7 @@ public class Activity_LogIn extends AppCompatActivity {
 
             if(comercial.getUsuario().equals(_user) && comercial.getPassword().equals(_password)){
                 existe = true;
+                datos.logginUser(comercial.getId());
                 break;
             }
             pos++;
