@@ -31,11 +31,18 @@ public class Activity_LogIn extends AppCompatActivity {
         datos = Datos.getInstance();
         datos.setMainActivityElements(getResources(), getBaseContext());
 
+
         if (DBJustCreated.getInstance().isDbJustCreated()){
             datos.cargarAssets();
             datos.insertAll(datos.getDb());
         }else{
             datos.cargarDatosDesdeBD();
+        }
+
+        if (datos.loggedUser() >= 0){
+            datos.setPosComercial(datos.loggedUser());
+            Intent intent = new Intent(Activity_LogIn.this, MainActivity.class);
+            startActivity(intent);
         }
 
         logIn.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +66,7 @@ public class Activity_LogIn extends AppCompatActivity {
 
             if(comercial.getUsuario().equals(_user) && comercial.getPassword().equals(_password)){
                 existe = true;
+                datos.logginUser(comercial.getId());
                 break;
             }
             pos++;
