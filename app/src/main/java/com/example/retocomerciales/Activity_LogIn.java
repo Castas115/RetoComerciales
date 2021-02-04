@@ -31,7 +31,6 @@ public class Activity_LogIn extends AppCompatActivity {
         datos = Datos.getInstance();
         datos.setMainActivityElements(getResources(), getBaseContext());
 
-
         if (DBJustCreated.getInstance().isDbJustCreated()){
             datos.cargarAssets();
             datos.insertAll(datos.getDb());

@@ -780,5 +780,4 @@ public class Datos {
         this.comerciales = cargarComercialesDesdeBD();
     }
 
-
 }
