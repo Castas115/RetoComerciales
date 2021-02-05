@@ -116,12 +116,8 @@ public class Datos {
             String sql= "UPDATE PRODUCTOS SET EXISTENCIAS = " +prod.getExistencias() + " WHERE COD_PRODUCTO = '"+prod.getCod() + "'";
                     db.execSQL(sql);
         }
-        escribirPedidoDOM();
-        escribirProductoDOM();
-
-
-
-
+        //escribirPedidoDOM();
+        //escribirProductoDOM();
 
        datos.insert(pedido, db);
 
@@ -243,7 +239,7 @@ public class Datos {
         }
     }
 
-    public void escribirPartnerDOM(Partner partner) {
+    /*public void escribirPartnerDOM(Partner partner) {
         escribirNewPartnerDOM(partner);
         //añadir nuevo partner
         Partner[] newPartners = new Partner[partners.length + 1];
@@ -282,9 +278,8 @@ public class Datos {
             e.printStackTrace();
             Log.e("Datos class error", "Error a la hora de escribir a un archvo XML");
         }
-    }
-
-    private void escribirNewPartnerDOM(Partner partner) {
+    }*/
+    public void escribirNewPartnerDOM(Partner partner) {
        try {
             //generar el nuevo documento
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -318,7 +313,7 @@ public class Datos {
         }
     }
 
-    private void escribirPedidoDOM(){
+    /*private void escribirPedidoDOM(){
         try {
             //generar el nuevo documento
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -350,9 +345,8 @@ public class Datos {
         catch (Exception e) {
             System.err.println("ERROR");
         }
-    }
-
-    private void escribirProductoDOM(){
+    }*/
+    /*private void escribirProductoDOM(){
         try {
             //generar el nuevo documento
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -383,7 +377,7 @@ public class Datos {
             e.printStackTrace();
             Log.e("Datos class error", "Error a la hora de escribir a un archvo XML");
         }
-    }
+    }*/
 
     private Producto[] leeProductos(String fileName) {
         Producto[] listProducto = null;
@@ -451,7 +445,7 @@ public class Datos {
     private Partner[] leePartners(String fileName){
         Partner[] listPartners = null;
 
-        
+
 
         try {
             DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
@@ -543,7 +537,7 @@ public class Datos {
         return listComercial;
     }
 
-    private Pedido[] leePedidos(String fileName) {
+    /*private Pedido[] leePedidos(String fileName) {
         Pedido[] listPedidos = null;
 
         try {
@@ -587,7 +581,7 @@ public class Datos {
             System.out.println("Error");
         }
         return listPedidos;
-    }
+    }*/
 
     //select
 
@@ -693,8 +687,8 @@ public class Datos {
     }
 
     public Producto[] cargarProductosDesdeBD() {
-        Producto[] listProducto = null;
-        String cod = "", nombre = "", descripcion = "", imagen = "";
+        Producto[] listProducto ;
+        String cod, nombre, descripcion, imagen;
         float pr_unidad = 0f;
         int existencias = 0;
         int i = 0;
@@ -723,8 +717,8 @@ public class Datos {
     }
 
     public Partner[] cargarPartnersDesdeBD() {
-        Partner[] listPartner=null;
-        String nombre = "", direccion = "", cif = "", telefono = "", email = "";
+        Partner[] listPartner;
+        String nombre, direccion, cif, telefono, email;
         int id, id_comercial;
         int i = 0;
         this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getReadableDatabase();
@@ -749,8 +743,8 @@ public class Datos {
     }
 
     public Comercial[] cargarComercialesDesdeBD() {
-        Comercial[] listComercial=null;
-        String usuario = "", password= "",nombre= "",apellidos= "",email= "",delegacion= "",telefono_delegacion= "",email_delegacion= "";
+        Comercial[] listComercial;
+        String usuario, password, nombre, apellidos, email, delegacion, telefono_delegacion, email_delegacion;
         int i =0, id;
         this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getReadableDatabase();
 
