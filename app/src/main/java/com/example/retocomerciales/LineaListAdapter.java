@@ -83,7 +83,7 @@ public class LineaListAdapter extends ArrayAdapter<Linea> {
 
         formatoDecimal = new DecimalFormat("0.00");
         formatoDecimal.setRoundingMode(RoundingMode.DOWN);
-        prTotalProd.setText(formatoDecimal.format(linea.getPr_total()) + " €");
+        prTotalProd.setText(formatoDecimal.format(Double.parseDouble(formatoDecimal.format( linea.getPr_unidad() * (double) linea.getCantidad()))) + " €");
 
         return convertView;
 

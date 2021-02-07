@@ -10,7 +10,7 @@ import java.text.DecimalFormatSymbols;
 public class Linea {
     private Producto producto;
     private int cantidad;
-    private double pr_total;
+    private double pr_unidad;
     private static DecimalFormat formatoDecimal;
 
     //constructor (el precio total se calcula con el precio_unidad del producto y la cantidad
@@ -23,18 +23,17 @@ public class Linea {
 
         this.producto = producto;
         this.cantidad = cantidad;
-        this.pr_total = Double.parseDouble(formatoDecimal.format( producto.getPr_unidad() * (double) cantidad));
+        this.pr_unidad = producto.getPr_unidad();
     }
 
     //Getter
     public Producto getProducto() {return producto;}
     public int getCantidad() {return cantidad;}
-    public double getPr_total() {return pr_total;}
+    public double getPr_unidad() {return pr_unidad;}
 
     //Setter de la cantidad (actualiza el precio)
     public void setCantidad(int cantidad){
         this.cantidad = cantidad;
-        this.pr_total = Double.parseDouble(formatoDecimal.format( producto.getPr_unidad() * (double) cantidad));
     }
 
     //para pruebas
@@ -44,6 +43,6 @@ public class Linea {
         System.out.println(" - nomProd: " + this.producto.getNombre());
         System.out.println(" - Pr unidad: " + this.producto.getPr_unidad());
         System.out.println(" - cantidad: " + this.cantidad);
-        System.out.println(" - Pr total: " + this.pr_total);
+        System.out.println(" - Pr total: " + Double.parseDouble(formatoDecimal.format( this.pr_unidad * (double) cantidad)));
     }
 }

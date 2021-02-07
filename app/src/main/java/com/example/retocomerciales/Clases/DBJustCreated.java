@@ -14,5 +14,5 @@ public class DBJustCreated {
     }
 
     public boolean isDbJustCreated() {return dbJustCreated;}
-    public void dbJustCreated(){ dbJustCreated = true;}
+    public void setDbJustCreated(boolean justCreated){ dbJustCreated = justCreated;}
 }

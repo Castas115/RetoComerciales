@@ -44,7 +44,7 @@ public class Pedido  {
             elements.add(document.createElement("linea"));
             elements.get(i).setAttribute("cantidad", String.valueOf(lineas.get(i-1).getCantidad()));
             elements.get(i).setAttribute("codArticulo", lineas.get(i-1).getProducto().getCod());
-            elements.get(i).setAttribute("precioLinea", String.valueOf(lineas.get(i-1).getPr_total()));
+            elements.get(i).setAttribute("precioLinea", String.valueOf(lineas.get(i-1).getPr_unidad()));
             elements.get(i).setAttribute("precioUnidad", String.valueOf(lineas.get(i-1).getProducto().getPr_unidad()));
 
             elements.get(0).appendChild(elements.get(i));

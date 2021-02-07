@@ -3,6 +3,7 @@ package com.example.retocomerciales;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.TextView;
 
 import com.example.retocomerciales.Clases.DBJustCreated;
 import com.example.retocomerciales.Clases.Datos;
@@ -33,7 +34,7 @@ public class RetoComercialesSQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(sqlPartners);
         db.execSQL(sqlPedidos);
         db.execSQL(sqlProductos);
-        DBJustCreated.getInstance().dbJustCreated();
+        DBJustCreated.getInstance().setDbJustCreated(true);
     }
 
     @Override
