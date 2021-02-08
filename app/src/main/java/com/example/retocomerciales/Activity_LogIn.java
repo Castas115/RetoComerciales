@@ -68,13 +68,12 @@ public class Activity_LogIn extends AppCompatActivity {
             if(comercial.getUsuario().equals(_user) && comercial.getPassword().equals(_password)){
                 existe = true;
                 datos.logginUser(comercial.getId());
+                datos.setPosComercial(pos);
                 break;
             }
             pos++;
         }
         if (existe){
-            datos.setPosComercial(pos);
-
             Intent intent = new Intent(Activity_LogIn.this, MainActivity.class);
             startActivity(intent);
             finish();
