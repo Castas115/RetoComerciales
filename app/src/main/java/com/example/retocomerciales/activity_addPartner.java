@@ -1,5 +1,6 @@
 package com.example.retocomerciales;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.retocomerciales.Clases.Datos;
 import com.example.retocomerciales.Clases.Partner;
+
+import java.util.Objects;
 
 public class activity_addPartner extends AppCompatActivity {
 
@@ -72,12 +75,14 @@ public class activity_addPartner extends AppCompatActivity {
                     Datos.getInstance().insert(partner,datos.getDb());
                     Datos.getInstance().addPartner(partner);
 
-
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
                                     "Añadido", Toast.LENGTH_SHORT);
                     toast1.show();
 
+
+                    Intent intent = new Intent(activity_addPartner.this, activity_gestionPartner.class);
+                    startActivityForResult(intent, 123);
                     finish();
 
                 }else{
@@ -100,9 +105,5 @@ public class activity_addPartner extends AppCompatActivity {
                 finish();
             }
         });
-
-
     }
-
-
 }

@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.retocomerciales.Clases.Datos;
 
+import java.util.Objects;
+
 public class activity_gestionPartner extends AppCompatActivity {
 
 
@@ -21,7 +23,6 @@ public class activity_gestionPartner extends AppCompatActivity {
     Spinner spnGestionPartners;
     Datos datos;
     TextView tbnombre , tbdireccion, tbpoblacion, tbcif, tbtlfn, tbemail;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +74,8 @@ public class activity_gestionPartner extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intent = new Intent(activity_gestionPartner.this, activity_addPartner.class);
-                startActivity(intent);
+                startActivityForResult(intent, 123);
+                finish();
             }
         });
 
