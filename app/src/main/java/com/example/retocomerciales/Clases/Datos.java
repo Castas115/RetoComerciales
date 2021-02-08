@@ -12,6 +12,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
+import android.provider.Telephony;
 import android.util.Log;
 
 import com.example.retocomerciales.RetoComercialesSQLiteHelper;
@@ -47,9 +48,9 @@ public class Datos {
     //atributos:
     private Producto[] productos;           //Array de los productos. se carga del xml
     private Partner[] partners;             //Array de los partners. se carga del xml
-    private Comercial[] comerciales;        //Array de los comerciales. se carga del xml
+    private Comercial comercial;
     private Pedido pedido;                  //El pedido que se esté produciendo
-    private int posComercial, posPartner;   //la posición del comercial y el partner en su respectivo array. Se inicializa en cada spinner que se modifique.
+    private int posPartner;   //la posición del partner en su respectivo array. Se inicializa en cada spinner que se modifique.
     private static Resources resources;     //para poder acceder a resources y cargar los xmls al instalar la aplicación.
     private Context context;
     private File XML_FILE_LOCATION_PATH;    //carpeta de la memoria interna del movil.
@@ -60,8 +61,6 @@ public class Datos {
     public void setMainActivityElements(Resources resources, Context context) {
         this.resources = resources;
         this.context = context;
-
-        //RetoComercialesSQLiteHelper dbh = ;
         this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getWritableDatabase();
 
         this.XML_FILE_LOCATION_PATH = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
@@ -82,13 +81,14 @@ public class Datos {
     }
 
     //Dato posComercial
-    public int getPosComercial() {
+    /*public int getPosComercial() {
         return this.posComercial;
     }
 
     public void setPosComercial(int posComercial) {
         this.posComercial = posComercial;
     }
+*/
 
     //Dato posPartner
     public int getPosPartner() {
@@ -172,11 +172,26 @@ public class Datos {
         return null;
     }
 
-    /**
-     * métodos para comerciales
-     */
+    public void addPartner(Partner partner){
+        Partner[] _partners = new Partner[partners.length + 1];
+        for (int i = 0; i < partners.length; i++){
+            _partners[i] = partners[i];
+        }
+        _partners[_partners.length - 1] = partner;
+        partners = _partners;
+    }
 
-    public Comercial getComercial(int pos) {
+    //métodos para comerciales
+
+
+    public Comercial getComercial(){return comercial;}
+    public void setComercial(int id){this.comercial = selectComercial(id);}
+
+
+    public void setComercial(Comercial comercial) {
+        this.comercial = comercial;
+    }
+    /*public Comercial getComercial(int pos) {
         return comerciales[pos];
     }
 
@@ -193,6 +208,7 @@ public class Datos {
         return null;
     }
     public Comercial[] getComerciales() {return comerciales;}
+*/
 
     //devolver lista de strings con los nombres de cada lista (comerciales, partners y productos)
     public String[] getNombresPartners() {
@@ -209,15 +225,6 @@ public class Datos {
 
         for (int i = 0; i < this.productos.length; i++) {
             nombres[i] = this.productos[i].getNombre();
-        }
-        return nombres;
-    }
-
-    public String[] getNombresComerciales() {
-        String[] nombres = new String[this.comerciales.length];
-
-        for (int i = 0; i < this.comerciales.length; i++) {
-            nombres[i] = this.comerciales[i].getNombre() + " " + this.comerciales[i].getApellidos();
         }
         return nombres;
     }
@@ -445,8 +452,6 @@ public class Datos {
     private Partner[] leePartners(String fileName){
         Partner[] listPartners = null;
 
-
-
         try {
             DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -490,8 +495,7 @@ public class Datos {
         return listPartners;
     }
 
-    private Comercial[] leeComerciales(String fileName) {
-        Comercial[] listComercial = null;
+    private void leeComerciales(String fileName) {
 
         try {
 
@@ -504,9 +508,8 @@ public class Datos {
 
 
             NodeList list = document.getElementsByTagName("comercial");
-            listComercial = new Comercial[list.getLength()];
 
-            String  usuario = "", password = "" , email= "", nombre = "", apellidos = "", delegacion = "", telefono = "", emailDelegacion = "";
+            String  usuario, password , email, nombre, apellidos, delegacion, telefono, emailDelegacion;
 
             for (int i = 0; i < list.getLength(); i++) {
                 org.w3c.dom.Element elementosComercial = (org.w3c.dom.Element) list.item(i);
@@ -529,12 +532,11 @@ public class Datos {
                 Node nEmailDelegacion = elementosComercial.getElementsByTagName("emailDelegacion").item(0).getFirstChild();
                 emailDelegacion = nEmailDelegacion.getNodeValue();
 
-                listComercial[i] = new Comercial(String.valueOf(i+1), usuario, password, email, nombre, apellidos, delegacion, telefono, emailDelegacion);
+                insert(new Comercial(String.valueOf(i+1), usuario, password, email, nombre, apellidos, delegacion, telefono, emailDelegacion), getDb());
             }
         }catch (Exception e){
             System.out.println("Error");
         }
-        return listComercial;
     }
 
     /*private Pedido[] leePedidos(String fileName) {
@@ -586,7 +588,7 @@ public class Datos {
     //select
 
     public int loggedUser(){
-        int pos = -1;
+        int id = -1;
         this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getWritableDatabase();
         String sql= "SELECT * FROM COMERCIALES WHERE LOGGEADO = 1";
         Cursor c = db.rawQuery(sql, null);
@@ -595,13 +597,44 @@ public class Datos {
             c = db.rawQuery("SELECT * FROM COMERCIALES", null);
             c.moveToFirst();
             do{
-                pos++;
                 if(c.getInt(9) == 1){
+                    id = c.getInt(0);
                     break;
                 }
             }while (c.moveToNext());
         }
-        return pos;
+        return id;
+    }
+
+    public String[][] selectNombresComerciales(){
+        String[][] nombresComerciales = null;
+
+        this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getWritableDatabase();
+        String sql= "SELECT * FROM COMERCIALES";
+        Cursor c = db.rawQuery(sql, null);
+        nombresComerciales = new String[2][c.getCount()];
+        if(c.moveToFirst()){
+            int i = 0;
+            do{
+                nombresComerciales[0][i] = String.valueOf(c.getInt(0));
+                nombresComerciales[1][i] = c.getString(3);
+                i++;
+            }while (c.moveToNext());
+        }
+        return nombresComerciales;
+    }
+
+    public Comercial selectComercial(int id){
+        Comercial comercial = null;
+
+        this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getWritableDatabase();
+        String sql= "SELECT * FROM COMERCIALES WHERE id = " + id;
+        Cursor c = db.rawQuery(sql, null);
+        if(c.moveToFirst()){
+                comercial = new Comercial(String.valueOf(c.getInt(0)), c.getString(1), c.getString(2), c.getString(5),
+                        c.getString(3), c.getString(4), c.getString(6), c.getString(7), c.getString(8));
+        }
+        return comercial;
     }
 
     //inserts
@@ -657,10 +690,10 @@ public class Datos {
         for (Producto producto: productos){
             datos.insert(producto, db);
         }
-
+/*
         for (Comercial comercial: comerciales){
             datos.insert(comercial, db);
-        }
+        }*/
 
         for (Partner partner: partners){
             datos.insert(partner, db);
@@ -669,9 +702,23 @@ public class Datos {
     }
 
     //UPDATE
-    public void logginUser(String id){
-        String sql= "UPDATE COMERCIALES SET loggeado = 1 where id = " + Integer.parseInt(id);
-        db.execSQL(sql);
+    public Comercial logginUser(String user, String password){
+        Comercial comercial = null;
+        int id;
+        String usuario, contrasena, nombre, apellidos, email, delegacion, telefono_delegacion, email_delegacion;
+        this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM COMERCIALES WHERE usuario = '" + user +"' AND password = '" + password + "'", null);
+
+        if(c.moveToFirst()){
+            comercial = new Comercial(String.valueOf(c.getInt(0)), c.getString(1), c.getString(2), c.getString(3), c.getString(4),
+                    c.getString(5), c.getString(6), c.getString(7), c.getString(8));
+        }
+        c.close();
+
+        if (comercial != null){
+            db.execSQL("UPDATE COMERCIALES SET loggeado = 1 where id = " + Integer.parseInt(comercial.getId()));
+        }
+        return comercial;
     }
     public void logoutUser(){
         String sql= "UPDATE COMERCIALES SET loggeado = 0 where loggeado = 1";
@@ -683,7 +730,7 @@ public class Datos {
     public void cargarAssets(){
         this.productos = leeProductos("productos.xml");
         this.partners = leePartners("partners.xml");
-        this.comerciales = leeComerciales("comerciales.xml");
+        leeComerciales("comerciales.xml");
     }
 
     public Producto[] cargarProductosDesdeBD() {
@@ -772,7 +819,7 @@ public class Datos {
     public void cargarDatosDesdeBD(){
         this.productos = cargarProductosDesdeBD();
         this.partners = cargarPartnersDesdeBD();
-        this.comerciales = cargarComercialesDesdeBD();
+        cargarComercialesDesdeBD(); //mirar esto
     }
 
 }

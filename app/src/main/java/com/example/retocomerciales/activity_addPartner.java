@@ -1,6 +1,5 @@
 package com.example.retocomerciales;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,25 +8,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import org.jdom2.Attribute;
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
-import org.xml.sax.SAXException;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.retocomerciales.Clases.Datos;
 import com.example.retocomerciales.Clases.Partner;
-
-import javax.xml.parsers.ParserConfigurationException;
 
 public class activity_addPartner extends AppCompatActivity {
 
@@ -35,8 +20,10 @@ public class activity_addPartner extends AppCompatActivity {
     Button anadir, volver;
     Spinner partnerComerciales;
 
-    private int posicionComercialEnLista;
+    private String[][] listComerciales;
+    private String[] listNombresComerciales;
     String idComercial;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +41,12 @@ public class activity_addPartner extends AppCompatActivity {
 
         final Datos datos = Datos.getInstance();
 
-        final ArrayAdapter adapterComerciales = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos.getNombresComerciales());
+        listComerciales = datos.selectNombresComerciales();
+        listNombresComerciales = new String[listComerciales[1].length];
+        for (int i = 0; i < listComerciales[1].length; i++){
+            listNombresComerciales[i] = listComerciales[1][i];
+        }
+        final ArrayAdapter adapterComerciales = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listNombresComerciales);
         adapterComerciales.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         partnerComerciales.setAdapter(adapterComerciales);
 
@@ -62,8 +54,7 @@ public class activity_addPartner extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                posicionComercialEnLista = position;
-                idComercial = String.valueOf(datos.getComercial(position).getId());
+                idComercial = listComerciales[0][position];
             }
 
             @Override
@@ -76,9 +67,11 @@ public class activity_addPartner extends AppCompatActivity {
             public void onClick(View v) {
                 if(!nombrePartner.getText().toString().isEmpty() && !direccionPartner.getText().toString().isEmpty() && !cifPartner.getText().toString().isEmpty() && !poblacionPartner.getText().toString().isEmpty() && !telefonoPartner.getText().toString().isEmpty() && !emailPartner.getText().toString().isEmpty()){
                     int ide = (Integer.parseInt(datos.getPartner(datos.getPartners().length-1).getId()))+1;
-                    Partner partner = new Partner(String.valueOf(ide), nombrePartner.getText().toString(), direccionPartner.getText().toString(), cifPartner.getText().toString(), poblacionPartner.getText().toString() ,telefonoPartner.getText().toString(), emailPartner.getText().toString(), datos.getComercial().getId());
+                    Partner partner = new Partner(String.valueOf(ide), nombrePartner.getText().toString(), direccionPartner.getText().toString(), cifPartner.getText().toString(), poblacionPartner.getText().toString() ,telefonoPartner.getText().toString(), emailPartner.getText().toString(), idComercial);
                     Datos.getInstance().escribirNewPartnerDOM(partner);
                     Datos.getInstance().insert(partner,datos.getDb());
+                    Datos.getInstance().addPartner(partner);
+
 
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),

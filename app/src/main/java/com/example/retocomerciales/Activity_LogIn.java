@@ -40,7 +40,7 @@ public class Activity_LogIn extends AppCompatActivity {
         }
 
         if (datos.loggedUser() >= 0){
-            datos.setPosComercial(datos.loggedUser());
+            datos.setComercial(datos.loggedUser());
             Intent intent = new Intent(Activity_LogIn.this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -60,20 +60,12 @@ public class Activity_LogIn extends AppCompatActivity {
         });
     }
     public void loggeado(){
-        boolean existe = false;
-        int pos = 0;
 
-        for (Comercial comercial: datos.getComerciales()){
+        Comercial comercial = datos.logginUser(_user, _password);
 
-            if(comercial.getUsuario().equals(_user) && comercial.getPassword().equals(_password)){
-                existe = true;
-                datos.logginUser(comercial.getId());
-                datos.setPosComercial(pos);
-                break;
-            }
-            pos++;
-        }
-        if (existe){
+        if(comercial != null){
+            datos.setComercial(comercial);
+
             Intent intent = new Intent(Activity_LogIn.this, MainActivity.class);
             startActivity(intent);
             finish();

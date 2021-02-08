@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         final Datos datos = Datos.getInstance();
 
         //cargar datos del comercial elegido
-        nomComercial.setText("Bienvenido " + datos.getComercial().getNombre());
+        nomComercial.setText("Bienvenido " + datos.getComercial().getNombre() + " " + datos.getComercial().getApellidos());
         nomDelegacion.setText("Delegación provincial " + datos.getComercial().getDelegacion());
         emailDelegacion = datos.getComercial().getEmailDelegacion();
         telf = datos.getComercial().getTelefonoDelegacion();
