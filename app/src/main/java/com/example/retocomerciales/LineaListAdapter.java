@@ -20,6 +20,7 @@ import com.example.retocomerciales.Clases.Producto;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -81,7 +82,9 @@ public class LineaListAdapter extends ArrayAdapter<Linea> {
         nombreProd.setText(linea.getProducto().getNombre());
         cantidadProd.setText(linea.getCantidad() + " unidades");
 
-        formatoDecimal = new DecimalFormat("0.00");
+        DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+        simbolos.setDecimalSeparator('.');
+        formatoDecimal = new DecimalFormat("#.##",simbolos);
         formatoDecimal.setRoundingMode(RoundingMode.DOWN);
         prTotalProd.setText(formatoDecimal.format(Double.parseDouble(formatoDecimal.format( linea.getPr_unidad() * (double) linea.getCantidad()))) + " €");
 

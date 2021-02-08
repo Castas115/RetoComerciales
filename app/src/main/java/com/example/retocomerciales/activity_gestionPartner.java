@@ -18,11 +18,12 @@ import java.util.Objects;
 public class activity_gestionPartner extends AppCompatActivity {
 
 
-    Button alta,volver;
+    Button alta,volver,borrar;
     Intent intent;
     Spinner spnGestionPartners;
     Datos datos;
     TextView tbnombre , tbdireccion, tbpoblacion, tbcif, tbtlfn, tbemail;
+    String posicion;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,7 @@ public class activity_gestionPartner extends AppCompatActivity {
         tbcif = findViewById(R.id.contenidoCif);
         tbtlfn = findViewById(R.id.contenidoTlfno);
         tbemail = findViewById(R.id.contenidoEmail);
+        borrar = findViewById(R.id.btnBorrar);
 
 
 
@@ -54,7 +56,7 @@ public class activity_gestionPartner extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                posicion = String.valueOf(position);
                 tbnombre.setText(String.valueOf(datos.getPartner(position).getNombre()));
                 tbdireccion.setText(String.valueOf(datos.getPartner(position).getDireccion()));
                 tbcif.setText(String.valueOf(datos.getPartner(position).getCIF()));
@@ -69,6 +71,12 @@ public class activity_gestionPartner extends AppCompatActivity {
 
         });
 
+        borrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datos.borrarPartner(datos.getPartner(Integer.parseInt(posicion)).getId());
+            }
+        });
 
         alta.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -725,7 +725,10 @@ public class Datos {
         db.execSQL(sql);
     }
 
-
+   public void borrarPartner(String id){
+        String sql= "DELETE FROM PARTNERS WHERE id = "+Integer.parseInt(id);
+        db.execSQL(sql);
+    }
 
     public void cargarAssets(){
         this.productos = leeProductos("productos.xml");

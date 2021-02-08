@@ -14,11 +14,11 @@ public class RetoComercialesSQLiteHelper extends SQLiteOpenHelper {
     //Sentencia SQL para crear las tablas
     String sqlComerciales = "CREATE TABLE COMERCIALES (id INTEGER PRIMARY KEY AUTOINCREMENT,usuario TEXT, password TEXT, nombre TEXT, apellidos TEXT,email TEXT,delegacion TEXT, telefono_delegacion TEXT, email_delegacion TEXT, loggeado INTEGER DEFAULT 0)";
 
-    String sqlLineas = "CREATE TABLE LINEAS (id_pedido INTEGER, cod_producto TEXT, cantidad INTEGER, pr_unidad DECIMAL(10,2), PRIMARY KEY (id_pedido,cod_producto), FOREIGN KEY (cod_producto) REFERENCES PRODUCTOS(cod_productos))";
+    String sqlLineas = "CREATE TABLE LINEAS (id_pedido INTEGER, cod_producto TEXT, cantidad INTEGER, pr_unidad DECIMAL(10,2), PRIMARY KEY (id_pedido,cod_producto), FOREIGN KEY (cod_producto) REFERENCES PRODUCTOS(cod_productos) ON UPDATE SET NULL ON DELETE SET NULL)";
 
     String sqlPartners = "CREATE TABLE PARTNERS (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, direccion TEXT, cif TEXT, telefono TEXT, email TEXT, id_comercial INTEGER,FOREIGN KEY (id_comercial) REFERENCES COMERCIALES(id))";
 
-    String sqlPedidos = "CREATE TABLE PEDIDOS (id INTEGER PRIMARY KEY AUTOINCREMENT, fecha DATE, id_partner INTEGER, id_comercial INTEGER ,FOREIGN KEY (id_comercial) REFERENCES COMERCIALES(id),FOREIGN KEY (id_partner) REFERENCES PARTNERS(id))";
+    String sqlPedidos = "CREATE TABLE PEDIDOS (id INTEGER PRIMARY KEY AUTOINCREMENT, fecha DATE, id_partner INTEGER, id_comercial INTEGER ,FOREIGN KEY (id_comercial) REFERENCES COMERCIALES(id),FOREIGN KEY (id_partner) REFERENCES PARTNERS(id) ON UPDATE SET NULL ON DELETE SET NULL)";
 
     String sqlProductos = "CREATE TABLE PRODUCTOS (cod_producto TEXT PRIMARY KEY, nombre TEXT, descripcion TEXT, imagen TEXT, existencias INTEGER, pr_unidad DECIMAL(10,2))";
 
