@@ -113,7 +113,7 @@ public class Datos {
 
     public void realizarPedido(){
         for(Producto prod: productos){
-            prod.ajustarExistencias();
+            prod.ajustarExistencias();//ajustamos las existencias tanto en instancia como en la base de datos
             String sql= "UPDATE PRODUCTOS SET EXISTENCIAS = " +prod.getExistencias() + " WHERE COD_PRODUCTO = '"+prod.getCod() + "'";
                     db.execSQL(sql);
         }
@@ -597,7 +597,7 @@ public class Datos {
     //select
 
     public int loggedUser(){
-        int id = -1;
+        int id = -1;//por defecto si no encuentra ninguno seguira siendo -1
         this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getWritableDatabase();
         String sql= "SELECT * FROM COMERCIALES WHERE LOGGEADO = 1";
         Cursor c = db.rawQuery(sql, null);
@@ -673,16 +673,19 @@ public class Datos {
     public void insert(Pedido pedido, SQLiteDatabase db){
         long id_pedido;
 
+
+
         //valores de los inserts (values en sql)
+        //INSERT INTO PEDIDOS (FECHA,ID_PARTNER,ID_COMERCIAL) VALUES (...,...,...)
         ContentValues values = new ContentValues();
         values.put("fecha", pedido.getFecha());
         values.put("id_partner", pedido.getPartner().getId());
         values.put("id_comercial", pedido.getComercial().getId());
 
-        id_pedido = db.insert("PEDIDOS", null, values);
+        id_pedido = db.insert("PEDIDOS", null, values);//Nos devuelve la ID recien creada por la base de datos del pedido
 
         for (Linea linea : pedido.getLineas()){
-            insert(linea,id_pedido, db);
+            insert(linea,id_pedido, db);//Insert normal con todas las lineas
         }
     }
 
@@ -696,10 +699,11 @@ public class Datos {
 
 
     public void insertAll(SQLiteDatabase db){
+        //Hace los inserts de la informacion instanciada en Datos
         for (Producto producto: productos){
             datos.insert(producto, db);
         }
-/*
+        /*
         for (Comercial comercial: comerciales){
             datos.insert(comercial, db);
         }*/
