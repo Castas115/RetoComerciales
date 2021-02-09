@@ -16,3 +16,5 @@ public class DBJustCreated {
     public boolean isDbJustCreated() {return dbJustCreated;}
     public void setDbJustCreated(boolean justCreated){ dbJustCreated = justCreated;}
 }
+
+//Creamos la primer bes

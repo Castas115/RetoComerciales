@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         cerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                datos.logoutUser();
+                datos.logoutUser();//Pone el valor de todos los campos loggeados y los cambia de 0 a 1
                 Intent intent = new Intent( MainActivity.this, Activity_LogIn.class);
                 startActivity(intent);
                 finish();
