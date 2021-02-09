@@ -33,10 +33,23 @@ public class Partner {
     public String getNombre() {return nombre;}
     public String getDireccion() {return direccion;}
     public String getCIF() {return CIF;}
-    public String getPoblacion() {return Poblacion;}
     public String getTelefono() {return telefono;}
     public String getEmail() {return email;}
     public String getIdComercial() {return idComercial;}
+
+    //Setters
+
+
+    public void setNombre(String nombre) {this.nombre = nombre;}
+    public void setDireccion(String direccion) {this.direccion = direccion;}
+    public void setPoblacion(String poblacion) {Poblacion = poblacion;}
+    public void setCIF(String CIF) {this.CIF = CIF;}
+    public void setTelefono(String telefono) {this.telefono = telefono;}
+    public void setEmail(String email) {this.email = email;}
+
+    public void setIdComercial(String idComercial) {
+        this.idComercial = idComercial;
+    }
 
     //convertire el contenido de Partners en un elemento XML
     public Element toElement(Document document) {

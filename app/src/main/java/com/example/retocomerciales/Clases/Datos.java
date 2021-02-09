@@ -172,6 +172,14 @@ public class Datos {
         }
         return null;
     }
+    public Partner modifyPartner(int pos, String nombre, String direccion, String cif, String telefono, String email){
+        this.partners[pos].setNombre(nombre);
+        this.partners[pos].setDireccion(direccion);
+        this.partners[pos].setPoblacion(cif);
+        this.partners[pos].setCIF(telefono);
+        this.partners[pos].setTelefono(email);
+        return partners[pos];
+    }
 
     public void addPartner(Partner partner){
         Partner[] _partners = new Partner[partners.length + 1];
@@ -728,7 +736,7 @@ public class Datos {
 
     public void update (Partner partner){
 
-        String sql= "UPDATE PARTNER SET NOMBRE = '" + partner.getNombre() + "' AND DIRECCION= '" + partner.getDireccion() + "' AND CIF = '" + partner.getCIF() + "' AND TELEFONO= '" + partner.getTelefono() + "' AND  EMAIL = '" + partner.getEmail() + "' AND ID_COMERCIAL = " + Integer.parseInt(partner.getIdComercial()) + " where id = " + partner.getId();
+        String sql= "UPDATE PARTNERS SET NOMBRE = '" + partner.getNombre() + "', DIRECCION= '" + partner.getDireccion() + "', CIF = '" + partner.getCIF() + "', TELEFONO= '" + partner.getTelefono() + "',  EMAIL = '" + partner.getEmail() + "', ID_COMERCIAL = " + Integer.parseInt(partner.getIdComercial()) + " where id = " + partner.getId();
         db.execSQL(sql);
     }
 

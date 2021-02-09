@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.retocomerciales.Clases.Datos;
+import com.example.retocomerciales.Clases.Partner;
 
 import java.util.Objects;
 
@@ -76,7 +77,12 @@ public class activity_gestionPartner extends AppCompatActivity {
         actualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Partner partner = datos.modifyPartner(pos, tbnombre.getText().toString(), tbdireccion.getText().toString(), tbcif.getText().toString(), tbtlfn.getText().toString(), tbemail.getText().toString());
+                datos.update(partner);
+                Toast.makeText(getApplicationContext(), "Partner modificado", Toast.LENGTH_SHORT).show();
+                intent = new Intent(activity_gestionPartner.this, activity_gestionPartner.class);
+                startActivity(intent);
+                finish();
             }
         });
 

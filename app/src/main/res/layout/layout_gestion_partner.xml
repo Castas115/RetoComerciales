@@ -92,12 +92,14 @@
                         android:textColor="@color/common_google_signin_btn_text_dark_focused"
                         android:textSize="16sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/contenidoNombre"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:background="#B2E7ED" />
+                        android:background="#B2E7ED"
+                        android:textColor="#3A3A3A"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tbDireccion"
@@ -110,12 +112,14 @@
                         android:textColor="@color/common_google_signin_btn_text_dark_focused"
                         android:textSize="16sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/contenidoDireccion"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:background="#B2E7ED" />
+                        android:background="#B2E7ED"
+                        android:textColor="#3A3A3A"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tbCif"
@@ -128,12 +132,14 @@
                         android:textColor="@color/common_google_signin_btn_text_dark_focused"
                         android:textSize="16sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/contenidoCif"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:background="#B2E7ED" />
+                        android:background="#B2E7ED"
+                        android:textColor="#3A3A3A"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tbEmail"
@@ -146,12 +152,14 @@
                         android:textColor="@color/common_google_signin_btn_text_dark_focused"
                         android:textSize="16sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/contenidoEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:background="#B2E7ED" />
+                        android:background="#B2E7ED"
+                        android:textColor="#3A3A3A"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/tbTlfn"
@@ -164,12 +172,15 @@
                         android:textColor="@color/common_google_signin_btn_text_dark_focused"
                         android:textSize="16sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/contenidoTlfno"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
-                        android:background="#B2E7ED" />
+                        android:background="#B2E7ED"
+                        android:inputType="number"
+                        android:textColor="#3A3A3A"
+                        android:textSize="14sp" />
 
                 </LinearLayout>
             </ScrollView>
