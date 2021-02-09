@@ -724,8 +724,9 @@ public class Datos {
         Cursor c = db.rawQuery("SELECT * FROM COMERCIALES WHERE usuario = '" + user +"' AND password = '" + password + "'", null);
 
         if(c.moveToFirst()){
-            comercial = new Comercial(String.valueOf(c.getInt(0)), c.getString(1), c.getString(2), c.getString(3), c.getString(4),
-                    c.getString(5), c.getString(6), c.getString(7), c.getString(8));
+            comercial = new Comercial(String.valueOf(c.getInt(0)), c.getString(1), c.getString(2), c.getString(5),
+                    c.getString(3), c.getString(4), c.getString(6), c.getString(7), c.getString(8));
+
         }
         c.close();
 
