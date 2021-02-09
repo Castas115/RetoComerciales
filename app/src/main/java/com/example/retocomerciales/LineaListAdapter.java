@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,14 +46,13 @@ public class LineaListAdapter extends ArrayAdapter<Linea> {
     public View getView(final int pos, @Nullable View convertView, @NonNull ViewGroup parent) {
         Producto producto = Objects.requireNonNull(getItem(pos)).getProducto();
         int cantidad = Objects.requireNonNull(getItem(pos)).getCantidad();
-        //String prTotal = getItem(pos).getPr_total() + "€";
 
         Linea linea =new Linea(producto, cantidad);
         LayoutInflater inflater = LayoutInflater.from(context);
         convertView = inflater.inflate(resource, parent, false);
 
         TextView nombreProd = convertView.findViewById(R.id.lsv_lbl_nomArt);
-        EditText cantidadProd = convertView.findViewById(R.id.editTxtCantidad);
+        TextView cantidadProd = convertView.findViewById(R.id.lsv_lbl_cantArt);
         TextView prTotalProd = convertView.findViewById(R.id.lsv_lbl_prTotalArt);
         Button borrar = convertView.findViewById(R.id.btn_borrar);
         datos = Datos.getInstance();
@@ -81,7 +79,7 @@ public class LineaListAdapter extends ArrayAdapter<Linea> {
         });
 
         nombreProd.setText(linea.getProducto().getNombre());
-        cantidadProd.setText(linea.getCantidad());
+        cantidadProd.setText(linea.getCantidad() + " unidades");
 
         DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
         simbolos.setDecimalSeparator('.');
