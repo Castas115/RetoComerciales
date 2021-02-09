@@ -118,24 +118,6 @@
                         android:background="#B2E7ED" />
 
                     <TextView
-                        android:id="@+id/tbPoblacion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="15dp"
-                        android:text="@string/poblacion"
-                        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:id="@+id/contenidoPoblacion"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:background="#B2E7ED" />
-
-                    <TextView
                         android:id="@+id/tbCif"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -197,12 +179,12 @@
             android:id="@+id/btnAlta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="9dp"
             android:text="@string/dar_de_alta"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.953"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_actualizar"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
         <Button
@@ -210,21 +192,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/volver"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.15"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnAlta"
+            app:layout_constraintEnd_toStartOf="@+id/btnBorrar"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+            app:layout_constraintTop_toTopOf="@+id/btnAlta" />
 
         <Button
             android:id="@+id/btnBorrar"
-            android:layout_width="79dp"
-            android:layout_height="47dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Borrar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnAlta"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnAlta"
+            app:layout_constraintEnd_toStartOf="@+id/btn_actualizar"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btnVolver"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+            app:layout_constraintTop_toTopOf="@+id/btnAlta" />
+
+        <Button
+            android:id="@+id/btn_actualizar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Actualiza"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnAlta"
+            app:layout_constraintEnd_toStartOf="@+id/btnAlta"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnBorrar"
+            app:layout_constraintTop_toTopOf="@+id/btnAlta" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,12 +19,13 @@ import java.util.Objects;
 public class activity_gestionPartner extends AppCompatActivity {
 
 
-    Button alta,volver,borrar;
+    Button alta, volver, borrar, actualizar;
     Intent intent;
     Spinner spnGestionPartners;
     Datos datos;
-    TextView tbnombre , tbdireccion, tbpoblacion, tbcif, tbtlfn, tbemail;
+    TextView tbnombre , tbdireccion, tbcif, tbtlfn, tbemail;
     String posicion;
+    int pos;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +37,11 @@ public class activity_gestionPartner extends AppCompatActivity {
         spnGestionPartners = findViewById(R.id.spinner2);
         tbnombre = findViewById(R.id.contenidoNombre);
         tbdireccion = findViewById(R.id.contenidoDireccion);
-        tbpoblacion = findViewById(R.id.contenidoPoblacion);
         tbcif = findViewById(R.id.contenidoCif);
         tbtlfn = findViewById(R.id.contenidoTlfno);
         tbemail = findViewById(R.id.contenidoEmail);
         borrar = findViewById(R.id.btnBorrar);
+        actualizar = findViewById(R.id.btn_actualizar);
 
 
 
@@ -56,11 +58,11 @@ public class activity_gestionPartner extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                pos = position;
                 posicion = String.valueOf(position);
                 tbnombre.setText(String.valueOf(datos.getPartner(position).getNombre()));
                 tbdireccion.setText(String.valueOf(datos.getPartner(position).getDireccion()));
                 tbcif.setText(String.valueOf(datos.getPartner(position).getCIF()));
-                tbpoblacion.setText(String.valueOf(datos.getPartner(position).getPoblacion()));
                 tbtlfn.setText(String.valueOf(datos.getPartner(position).getTelefono()));
                 tbemail.setText(String.valueOf(datos.getPartner(position).getEmail()));
 
@@ -71,10 +73,22 @@ public class activity_gestionPartner extends AppCompatActivity {
 
         });
 
+        actualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         borrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 datos.borrarPartner(datos.getPartner(Integer.parseInt(posicion)).getId());
+
+                Toast.makeText(getApplicationContext(), "Partner borrado", Toast.LENGTH_SHORT).show();
+                intent = new Intent(activity_gestionPartner.this, activity_gestionPartner.class);
+                startActivity(intent);
+                finish();
             }
         });
 

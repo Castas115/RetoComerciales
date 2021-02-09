@@ -30,6 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -725,9 +726,25 @@ public class Datos {
         db.execSQL(sql);
     }
 
+    public void update (Partner partner){
+
+        String sql= "UPDATE PARTNER SET NOMBRE = '" + partner.getNombre() + "' AND DIRECCION= '" + partner.getDireccion() + "' AND CIF = '" + partner.getCIF() + "' AND TELEFONO= '" + partner.getTelefono() + "' AND  EMAIL = '" + partner.getEmail() + "' AND ID_COMERCIAL = " + Integer.parseInt(partner.getIdComercial()) + " where id = " + partner.getId();
+        db.execSQL(sql);
+    }
+
+    //DELETE
+
    public void borrarPartner(String id){
         String sql= "DELETE FROM PARTNERS WHERE id = "+Integer.parseInt(id);
         db.execSQL(sql);
+        for(int i = 0; i<this.partners.length; i++){
+            if(partners[i].getId() == id){
+                partners[i] = partners[partners.length -1];
+                partners = Arrays.copyOf(partners, partners.length -1);
+                break;
+            }
+        }
+
     }
 
     public void cargarAssets(){
