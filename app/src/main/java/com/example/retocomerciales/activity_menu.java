@@ -7,6 +7,7 @@ import android.provider.CalendarContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -66,13 +67,17 @@ public class activity_menu extends AppCompatActivity {
         pedidos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(activity_menu.this, activity_pedido1.class);
-                Datos datos = Datos.getInstance();
+                if(Datos.getInstance().getPartners().length > 0){
+                    intent = new Intent(activity_menu.this, activity_pedido1.class);
+                    Datos datos = Datos.getInstance();
 
 
-                datos.cargarExistencias();//cargar existenciasCompras = existencias (nuevo pedido cancelando los cambios hechos anteriormente)
-                datos.nuevoPedido(datos.getComercial());
-                startActivity(intent);
+                    datos.cargarExistencias();//cargar existenciasCompras = existencias (nuevo pedido cancelando los cambios hechos anteriormente)
+                    datos.nuevoPedido(datos.getComercial());
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(), "No hay partners \n no se puede realizar pedido", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

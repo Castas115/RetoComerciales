@@ -100,6 +100,7 @@ public class Datos {
         this.posPartner = posPartner;
     }
 
+
     //dato pedido
 
 

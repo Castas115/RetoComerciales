@@ -77,24 +77,33 @@ public class activity_gestionPartner extends AppCompatActivity {
         actualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Partner partner = datos.modifyPartner(pos, tbnombre.getText().toString(), tbdireccion.getText().toString(), tbcif.getText().toString(), tbtlfn.getText().toString(), tbemail.getText().toString());
-                datos.update(partner);
-                Toast.makeText(getApplicationContext(), "Partner modificado", Toast.LENGTH_SHORT).show();
-                intent = new Intent(activity_gestionPartner.this, activity_gestionPartner.class);
-                startActivity(intent);
-                finish();
+
+                if(Datos.getInstance().getPartners().length > 0){
+                    Partner partner = datos.modifyPartner(pos, tbnombre.getText().toString(), tbdireccion.getText().toString(), tbcif.getText().toString(), tbtlfn.getText().toString(), tbemail.getText().toString());
+                    datos.update(partner);
+                    Toast.makeText(getApplicationContext(), "Partner modificado", Toast.LENGTH_SHORT).show();
+                    intent = new Intent(activity_gestionPartner.this, activity_gestionPartner.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(), "No hay partners. \n no se puede actualizar.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         borrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                datos.borrarPartner(datos.getPartner(Integer.parseInt(posicion)).getId());
+                if(Datos.getInstance().getPartners().length > 0){
+                    datos.borrarPartner(datos.getPartner(Integer.parseInt(posicion)).getId());
 
-                Toast.makeText(getApplicationContext(), "Partner borrado", Toast.LENGTH_SHORT).show();
-                intent = new Intent(activity_gestionPartner.this, activity_gestionPartner.class);
-                startActivity(intent);
-                finish();
+                    Toast.makeText(getApplicationContext(), "Partner borrado", Toast.LENGTH_SHORT).show();
+                    intent = new Intent(activity_gestionPartner.this, activity_gestionPartner.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(), "No hay partners. \n No se puede borrar.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
