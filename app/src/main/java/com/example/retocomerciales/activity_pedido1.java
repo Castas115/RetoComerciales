@@ -49,7 +49,8 @@ public class activity_pedido1 extends AppCompatActivity {
         visualizaPedidos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                datos.cargarListaPedidos();
+                intent = new Intent(activity_pedido1.this, activity_visualizaPedidos.class);
+                startActivity(intent);
             }
         });
 

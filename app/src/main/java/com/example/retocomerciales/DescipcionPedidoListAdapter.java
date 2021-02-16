@@ -1,5 +1,6 @@
 package com.example.retocomerciales;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,27 +16,23 @@ import androidx.annotation.Nullable;
 
 import com.example.retocomerciales.Clases.Datos;
 import com.example.retocomerciales.Clases.DescripcionPedido;
-import com.example.retocomerciales.Clases.Linea;
-import com.example.retocomerciales.Clases.Producto;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class DescipcionPedidoListAdapter extends ArrayAdapter<DescripcionPedido> {
 
-    private final static String TAG = "LineaListAdapter";
+    private final static String TAG = "PedidoListAdapter";
     private Context context;
     int resource;
 
-    public DescipcionPedidoListAdapter(@NonNull Context context, int resource, @NonNull List<DescripcionPedido> objects) {
+    public DescipcionPedidoListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<DescripcionPedido> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
     }
 
+    @NonNull
     @Override
     public View getView(final int pos, @Nullable View convertView, @NonNull ViewGroup parent) {
 
@@ -43,12 +40,12 @@ public class DescipcionPedidoListAdapter extends ArrayAdapter<DescripcionPedido>
         convertView = inflater.inflate(resource, parent, false);
 
         TextView fecha = convertView.findViewById(R.id.lsv_lbl_fecha);
-        TextView nomPartner = convertView.findViewById(R.id.lsv_lbl_partner);
-        TextView prTotal = convertView.findViewById(R.id.lsv_lbl_prTotal);
+        TextView nomPartner = convertView.findViewById(R.id.lbl_nombrePartner);
+        TextView prTotal = convertView.findViewById(R.id.lbl_prTotalPedido);
         Button borrar = convertView.findViewById(R.id.btn_borrar);
 
         //listener del boton borrar
-        borrar.setOnClickListener(new View.OnClickListener() {
+         borrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(context)
@@ -59,6 +56,7 @@ public class DescipcionPedidoListAdapter extends ArrayAdapter<DescripcionPedido>
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //borar de instancia y de Base de datos
+                                //Datos.getInstance().borrarPedido(which);
                                 DescipcionPedidoListAdapter.super.notifyDataSetChanged();
                             }
                         })
@@ -67,10 +65,10 @@ public class DescipcionPedidoListAdapter extends ArrayAdapter<DescripcionPedido>
 
             }
         });
-
-        fecha.setText(getItem(pos).getFecha());
-        nomPartner.setText(getItem(pos).getNombrePartner());
-        prTotal.setText(getItem(pos).getPrTotal());
+        DescripcionPedido desc = getItem(pos);
+        fecha.setText(desc.getFecha());
+        nomPartner.setText(desc.getNombrePartner());
+        prTotal.setText(desc.getPrTotal());
 
         return convertView;
     }

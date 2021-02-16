@@ -29,6 +29,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -223,30 +224,37 @@ public class Datos {
 */
 
     //Datos de listaPedidos
-    public void cargarListaPedidos(){
-       this.listPedidos = new ArrayList<>();
-        if(comercial != null) {
-            this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getWritableDatabase();
-            String sql = "SELECT PE.ID, PE.FECHA, PA.NOMBRE FROM PEDIDOS PE INNER JOIN PARTNERS PA ON PE.ID_PARTNER = PA.ID "
-             + " WHERE PE.id_comercial = " + Integer.parseInt(comercial.getId());
-            Cursor c = db.rawQuery(sql, null);
-            if(c.moveToFirst()){
-                do{
-                    int idPedido = c.getInt(0);
-                    String fecha = c.getString(1);
-                    String nomPartner = c.getString(2);
+    public ArrayList<DescripcionPedido> cargarListaPedidos(){
+            this.listPedidos = new ArrayList<>();
+            if (comercial != null) {
+                this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getWritableDatabase();
+                String sql = "SELECT PE.ID, PE.FECHA, PA.NOMBRE FROM PEDIDOS PE INNER JOIN PARTNERS PA ON PE.ID_PARTNER = PA.ID "
+                        + " WHERE PE.id_comercial = " + Integer.parseInt(comercial.getId());
+                Cursor c = db.rawQuery(sql, null);
+                if (c.moveToFirst()) {
+                    do {
+                        int idPedido = c.getInt(0);
+                        String fecha = c.getString(1);
+                        String nomPartner = c.getString(2);
 
-                    String sql2 = "SELECT count(pr_unidad*cantidad) FROM LINEAS WHERE ID_PEDIDO = " + idPedido; //no se como hacer esto
-                    Cursor c2 = db.rawQuery(sql2, null);
-                    float prTotal = c2.getFloat(0);
-                    this.listPedidos.add(new DescripcionPedido(fecha, nomPartner, String.valueOf(prTotal)));
+                        String sql2 = "SELECT sum(pr_unidad * cantidad) as prTotal FROM LINEAS WHERE ID_PEDIDO = " + idPedido; //no se como hacer esto
+                        Cursor c2 = db.rawQuery(sql2, null);
+                        float prTotal = c2.getColumnIndex("prTotal");
+                        listPedidos.add(new DescripcionPedido(idPedido, fecha, nomPartner, String.valueOf(prTotal)));
 
-                }while (c.moveToNext());
+                    } while (c.moveToNext());
+                }
             }
-        }
+        return listPedidos;
+    }
+    public void borrarPedido(int pos){
+
+        db.execSQL("DELETE FROM LINEAS WHERE id = " + listPedidos.get(pos).getId());
+        db.execSQL("DELETE FROM PEDIDOS WHERE id = " + listPedidos.get(pos).getId());
+        this.listPedidos.remove(pos);
     }
 
-    public void listPedidosNull() {this.listPedidos = null;}
+    //public void listPedidosNull() {this.listPedidos = null;}
 
     //devolver lista de strings con los nombres de cada lista (comerciales, partners y productos)
     public String[] getNombresPartners() {

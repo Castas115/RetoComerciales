@@ -102,14 +102,19 @@ public class activity_pedido3 extends AppCompatActivity {
 
 
     public void realizarPedido() {
-        //introducir escritura en xml
-        datos.realizarPedido();
+        if(datos.getPedido().getLineas().size() ==0){
+            Toast.makeText(getApplicationContext(), "Añada una linea", Toast.LENGTH_SHORT).show();
+            finish();
+        }else {
+            //introducir escritura en xml
+            datos.realizarPedido();
 
-        Toast.makeText(getApplicationContext(), "Compra realizada", Toast.LENGTH_SHORT).show();
-        //para vovler al menú tras la compra
-        Intent volver = new Intent();
-        volver.putExtra("Volver", true);
-        setResult(RESULT_OK, volver);
-        finish();
+            Toast.makeText(getApplicationContext(), "Compra realizada", Toast.LENGTH_SHORT).show();
+            //para vovler al menú tras la compra
+            Intent volver = new Intent();
+            volver.putExtra("Volver", true);
+            setResult(RESULT_OK, volver);
+            finish();
+        }
     }
 }

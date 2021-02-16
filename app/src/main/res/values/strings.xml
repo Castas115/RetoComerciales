@@ -80,6 +80,7 @@
     <string name="lsv_lbl_fecha">Fecha: </string>
     <string name="lsv_lbl_partner">partner</string>
     <string name="lsb_lbl_prTotal">prTotal</string>
+    <string name="lbl_nomComercial">Pedidos de</string>
 
 
 </resources>
