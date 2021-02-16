@@ -1,6 +1,5 @@
 package com.example.retocomerciales;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,47 +14,38 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.retocomerciales.Clases.Datos;
+import com.example.retocomerciales.Clases.DescripcionPedido;
 import com.example.retocomerciales.Clases.Linea;
 import com.example.retocomerciales.Clases.Producto;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class LineaListAdapter extends ArrayAdapter<Linea> {
+public class DescipcionPedidoListAdapter extends ArrayAdapter<DescripcionPedido> {
 
     private final static String TAG = "LineaListAdapter";
     private Context context;
     int resource;
-    Datos datos;
 
-    DecimalFormat formatoDecimal;
-
-
-    public LineaListAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Linea> objects) {
+    public DescipcionPedidoListAdapter(@NonNull Context context, int resource, @NonNull List<DescripcionPedido> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
     }
 
-    @SuppressLint({"ViewHolder", "SetTextI18n"})
-    @NonNull
     @Override
     public View getView(final int pos, @Nullable View convertView, @NonNull ViewGroup parent) {
-        Producto producto = Objects.requireNonNull(getItem(pos)).getProducto();
-        int cantidad = Objects.requireNonNull(getItem(pos)).getCantidad();
 
-        Linea linea =new Linea(producto, cantidad);
         LayoutInflater inflater = LayoutInflater.from(context);
         convertView = inflater.inflate(resource, parent, false);
 
-        TextView nombreProd = convertView.findViewById(R.id.lsv_lbl_fecha);
-        TextView cantidadProd = convertView.findViewById(R.id.lsv_lbl_cantArt);
-        TextView prTotalProd = convertView.findViewById(R.id.lsv_lbl_prTotalArt);
+        TextView fecha = convertView.findViewById(R.id.lsv_lbl_fecha);
+        TextView nomPartner = convertView.findViewById(R.id.lsv_lbl_partner);
+        TextView prTotal = convertView.findViewById(R.id.lsv_lbl_prTotal);
         Button borrar = convertView.findViewById(R.id.btn_borrar);
-        datos = Datos.getInstance();
 
         //listener del boton borrar
         borrar.setOnClickListener(new View.OnClickListener() {
@@ -68,8 +58,8 @@ public class LineaListAdapter extends ArrayAdapter<Linea> {
                         .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                datos.getPedido().deleteLinea(pos);
-                                LineaListAdapter.super.notifyDataSetChanged();
+                                //borar de instancia y de Base de datos
+                                DescipcionPedidoListAdapter.super.notifyDataSetChanged();
                             }
                         })
                         .setNegativeButton("No", null)
@@ -78,16 +68,10 @@ public class LineaListAdapter extends ArrayAdapter<Linea> {
             }
         });
 
-        nombreProd.setText(linea.getProducto().getNombre());
-        cantidadProd.setText(linea.getCantidad() + " unidades");
-
-        DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
-        simbolos.setDecimalSeparator('.');
-        formatoDecimal = new DecimalFormat("#.##",simbolos);
-        formatoDecimal.setRoundingMode(RoundingMode.DOWN);
-        prTotalProd.setText(formatoDecimal.format(Double.parseDouble(formatoDecimal.format( linea.getPr_unidad() * (double) linea.getCantidad()))) + " €");
+        fecha.setText(getItem(pos).getFecha());
+        nomPartner.setText(getItem(pos).getNombrePartner());
+        prTotal.setText(getItem(pos).getPrTotal());
 
         return convertView;
-
     }
 }

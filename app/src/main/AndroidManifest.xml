@@ -18,6 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity_visualizaPedidos"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -30,7 +31,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="${mapsApiKey}" />
 
-
         <activity android:name=".Activity_LogIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +38,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".MainActivity">
             android:label="@string/title_activity_maps">
         </activity>

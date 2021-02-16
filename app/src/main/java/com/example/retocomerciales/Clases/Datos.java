@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -56,6 +57,7 @@ public class Datos {
     private Context context;
     private File XML_FILE_LOCATION_PATH;    //carpeta de la memoria interna del movil.
     private SQLiteDatabase db;
+    private ArrayList<DescripcionPedido> listPedidos;
 
     private Datos(){}
 
@@ -219,6 +221,32 @@ public class Datos {
     }
     public Comercial[] getComerciales() {return comerciales;}
 */
+
+    //Datos de listaPedidos
+    public void cargarListaPedidos(){
+       this.listPedidos = new ArrayList<>();
+        if(comercial != null) {
+            this.db = new RetoComercialesSQLiteHelper(context, "dbRetoComerciales", null, 1).getWritableDatabase();
+            String sql = "SELECT PE.ID, PE.FECHA, PA.NOMBRE FROM PEDIDOS PE INNER JOIN PARTNERS PA ON PE.ID_PARTNER = PA.ID "
+             + " WHERE PE.id_comercial = " + Integer.parseInt(comercial.getId());
+            Cursor c = db.rawQuery(sql, null);
+            if(c.moveToFirst()){
+                do{
+                    int idPedido = c.getInt(0);
+                    String fecha = c.getString(1);
+                    String nomPartner = c.getString(2);
+
+                    String sql2 = "SELECT count(pr_unidad*cantidad) FROM LINEAS WHERE ID_PEDIDO = " + idPedido; //no se como hacer esto
+                    Cursor c2 = db.rawQuery(sql2, null);
+                    float prTotal = c2.getFloat(0);
+                    this.listPedidos.add(new DescripcionPedido(fecha, nomPartner, String.valueOf(prTotal)));
+
+                }while (c.moveToNext());
+            }
+        }
+    }
+
+    public void listPedidosNull() {this.listPedidos = null;}
 
     //devolver lista de strings con los nombres de cada lista (comerciales, partners y productos)
     public String[] getNombresPartners() {
@@ -604,14 +632,14 @@ public class Datos {
         Cursor c = db.rawQuery(sql, null);
 
         if(c.moveToFirst()){
-            c = db.rawQuery("SELECT * FROM COMERCIALES", null);
-            c.moveToFirst();
-            do{
-                if(c.getInt(9) == 1){
+            //c = db.rawQuery("SELECT * FROM COMERCIALES", null);
+            //c.moveToFirst();
+            //do{
+            //    if(c.getInt(9) == 1){
                     id = c.getInt(0);
-                    break;
-                }
-            }while (c.moveToNext());
+            //        break;
+            //    }
+            //}while (c.moveToNext());
         }
         return id;
     }
@@ -727,12 +755,10 @@ public class Datos {
             comercial = new Comercial(String.valueOf(c.getInt(0)), c.getString(1), c.getString(2), c.getString(5),
                     c.getString(3), c.getString(4), c.getString(6), c.getString(7), c.getString(8));
 
+            db.execSQL("UPDATE COMERCIALES SET loggeado = 1 where id = " + Integer.parseInt(comercial.getId()));
         }
         c.close();
 
-        if (comercial != null){
-            db.execSQL("UPDATE COMERCIALES SET loggeado = 1 where id = " + Integer.parseInt(comercial.getId()));
-        }
         return comercial;
     }
     public void logoutUser(){

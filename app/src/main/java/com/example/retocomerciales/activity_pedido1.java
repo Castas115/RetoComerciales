@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class activity_pedido1 extends AppCompatActivity {
 
-    Button siguiente, volver,fecha;
+    Button siguiente, volver,fecha, visualizaPedidos;
     Intent intent;
     Datos datos;
     TextView mostrarFecha;
@@ -35,6 +35,7 @@ public class activity_pedido1 extends AppCompatActivity {
         spnPartners = findViewById(R.id.spn_partners);
         fecha = findViewById(R.id.btn_elegirFecha);
         mostrarFecha = findViewById(R.id.lbl_fecha);
+        visualizaPedidos = findViewById(R.id.btn_visualizaPedidos);
 
 
         siguiente.setEnabled(false);
@@ -44,6 +45,13 @@ public class activity_pedido1 extends AppCompatActivity {
         final ArrayAdapter adapterPartners = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datos.getNombresPartners());
         adapterPartners.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnPartners.setAdapter(adapterPartners);
+
+        visualizaPedidos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datos.cargarListaPedidos();
+            }
+        });
 
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override

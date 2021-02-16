@@ -27,6 +27,7 @@
     <!-- pedido1 -->
     <string name="btn_elegirFecha">Fecha</string>
     <string name="btn_nuevoComercial">Nuevo comercial</string>
+    <string name="btn_visualizaPedidos">Visualizar pedidos</string>
 
 
     <!-- pedido2 -->
@@ -74,6 +75,11 @@
     <string name="realizar_pedido">Realizar Pedido</string>
     <string name="gestion_de_partners">Gestion de Partners</string>
     <string name="cerrar_sesion">Cerrar Sesion</string>
+
+    <!-- resumen pedidos -->
+    <string name="lsv_lbl_fecha">Fecha: </string>
+    <string name="lsv_lbl_partner">partner</string>
+    <string name="lsb_lbl_prTotal">prTotal</string>
 
 
 </resources>
